@@ -27,10 +27,12 @@ scp -q -i "$K" "$W:$AAB" "$OUT/unsigned/" 2>/dev/null || echo "(no AAB on the bu
 
 printf "Keystore password for %s: " "$KS"; stty -echo 2>/dev/null || true; read -r ARK_KS_PASS; stty echo 2>/dev/null || true; echo
 export ARK_KS_PASS
+# --alignment-preserved: keep the build's bytes exactly (AGP already aligns native libraries to 16 KB). Without it,
+# apksigner 35+ re-aligns them and the signed APK no longer matches F-Droid's reproducible build of the same tag.
 for u in "$OUT"/unsigned/*-release-unsigned.apk; do
   abi=$(basename "$u" | sed 's/^app-//; s/-release-unsigned.apk$//')
   out="$OUT/EstudelyArk-$VER-$abi.apk"
-  java --enable-native-access=ALL-UNNAMED -jar "$SIGNER" sign --ks "$KS" --ks-key-alias "$ALIAS" --ks-pass env:ARK_KS_PASS --key-pass env:ARK_KS_PASS --out "$out" "$u"
+  java --enable-native-access=ALL-UNNAMED -jar "$SIGNER" sign --alignment-preserved --ks "$KS" --ks-key-alias "$ALIAS" --ks-pass env:ARK_KS_PASS --key-pass env:ARK_KS_PASS --out "$out" "$u"
   java --enable-native-access=ALL-UNNAMED -jar "$SIGNER" verify "$out"
   echo "signed $out"
 done
