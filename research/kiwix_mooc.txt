@@ -1,0 +1,10 @@
+phzh_core-arabic-one-test-zim_ar_2021-07.zim 2021-07-11 105M
+phzh_core-arabic-one-test-zim_ar_2022-01.zim 2022-01-07 102M
+phzh_core-dari-one_2021-10.zim 2021-10-25 88M
+phzh_core-dari-one_2022-04.zim 2022-04-23 120M
+phzh_core-english-one_en_2021-07.zim 2021-07-11 88M
+phzh_core-english-one_en_2022-01.zim 2022-01-07 92M
+phzh_core-greek-one_el_2021-07.zim 2021-07-11 113M
+phzh_core-greek-one_el_2022-01.zim 2022-01-07 110M
+phzh_core-italian-one_it_2021-12.zim 2021-12-23 102M
+phzh_core-italian-one_it_2022-01.zim 2022-01-10 79M

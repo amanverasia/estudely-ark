@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Map</title>
+<link rel="stylesheet" href="lib/maplibre-gl.css">
+<style>
+  html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #f4f1ea; }
+  #map { position: absolute; inset: 0; }
+  #bar { position: absolute; top: 10px; left: 10px; z-index: 2; background: #fff; padding: 8px 10px;
+         border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.3); font-size: 14px; max-width: calc(100% - 40px); }
+  #bar a { color: #1a5fb4; }
+  #err { color: #a00; }
+  #q { margin-top: 6px; width: 100%; box-sizing: border-box; font-size: 15px; padding: 6px 8px;
+       border: 1px solid #bbb; border-radius: 4px; }
+  #bar { width: 320px; }
+  #results { list-style: none; margin: 4px 0 0; padding: 0; max-height: 50vh; overflow-y: auto; }
+  #results li { padding: 5px 4px; cursor: pointer; border-bottom: 1px solid #eee; }
+  #results li:hover, #results li.sel { background: #e8f0fb; }
+  #results small { color: #666; }
+  #status { color: #666; font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="bar"><a href="../../../START-HERE.html">&larr; Back</a> &middot; <strong>Offline map</strong>
+  <span id="info"></span> <span id="err"></span>
+  <input id="q" type="search" placeholder="Search a town, village, hospital, station" autocomplete="off" aria-label="Search places">
+  <div id="status"></div>
+  <ul id="results"></ul></div>
+<div id="map"></div>
+<script src="lib/maplibre-gl.js"></script>
+<script src="lib/pmtiles.js"></script>
+<script src="lib/basemaps.js"></script>
+<script>
+(function () {
+  var err = document.getElementById('err');
+  if (location.protocol === 'file:') {
+    err.textContent = 'The map needs the library server. Close this and use the "Start Library" launcher.';
+    return;
+  }
+  var protocol = new pmtiles.Protocol();
+  maplibregl.addProtocol('pmtiles', protocol.tile);
+  // Fonts are packed into one file (fonts/glyphs.bin, index in fonts/glyphs.json) and read with Range requests.
+  var glyphIndex = fetch('fonts/glyphs.json').then(function (r) { return r.json(); });
+  var empty = new ArrayBuffer(0);
+  maplibregl.addProtocol('glyphs', function (params, abort) {
+    var m = params.url.match(/^glyphs:\/\/(.+)\/(\d+-\d+)$/);
+    if (!m) return Promise.resolve({ data: empty });
+    var stacks = decodeURIComponent(m[1]).split(',');
+    return glyphIndex.then(function (idx) {
+      for (var i = 0; i < stacks.length; i++) {
+        var e = idx[stacks[i].trim() + '/' + m[2]];
+        if (!e) continue;
+        if (e[1] === 0) return { data: empty };
+        return fetch('fonts/glyphs.bin', { headers: { Range: 'bytes=' + e[0] + '-' + (e[0] + e[1] - 1) }, signal: abort.signal })
+          .then(function (r) {
+            if (r.status !== 206) throw new Error('library server does not support Range requests');
+            return r.arrayBuffer();
+          }).then(function (buf) { return { data: buf }; });
+      }
+      return { data: empty };
+    });
+  });
+  // Tile file(s) listed in maps.json next to this page: [{"file": "...pmtiles", "name": "...", "center": [lon,lat], "zoom": n}]
+  fetch('maps.json').then(function (r) { return r.json(); }).then(function (maps) {
+    var m = maps[0];
+    var abs = function (p) { return new URL(p, location.href).href; };
+    var map = new maplibregl.Map({
+      container: 'map',
+      center: m.center, zoom: m.zoom, maxZoom: 18, hash: true,
+      attributionControl: { compact: true },
+      style: {
+        version: 8,
+        glyphs: 'glyphs://{fontstack}/{range}',
+        sprite: abs('sprites/v4/light'),
+        sources: { protomaps: { type: 'vector', url: 'pmtiles://' + abs(m.file),
+          attribution: '© OpenStreetMap contributors, Protomaps' } },
+        layers: basemaps.layers('protomaps', basemaps.namedFlavor('light'), { lang: 'en' })
+      }
+    });
+    map.addControl(new maplibregl.NavigationControl());
+    map.addControl(new maplibregl.ScaleControl());
+    document.getElementById('info').textContent = '· ' + m.name;
+    map.on('error', function (e) { err.textContent = (e.error && e.error.message) || 'map error'; });
+    // A few icon names in the style are missing from the sprite set; draw a small grey dot instead.
+    map.on('styleimagemissing', function (e) {
+      if (map.hasImage(e.id)) return;
+      var s = 12, d = new Uint8Array(s * s * 4);
+      for (var y = 0; y < s; y++) for (var x = 0; x < s; x++) {
+        var dx = x - 5.5, dy = y - 5.5, i = (y * s + x) * 4;
+        if (dx * dx + dy * dy <= 16) { d[i] = 110; d[i + 1] = 110; d[i + 2] = 110; d[i + 3] = 255; }
+      }
+      map.addImage(e.id, { width: s, height: s, data: d });
+    });
+    setupSearch(map);
+  }).catch(function (e) { err.textContent = 'Could not load maps.json: ' + e; });
+
+  // Offline place search over places.tsv (GeoNames): name, lat, lon, state, kind, zoom; most important first.
+  function setupSearch(map) {
+    var q = document.getElementById('q'), list = document.getElementById('results'), status = document.getElementById('status');
+    var places = null, loading = null, marker = null, sel = -1, shown = [];
+    function load() {
+      if (loading) return loading;
+      status.textContent = 'Loading place names...';
+      loading = fetch('places.tsv').then(function (r) {
+        if (!r.ok) throw new Error('places.tsv not found');
+        return r.text();
+      }).then(function (t) {
+        var lines = t.split('\n'), out = [];
+        for (var i = 0; i < lines.length; i++) {
+          if (!lines[i]) continue;
+          var c = lines[i].split('\t');
+          out.push({ n: c[0], k: norm(c[0]), lat: +c[1], lon: +c[2], st: c[3], kind: c[4], z: +c[5] });
+        }
+        places = out; status.textContent = '';
+        return out;
+      }).catch(function (e) { status.textContent = 'Place search unavailable: ' + e.message; loading = null; });
+      return loading;
+    }
+    function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ऀ-ॿ ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+    function search(text) {
+      var k = norm(text), exact = [], pre = [], mid = [];
+      if (k.length < 2 || !places) return [];
+      // List is sorted by importance; exact names first, then names starting with the text, then words inside names.
+      for (var i = 0; i < places.length && exact.length < 20; i++) {
+        var p = places[i].k;
+        if (p === k) exact.push(places[i]);
+        else if (pre.length < 20 && p.indexOf(k) === 0) pre.push(places[i]);
+        else if (mid.length < 20 && p.indexOf(' ' + k) > 0) mid.push(places[i]);
+      }
+      return exact.concat(pre, mid).slice(0, 20);
+    }
+    function render() {
+      list.innerHTML = '';
+      shown.forEach(function (p, i) {
+        var li = document.createElement('li');
+        li.innerHTML = '<span></span> <small></small>';
+        li.firstChild.textContent = p.n;
+        li.lastChild.textContent = [p.kind, p.st].filter(Boolean).join(', ');
+        if (i === sel) li.className = 'sel';
+        li.onclick = function () { go(p); };
+        list.appendChild(li);
+      });
+      if (places && norm(q.value).length >= 2 && !shown.length) status.textContent = 'No place found.';
+      else if (places) status.textContent = '';
+    }
+    function go(p) {
+      map.flyTo({ center: [p.lon, p.lat], zoom: p.z });
+      if (marker) marker.remove();
+      marker = new maplibregl.Marker({ color: '#c01c28' }).setLngLat([p.lon, p.lat]).addTo(map);
+      list.innerHTML = ''; shown = []; sel = -1;
+    }
+    var timer = null;
+    q.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        load().then(function () { shown = search(q.value); sel = -1; render(); });
+      }, 150);
+    });
+    q.addEventListener('keydown', function (e) {
+      if (!shown.length) return;
+      if (e.key === 'ArrowDown') { sel = Math.min(sel + 1, shown.length - 1); render(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { sel = Math.max(sel - 1, 0); render(); e.preventDefault(); }
+      else if (e.key === 'Enter') { go(shown[sel >= 0 ? sel : 0]); e.preventDefault(); }
+      else if (e.key === 'Escape') { list.innerHTML = ''; shown = []; }
+    });
+    q.addEventListener('focus', function () { load(); });
+  }
+})();
+</script>
+</body>
+</html>

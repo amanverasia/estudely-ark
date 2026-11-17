@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudely Ark</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#5d5b55; --card:#fff; --line:#dedbd2; --accent:#1a5fb4; --warn:#fff4d6; --warnline:#e0b84c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161614; --fg:#ecebe6; --muted:#a8a69f; --card:#201f1c; --line:#3a3833; --accent:#7fb2ff; --warn:#3a3016; --warnline:#8a6d1f; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.8rem; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 8px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  p.lead { color: var(--muted); margin: 0 0 16px; }
+  a { color: var(--accent); }
+  .note { background: var(--warn); border: 1px solid var(--warnline); border-radius: 8px; padding: 10px 14px; margin: 12px 0; }
+  .note[hidden] { display:none; }
+  input[type=search] { width:100%; font-size:1.05rem; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--fg); }
+  ul.items { list-style:none; padding:0; margin:0; }
+  ul.items li { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin:8px 0; }
+  .t { font-weight:600; }
+  .d { color:var(--muted); font-size:.95rem; }
+  .meta { color:var(--muted); font-size:.85rem; }
+  .open { margin-top:4px; }
+  .open a { margin-right: 14px; }
+  .missing { color: var(--muted); font-style: italic; }
+  footer { margin-top:40px; color:var(--muted); font-size:.9rem; }
+  code { font-size: .9em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Estudely Ark</h1>
+  <p class="lead">Useful knowledge that works without the internet. Release __RELEASE__.</p>
+
+  <div class="note" id="needserver" hidden>
+    <strong>Start the library first</strong> to read Wikipedia, guides, maps and documentation.
+    Double-click <code>Start-Library</code> in this folder (<code>Start-Library.command</code> on Mac,
+    <code>Start-Library.bat</code> on Windows, <code>Start-Library.sh</code> on Linux).
+    PDF guides below open without it.
+  </div>
+  <div class="note">
+    <strong>Health warning:</strong> these guides help when no professional is available.
+    If you can reach a doctor, nurse or health worker, do.
+    The AI assistant can be wrong; check what it says against the guides.
+  </div>
+
+  <input type="search" id="q" placeholder="Search titles and topics, e.g. water, first aid, python, map" aria-label="Search">
+  <div id="list"></div>
+
+  <footer>
+    <p>Check this copy is genuine: see <code>README.txt</code>, section "Verify".
+    Everything here was made by others and shared freely; see <code>CREDITS.txt</code>.</p>
+  </footer>
+</main>
+<script>
+var CATALOGUE = __CATALOGUE__;
+var MODULES = __MODULES__;
+(function () {
+  var params = new URLSearchParams(location.search);
+  var http = location.protocol === 'http:' || location.protocol === 'https:';
+  var host = http ? location.hostname : '127.0.0.1';
+  var libPort = params.get('lib') || '8470';
+  var aiPort = params.get('ai') || '8472';
+  if (!http) document.getElementById('needserver').hidden = false;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function size(b) { return b >= 1e9 ? (b/1e9).toFixed(1) + ' GB' : Math.max(1, Math.round(b/1e6)) + ' MB'; }
+  function links(it) {
+    var out = [];
+    (it.open || []).forEach(function (o) {
+      var href;
+      if (o.via === 'library') href = 'http://' + host + ':' + libPort + '/content/' + o.target + '/';
+      else if (o.via === 'files') href = http ? '/' + o.target : o.target;
+      else if (o.via === 'needs-files-server') href = http ? '/' + o.target : null;
+      else if (o.via === 'ai') href = 'http://' + host + ':' + aiPort + '/';
+      else href = o.target;
+      out.push(href ? '<a href="' + esc(href) + '">' + esc(o.label) + '</a>'
+                    : '<span class="missing">' + esc(o.label) + ' (start the library first)</span>');
+    });
+    return out.join('');
+  }
+  function render(q) {
+    q = (q || '').trim().toLowerCase();
+    var html = '';
+    MODULES.forEach(function (m) {
+      var items = CATALOGUE.filter(function (it) {
+        return it.module === m.id && (!q || (it.title + ' ' + it.description + ' ' + it.topics.join(' ')).toLowerCase().indexOf(q) >= 0);
+      });
+      if (!items.length) return;
+      html += '<h2>' + esc(m.title) + '</h2><ul class="items">';
+      items.forEach(function (it) {
+        html += '<li><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.description) + '</div>' +
+          '<div class="meta">' + esc(it.topics.join(', ')) + ' · ' + size(it.bytes) + '</div>' +
+          '<div class="open">' + links(it) + '</div></li>';
+      });
+      html += '</ul>';
+    });
+    document.getElementById('list').innerHTML = html || '<p>Nothing matches. Try a shorter word.</p>';
+  }
+  var box = document.getElementById('q');
+  box.addEventListener('input', function () { render(box.value); });
+  render('');
+})();
+</script>
+</body>
+</html>

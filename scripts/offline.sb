@@ -1,0 +1,9 @@
+(version 1)
+(allow default)
+; Block all network traffic except to this machine (loopback), to prove the pack works offline.
+(deny network-outbound)
+(allow network-outbound (remote ip "localhost:*"))
+(allow network-outbound (remote unix-socket))
+(deny network-bind)
+(allow network-bind (local ip "localhost:*"))
+(allow network-bind (local unix-socket))

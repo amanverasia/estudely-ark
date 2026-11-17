@@ -1,0 +1,137 @@
+ESTUDELY ARK: CREDITS AND LICENCES
+==================================
+
+This pack collects free material made by others. All credit belongs to them. The pack is
+given away free and is not sold. If you can afford to, please support these projects.
+
+Archives in .zim format were packaged by the Kiwix project and openZIM
+(https://kiwix.org). Unless noted, the text of each archive keeps the licence of its source.
+
+NON-COMMERCIAL ITEMS. Several parts of this pack may only be shared non-commercially:
+the Hesperian books, the PhET simulations, the iFixit guides and most OpenStax textbooks. Giving the pack away,
+copying it for friends, schools and clinics, or charging only the cost of a USB drive is
+fine. Selling it for profit is not.
+
+Licences below were checked against each source on 16 November 2026.
+
+
+CONTENT
+-------
+
+Simple English Wikipedia; Wikipedia Medicine, Mathematics, Physics, Chemistry
+  Wikipedia contributors. CC BY-SA 4.0 (text); images under their own licences.
+  https://simple.wikipedia.org  https://en.wikipedia.org
+
+The World Factbook
+  US Central Intelligence Agency. Public domain.
+
+Hesperian Health Guides (Where There Is No Doctor, Where Women Have No Doctor,
+A Book for Midwives, A Community Guide to Environmental Health, and others)
+  Hesperian Health Guides, Oakland, California. https://hesperian.org
+  From the books: "Hesperian encourages you to copy, reproduce, or adapt any or all parts of
+  this book, including the illustrations, provided that you do this for non-commercial
+  purposes, credit Hesperian, and follow the other requirements of Hesperian's Open Copyright
+  Policy" (hesperian.org/open-copyright-policy). Hesperian asks people who can afford it to
+  buy the books or donate, so the books stay free for those who can't.
+
+zimgit collections (Medicine, Water, Food Preparation, Post-Disaster, Knots)
+  Compiled by the Kiwix/openZIM community from public-domain and openly licensed guides.
+  Each document keeps its original licence and credits.
+
+Appropedia
+  Appropedia contributors. CC BY-SA 4.0. https://www.appropedia.org
+
+Gardenology
+  Gardenology contributors. Creative Commons Attribution-ShareAlike, unless a page says
+  otherwise. https://gardenology.org
+
+Restarters Repair Wiki
+  The Restart Project and contributors. CC BY-SA 4.0. https://wiki.restarters.net
+
+iFixit repair guides (Extras)
+  iFixit and contributors. CC BY-NC-SA. https://www.ifixit.com
+  Non-commercial: do not sell this module.
+
+Energypedia (Extras)
+  Energypedia contributors. CC BY-SA 4.0. https://energypedia.info
+
+PhET Interactive Simulations
+  University of Colorado Boulder. CC BY-NC 4.0 (as stated in each simulation file).
+  Non-commercial: do not sell this module. https://phet.colorado.edu
+
+DevDocs (Python, HTML, CSS, JavaScript, DOM, Git, SQLite, Bash, man pages, HTTP, Markdown, C)
+  Each manual keeps its own licence (Python Software Foundation, MDN contributors CC BY-SA,
+  Git, SQLite public domain, GNU FDL, Linux man-pages project, and others).
+  Packaged from https://devdocs.io (DevDocs itself: MPL-2.0)
+
+OpenStax textbooks
+  OpenStax, Rice University. https://openstax.org
+  Most books CC BY-NC-SA 4.0 (non-commercial); "Physics" and "Statistics" CC BY 4.0.
+  Download for free at openstax.org.
+
+LibreTexts K-12 textbooks
+  LibreTexts and the books' authors. https://libretexts.org
+  Licences vary by book (mostly Creative Commons); each book states its own.
+
+freeCodeCamp curriculum
+  freeCodeCamp.org. BSD-3-Clause. https://www.freecodecamp.org
+
+ArchWiki
+  ArchWiki contributors. GNU FDL 1.3 or later. https://wiki.archlinux.org
+
+
+MAPS
+----
+
+Map data
+  (c) OpenStreetMap contributors. Open Database Licence (ODbL).
+  https://www.openstreetmap.org/copyright
+
+Desktop map tiles
+  Protomaps basemap build, https://protomaps.com. Data (c) OpenStreetMap contributors.
+  Map style @protomaps/basemaps: design CC0, code BSD-3-Clause. Icons include MIT-licensed
+  Tangram icons. Fonts: Noto Sans (SIL Open Font Licence 1.1, see
+  Core/05-Maps/Desktop-Map/fonts/OFL.txt). Also includes Natural Earth data (public domain).
+
+Map place search
+  Place names from GeoNames (https://www.geonames.org). CC BY 4.0.
+
+Android map files
+  Organic Maps, https://organicmaps.app. Apache-2.0 (app). Map data (c) OpenStreetMap contributors.
+
+
+PROGRAMS
+--------
+
+Kiwix Desktop, Kiwix for macOS, Kiwix Android, kiwix-serve (kiwix-tools)
+  Kiwix project. GPL-3.0. https://kiwix.org
+
+miniserve
+  Sven-Hendrik Haase and contributors. MIT. https://github.com/svenstaro/miniserve
+
+MapLibre GL JS
+  MapLibre contributors. BSD-3-Clause. https://maplibre.org
+
+PMTiles
+  Protomaps LLC. BSD-3-Clause. https://github.com/protomaps/PMTiles
+
+llama.cpp (AI runner)
+  ggml authors. MIT. https://github.com/ggml-org/llama.cpp
+
+Organic Maps app
+  Organic Maps contributors. Apache-2.0.
+
+
+AI MODELS
+---------
+
+Gemma 4 E4B and Gemma 4 12B (quantization-aware trained, Q4_0), with image/audio projectors
+  Google DeepMind. Apache-2.0. https://ai.google.dev/gemma
+  The models can make mistakes. Do not rely on them for medical or safety decisions.
+
+
+THE PACK ITSELF
+---------------
+
+The launchers, START-HERE page, map viewer page and check tools were written for this
+pack and may be copied, changed and shared freely.

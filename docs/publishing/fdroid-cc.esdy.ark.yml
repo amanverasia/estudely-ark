@@ -1,0 +1,46 @@
+# Draft metadata for F-Droid's fdroiddata repository (metadata/cc.esdy.ark.yml).
+# Check the commit/tag of the release before submitting.
+Categories:
+  - Reading
+  - Science & Education
+  - Navigation
+License: GPL-3.0-or-later
+AuthorName: Aman Verasia
+WebSite: https://ark.esdy.cc/
+SourceCode: https://github.com/amanverasia/estudely-ark
+IssueTracker: https://github.com/amanverasia/estudely-ark/issues
+
+AutoName: Estudely Ark
+
+RepoType: git
+Repo: https://github.com/amanverasia/estudely-ark.git
+
+Builds:
+  - versionName: '2.0'
+    versionCode: 2001
+    commit: v2.0
+    subdir: android/app
+    gradle:
+      - yes
+    output: build/outputs/apk/release/app-armeabi-v7a-release-unsigned.apk
+
+  - versionName: '2.0'
+    versionCode: 2002
+    commit: v2.0
+    subdir: android/app
+    gradle:
+      - yes
+    output: build/outputs/apk/release/app-arm64-v8a-release-unsigned.apk
+
+  - versionName: '2.0'
+    versionCode: 2003
+    commit: v2.0
+    subdir: android/app
+    gradle:
+      - yes
+    output: build/outputs/apk/release/app-x86_64-release-unsigned.apk
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: '2.0'
+CurrentVersionCode: 2003

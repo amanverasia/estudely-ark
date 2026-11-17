@@ -1,0 +1,25 @@
+# Large or local-only: downloads, built packs, test data, tools
+release/
+prototype/
+tools/
+.ci-key/
+dl/
+pack/
+spec.json
+*.torrent
+.DS_Store
+__pycache__/
+
+# The Android app ships the v1.0 torrent as an asset.
+!android/app/src/main/assets/*.torrent
+
+# Android release signing (kept by the maintainer, never committed)
+*.jks
+*.keystore
+ark-release.properties
+
+# Wrangler local cache (holds the Cloudflare account name and id)
+.wrangler/
+
+# Machine-specific helper settings
+scripts/local.env

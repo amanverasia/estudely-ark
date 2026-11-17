@@ -1,0 +1,3851 @@
+{
+ "release": "v1.0, November 2026",
+ "modules": [
+  {
+   "id": "general",
+   "dir": "Core/01-General-Knowledge",
+   "title": "General knowledge"
+  },
+  {
+   "id": "health",
+   "dir": "Core/02-Health-and-Sanitation",
+   "title": "Health and sanitation"
+  },
+  {
+   "id": "food",
+   "dir": "Core/03-Food-and-Growing",
+   "title": "Food and growing"
+  },
+  {
+   "id": "repair",
+   "dir": "Core/04-Repair-and-Practical-Skills",
+   "title": "Repair and practical skills"
+  },
+  {
+   "id": "maps",
+   "dir": "Core/05-Maps",
+   "title": "Maps"
+  },
+  {
+   "id": "edu",
+   "dir": "Core/06-Education-and-Books",
+   "title": "Education"
+  },
+  {
+   "id": "computing",
+   "dir": "Core/07-Computing-and-Documentation",
+   "title": "Computing"
+  },
+  {
+   "id": "extras",
+   "dir": "Extras",
+   "title": "Extras (optional)"
+  },
+  {
+   "id": "ai",
+   "dir": "AI",
+   "title": "AI assistant (optional)"
+  },
+  {
+   "id": "readers",
+   "dir": "Shared-Readers",
+   "title": "Reader programs"
+  }
+ ],
+ "files": [
+  {
+   "src": "zim/wikipedia_en-simple_all_maxi_2026-09.zim",
+   "dest": "Core/01-General-Knowledge/wikipedia_en-simple_all_maxi_2026-09.zim"
+  },
+  {
+   "src": "zim/theworldfactbook_en_all_2026-02.zim",
+   "dest": "Core/01-General-Knowledge/theworldfactbook_en_all_2026-02.zim"
+  },
+  {
+   "src": "zim/wikipedia_en_medicine_nopic_2026-10.zim",
+   "dest": "Core/02-Health-and-Sanitation/wikipedia_en_medicine_nopic_2026-10.zim"
+  },
+  {
+   "src": "zim/zimgit-medicine_en_2024-08.zim",
+   "dest": "Core/02-Health-and-Sanitation/zimgit-medicine_en_2024-08.zim"
+  },
+  {
+   "src": "zim/zimgit-water_en_2024-08.zim",
+   "dest": "Core/02-Health-and-Sanitation/zimgit-water_en_2024-08.zim"
+  },
+  {
+   "src": "zim/zimgit-food-preparation_en_2025-04.zim",
+   "dest": "Core/03-Food-and-Growing/zimgit-food-preparation_en_2025-04.zim"
+  },
+  {
+   "src": "zim/zimgit-post-disaster_en_2024-05.zim",
+   "dest": "Core/02-Health-and-Sanitation/zimgit-post-disaster_en_2024-05.zim"
+  },
+  {
+   "src": "zim/zimgit-knots_en_2024-08.zim",
+   "dest": "Core/04-Repair-and-Practical-Skills/zimgit-knots_en_2024-08.zim"
+  },
+  {
+   "src": "zim/gardenology.org_en_all_2026-09.zim",
+   "dest": "Core/03-Food-and-Growing/gardenology.org_en_all_2026-09.zim"
+  },
+  {
+   "src": "zim/restarters_en_all_maxi_2026-10.zim",
+   "dest": "Core/04-Repair-and-Practical-Skills/restarters_en_all_maxi_2026-10.zim"
+  },
+  {
+   "src": "zim/appropedia_en_all_maxi_2026-02.zim",
+   "dest": "Core/04-Repair-and-Practical-Skills/appropedia_en_all_maxi_2026-02.zim"
+  },
+  {
+   "src": "zim/energypedia_en_all_maxi_2026-06.zim",
+   "dest": "Extras/Energypedia/energypedia_en_all_maxi_2026-06.zim"
+  },
+  {
+   "src": "zim/ifixit_en_all_2025-12.zim",
+   "dest": "Extras/iFixit/ifixit_en_all_2025-12.zim"
+  },
+  {
+   "src": "zim/devdocs_en_python_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_python_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_html_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_html_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_css_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_css_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_javascript_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_javascript_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_dom_2026-05.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_dom_2026-05.zim"
+  },
+  {
+   "src": "zim/devdocs_en_git_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_git_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_sqlite_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_sqlite_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_bash_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_bash_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_man_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_man_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_http_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_http_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_markdown_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_markdown_2026-10.zim"
+  },
+  {
+   "src": "zim/devdocs_en_c_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/devdocs_en_c_2026-10.zim"
+  },
+  {
+   "src": "zim/freecodecamp_en_all_2026-08.zim",
+   "dest": "Core/07-Computing-and-Documentation/freecodecamp_en_all_2026-08.zim"
+  },
+  {
+   "src": "zim/archlinux_en_all_maxi_2026-10.zim",
+   "dest": "Core/07-Computing-and-Documentation/archlinux_en_all_maxi_2026-10.zim"
+  },
+  {
+   "src": "zim/phet_en_all_2026-08.zim",
+   "dest": "Core/06-Education-and-Books/phet_en_all_2026-08.zim"
+  },
+  {
+   "src": "zim/wikipedia_en_mathematics_mini_2026-06.zim",
+   "dest": "Core/06-Education-and-Books/wikipedia_en_mathematics_mini_2026-06.zim"
+  },
+  {
+   "src": "zim/wikipedia_en_physics_mini_2026-10.zim",
+   "dest": "Core/06-Education-and-Books/wikipedia_en_physics_mini_2026-10.zim"
+  },
+  {
+   "src": "zim/wikipedia_en_chemistry_mini_2026-10.zim",
+   "dest": "Core/06-Education-and-Books/wikipedia_en_chemistry_mini_2026-10.zim"
+  },
+  {
+   "src": "zim/libretexts.org_en_k12_2026-01.zim",
+   "dest": "Core/06-Education-and-Books/libretexts.org_en_k12_2026-01.zim"
+  },
+  {
+   "src": "openstax/prealgebra-2e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Prealgebra-2e.pdf"
+  },
+  {
+   "src": "openstax/elementary-algebra-2e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Elementary-Algebra-2e.pdf"
+  },
+  {
+   "src": "openstax/introductory-statistics-2e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Introductory-Statistics-2e.pdf"
+  },
+  {
+   "src": "openstax/physics.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Physics.pdf"
+  },
+  {
+   "src": "openstax/chemistry-2e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Chemistry-2e.pdf"
+  },
+  {
+   "src": "openstax/concepts-biology.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Concepts-of-Biology.pdf"
+  },
+  {
+   "src": "openstax/fundamentals-nursing.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Fundamentals-of-Nursing.pdf"
+  },
+  {
+   "src": "openstax/clinical-nursing-skills.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Clinical-Nursing-Skills.pdf"
+  },
+  {
+   "src": "openstax/pharmacology.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Pharmacology-for-Nurses.pdf"
+  },
+  {
+   "src": "openstax/maternal-newborn-nursing.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Maternal-Newborn-Nursing.pdf"
+  },
+  {
+   "src": "openstax/nutrition.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Nutrition-for-Nurses.pdf"
+  },
+  {
+   "src": "openstax/population-health.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Population-Health-for-Nurses.pdf"
+  },
+  {
+   "src": "openstax/psychiatric-mental-health.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Psychiatric-Mental-Health-Nursing.pdf"
+  },
+  {
+   "src": "openstax/medical-surgical-nursing.pdf",
+   "dest": "Core/02-Health-and-Sanitation/OpenStax/Medical-Surgical-Nursing.pdf"
+  },
+  {
+   "src": "openstax/psychology-2e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Psychology-2e.pdf"
+  },
+  {
+   "src": "openstax/principles-economics-3e.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Principles-of-Economics-3e.pdf"
+  },
+  {
+   "src": "openstax/introduction-python-programming.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Introduction-to-Python-Programming.pdf"
+  },
+  {
+   "src": "openstax/writing-guide.pdf",
+   "dest": "Core/06-Education-and-Books/OpenStax/Writing-Guide-with-Handbook.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_01.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_02.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_03.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_04.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_05.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_06.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_07.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_08.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_09.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_10.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_11.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_12.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_13.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_14.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_15.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_16.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_17.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_18.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_19.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_20.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_21.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_22.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_23.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_gp.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_gp.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_info.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_info.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_int.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_int.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_wtnd_2025/en_wtnd_2025_toc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/en_wtnd_2025_toc.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_01.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_02.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_03.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_04.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_05.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_06.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_07.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_08.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_09.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_10.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_11.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_12.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_13.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_14.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_15.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_16.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_17.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_18.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_19.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_20.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_21.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_22.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_23.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_24.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_24.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_25.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_25.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_26.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_26.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_27.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_27.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_28.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_28.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_29.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_29.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_30.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_30.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_31.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_31.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_gp.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_gp.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_ob.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_ob.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_wwhnd_2024/en_wwhnd_2024_skills.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/en_wwhnd_2024_skills.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_01.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_02.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_03.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_04.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_05.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_06.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_07.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_08.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_09.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_10.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_11.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_12.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_13.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_14.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_15.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_16.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_17.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_18.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_19.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_20.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_21.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_22.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_23.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_24.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_24.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_25.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_25.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_ddc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_ddc.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_gp.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_gp.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_midw_2026/en_midw_2026_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/en_midw_2026_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_01.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_02.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_03.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_04.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_05.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_06.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_07.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_08.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_09.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_10.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_11.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_12.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_dent_2024/en_dent_2024_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/en_dent_2024_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_01.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_02.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_03.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_04.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_05.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_06.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_07.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_08.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_09.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_10.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_11.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_12.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_13.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_14.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_15.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_16.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_17.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_18.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_19.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_20.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_21.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_22.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_23.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_appa.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_appa.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_appb.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_appb.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_cgeh_2012/en_cgeh_2012_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/en_cgeh_2012_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2011_27d.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2011_27d.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2011_28d.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2011_28d.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2011_31e.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2011_31e.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2011_32b.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2011_32b.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2014_03g.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2014_03g.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2014_15d.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2014_15d.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2014_24b.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2014_24b.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2014_26d.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2014_26d.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2014_tocd.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2014_tocd.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2015_25b.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2015_25b.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2016_20a.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2016_20a.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2016_21a.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2016_21a.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2017_9.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2017_9.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2018_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2018_14.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2019_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2019_16.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2019_22a.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2019_22a.pdf"
+  },
+  {
+   "src": "hesperian/en_nwtnd_2011/en_nwtnd_2019_30.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/en_nwtnd_2019_30.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_10.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_11.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_12.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_13.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_14.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_15.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_2.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_2.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_3.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_3.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_4.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_4.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_5.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_5.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_6.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_6.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_7.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_7.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_8.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_8.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_9.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_9.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_Community.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_Community.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_appA.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_appA.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_appB.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_appB.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_gp.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_gp.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_ind.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_ind.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_int.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_int.pdf"
+  },
+  {
+   "src": "hesperian/en_wwd_2008/en_WWD_2008_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/en_WWD_2008_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_01.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_02.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_03.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_04.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_05.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_06.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_07.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_08.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_09.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_10.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_11.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_12.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_13.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_14.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_15.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_16.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_17.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_18.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_19.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_20.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_21.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_22.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_23.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_24.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_24.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_25.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_25.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_26.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_26.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_27.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_27.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_28.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_28.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_29.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_29.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_30.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_30.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_31.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_31.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_32.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_32.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_33.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_33.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_34.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_34.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_35.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_35.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_36.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_36.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_37.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_37.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_38.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_38.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_39.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_39.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_40.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_40.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_41.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_41.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_42.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_42.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_43.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_43.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_44.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_44.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_45.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_45.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_46.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_46.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_47.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_47.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_48.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_48.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_49.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_49.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_50.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_50.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_51.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_51.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_52.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_52.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_53.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_53.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_54.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_54.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_55.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_55.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_56.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_56.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_57.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_57.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_58.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_58.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_59.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_59.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_60.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_60.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_61.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_61.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_62.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_62.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_63.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_63.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_64.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_64.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_65.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_65.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_66.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_66.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_67.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_67.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_ob.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_ob.pdf"
+  },
+  {
+   "src": "hesperian/en_dvc_2025/en_dvc_2025_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/en_dvc_2025_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_01.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_02.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_03.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_04.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_05.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_06.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_07.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_08.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_09.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_gloss.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_gloss.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_easb_2026/en_easb_2026_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/en_easb_2026_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_01.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_02.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_03.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_04.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_05.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_06.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_07.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_08.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_09.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_10.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_appa.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_appa.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_appb.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_appb.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_appc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_appc.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_haw_2015/en_haw_2015_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/en_haw_2015_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_01.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_02.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_03.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_04.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_05.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_06.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_07.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_08.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_09.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_10.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_11.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_12.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_13.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_14.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_15.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_hclhiv_2019/en_hclhiv_2019_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/en_hclhiv_2019_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_01.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_02.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_03.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_04.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_05.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_06.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_07.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_08.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_09.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_10.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_11.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_12.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_13.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_14.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_15.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_16.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_17.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_18.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_19.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_20.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwb_2000/en_hcwb_2000_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/en_hcwb_2000_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_01.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_02.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_03.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_04.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_05.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_06.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_07.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_08.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_09.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_10.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_11.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_12.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_13.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_14.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_15.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_appa.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_appa.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_appb.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_appb.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_appc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_appc.pdf"
+  },
+  {
+   "src": "hesperian/en_hcwd_2026/en_hcwd_2026_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/en_hcwd_2026_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_01.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_02.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_03.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_04.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_05.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_06.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_07.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_08.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_09.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_10.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_11.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_12.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_13.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_14.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_15.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_16.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_17.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_18.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_19.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_20.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_21.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_22.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_23.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_24.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_24.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_25.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_25.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_26.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_26.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_27.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_27.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_bm1.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_bm1.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_bm2.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_bm2.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_ob.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_ob.pdf"
+  },
+  {
+   "src": "hesperian/en_hhwl_2026/en_hhwl_2026_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/en_hhwl_2026_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_01.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_02.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_03.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_04.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_05.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_06.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_07.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_08.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_09.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_bm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_bm.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_info.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_info.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_int.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_int.pdf"
+  },
+  {
+   "src": "hesperian/en_pcmh_2025/en_pcmh_2025_ob.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/en_pcmh_2025_ob.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_01.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_01.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_02.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_02.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_03.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_03.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_04.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_04.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_05.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_05.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_06.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_06.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_07.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_07.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_08.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_08.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_09.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_09.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_10.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_10.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_11.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_11.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_12.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_12.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_13.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_13.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_14.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_14.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_15.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_15.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_16.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_16.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_17.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_17.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_18.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_18.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_19.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_19.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_20.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_20.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_21.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_21.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_22.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_22.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_23.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_23.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_24.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_24.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_25.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_25.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_26.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_26.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_27.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_27.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_28.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_28.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_29.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_29.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_30.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_30.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_31.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_31.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_32.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_32.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_33.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_33.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_appa.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_appa.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_appb.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_appb.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_fm.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_fm.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_indx.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_indx.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_ob.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_ob.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_resc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_resc.pdf"
+  },
+  {
+   "src": "hesperian/en_wgthas_2015/en_wgthas_2015_toc.pdf",
+   "dest": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/en_wgthas_2015_toc.pdf"
+  },
+  {
+   "src": "maps/261110/India_Andaman and Nicobar Islands.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Andaman and Nicobar Islands.mwm"
+  },
+  {
+   "src": "maps/261110/India_Andhra Pradesh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Andhra Pradesh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Arunachal Pradesh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Arunachal Pradesh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Assam.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Assam.mwm"
+  },
+  {
+   "src": "maps/261110/India_Bihar.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Bihar.mwm"
+  },
+  {
+   "src": "maps/261110/India_Chandigarh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Chandigarh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Chhattisgarh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Chhattisgarh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Delhi.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Delhi.mwm"
+  },
+  {
+   "src": "maps/261110/India_Goa.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Goa.mwm"
+  },
+  {
+   "src": "maps/261110/India_Gujarat.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Gujarat.mwm"
+  },
+  {
+   "src": "maps/261110/India_Haryana.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Haryana.mwm"
+  },
+  {
+   "src": "maps/261110/India_Himachal Pradesh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Himachal Pradesh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Jammu and Kashmir.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Jammu and Kashmir.mwm"
+  },
+  {
+   "src": "maps/261110/India_Jharkhand.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Jharkhand.mwm"
+  },
+  {
+   "src": "maps/261110/India_Karnataka_North.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Karnataka_North.mwm"
+  },
+  {
+   "src": "maps/261110/India_Karnataka_South.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Karnataka_South.mwm"
+  },
+  {
+   "src": "maps/261110/India_Kerala.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Kerala.mwm"
+  },
+  {
+   "src": "maps/261110/India_Lakshadweep.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Lakshadweep.mwm"
+  },
+  {
+   "src": "maps/261110/India_Madhya Pradesh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Madhya Pradesh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Maharashtra.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Maharashtra.mwm"
+  },
+  {
+   "src": "maps/261110/India_Manipur.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Manipur.mwm"
+  },
+  {
+   "src": "maps/261110/India_Meghalaya.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Meghalaya.mwm"
+  },
+  {
+   "src": "maps/261110/India_Mizoram.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Mizoram.mwm"
+  },
+  {
+   "src": "maps/261110/India_Nagaland.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Nagaland.mwm"
+  },
+  {
+   "src": "maps/261110/India_Odisha.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Odisha.mwm"
+  },
+  {
+   "src": "maps/261110/India_Punjab.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Punjab.mwm"
+  },
+  {
+   "src": "maps/261110/India_Rajasthan.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Rajasthan.mwm"
+  },
+  {
+   "src": "maps/261110/India_Sikkim.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Sikkim.mwm"
+  },
+  {
+   "src": "maps/261110/India_Tamil Nadu.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Tamil Nadu.mwm"
+  },
+  {
+   "src": "maps/261110/India_Telangana.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Telangana.mwm"
+  },
+  {
+   "src": "maps/261110/India_Tripura.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Tripura.mwm"
+  },
+  {
+   "src": "maps/261110/India_Uttar Pradesh.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Uttar Pradesh.mwm"
+  },
+  {
+   "src": "maps/261110/India_Uttarakhand.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_Uttarakhand.mwm"
+  },
+  {
+   "src": "maps/261110/India_West Bengal.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/India_West Bengal.mwm"
+  },
+  {
+   "src": "maps/261110/World.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/World.mwm"
+  },
+  {
+   "src": "maps/261110/WorldCoasts.mwm",
+   "dest": "Core/05-Maps/Android-Organic-Maps/261110/WorldCoasts.mwm"
+  },
+  {
+   "src": "maps/india-z14.pmtiles",
+   "dest": "Core/05-Maps/Desktop-Map/india.pmtiles"
+  },
+  {
+   "src": "readers/miniserve-0.35.0-aarch64-apple-darwin",
+   "dest": "Shared-Readers/miniserve/macos-arm64/miniserve",
+   "mode": "755"
+  },
+  {
+   "src": "readers/miniserve-0.35.0-x86_64-apple-darwin",
+   "dest": "Shared-Readers/miniserve/macos-x64/miniserve",
+   "mode": "755"
+  },
+  {
+   "src": "readers/miniserve-0.35.0-x86_64-unknown-linux-musl",
+   "dest": "Shared-Readers/miniserve/linux-x64/miniserve",
+   "mode": "755"
+  },
+  {
+   "src": "readers/miniserve-0.35.0-aarch64-unknown-linux-musl",
+   "dest": "Shared-Readers/miniserve/linux-arm64/miniserve",
+   "mode": "755"
+  },
+  {
+   "src": "readers/miniserve-0.35.0-x86_64-pc-windows-msvc.exe",
+   "dest": "Shared-Readers/miniserve/windows-x64/miniserve.exe"
+  },
+  {
+   "src": "readers/kiwix-desktop_windows_x64_2.5.1.zip",
+   "dest": "Shared-Readers/kiwix-app/kiwix-desktop_windows_x64_2.5.1.zip"
+  },
+  {
+   "src": "readers/kiwix-desktop_x86_64_2.5.1.appimage",
+   "dest": "Shared-Readers/kiwix-app/kiwix-desktop_x86_64_2.5.1.appimage",
+   "mode": "755"
+  },
+  {
+   "src": "readers/kiwix-macos_3.9.0.dmg",
+   "dest": "Shared-Readers/kiwix-app/kiwix-macos_3.9.0.dmg"
+  },
+  {
+   "src": "readers/org.kiwix.kiwixmobile.standalone-v3.14.1.apk",
+   "dest": "Shared-Readers/android/org.kiwix.kiwixmobile.standalone-v3.14.1.apk"
+  },
+  {
+   "src": "maps/OrganicMaps-26111139-web-release.apk",
+   "dest": "Shared-Readers/android/OrganicMaps-26111139-web-release.apk"
+  },
+  {
+   "src": "ai/gemma-4-E4B_q4_0-it.gguf",
+   "dest": "AI/Gemma-4-E4B/gemma-4-E4B_q4_0-it.gguf"
+  },
+  {
+   "src": "ai/gemma-4-E4B-it-mmproj.gguf",
+   "dest": "AI/Gemma-4-E4B/gemma-4-E4B-it-mmproj.gguf"
+  },
+  {
+   "src": "ai/gemma-4-12b-it-qat-q4_0.gguf",
+   "dest": "AI/Gemma-4-12B/gemma-4-12b-it-qat-q4_0.gguf"
+  },
+  {
+   "src": "ai/mmproj-gemma-4-12b-it-qat-q4_0.gguf",
+   "dest": "AI/Gemma-4-12B/mmproj-gemma-4-12b-it-qat-q4_0.gguf"
+  }
+ ],
+ "unpack": [
+  {
+   "archive": "readers/kiwix-tools_macos-arm64-3.8.1.tar.gz",
+   "dest": "Shared-Readers/kiwix-serve/macos-arm64",
+   "only": [
+    "kiwix-serve"
+   ]
+  },
+  {
+   "archive": "readers/kiwix-tools_macos-x86_64-3.8.1.tar.gz",
+   "dest": "Shared-Readers/kiwix-serve/macos-x64",
+   "only": [
+    "kiwix-serve"
+   ]
+  },
+  {
+   "archive": "readers/kiwix-tools_linux-x86_64-3.8.1.tar.gz",
+   "dest": "Shared-Readers/kiwix-serve/linux-x64",
+   "only": [
+    "kiwix-serve"
+   ]
+  },
+  {
+   "archive": "readers/kiwix-tools_linux-aarch64-3.8.1.tar.gz",
+   "dest": "Shared-Readers/kiwix-serve/linux-arm64",
+   "only": [
+    "kiwix-serve"
+   ]
+  },
+  {
+   "archive": "readers/kiwix-tools_win-x86_64-3.8.1.zip",
+   "dest": "Shared-Readers/kiwix-serve/windows-x64",
+   "only": [
+    "kiwix-serve.exe",
+    "icudt74.dll",
+    "icuin74.dll",
+    "icuio74.dll",
+    "icutu74.dll",
+    "icuuc74.dll"
+   ]
+  },
+  {
+   "archive": "ai/llama-b12379-bin-macos-arm64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/macos-arm64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-macos-x64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/macos-x64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-ubuntu-x64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/linux-x64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-ubuntu-arm64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/linux-arm64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-ubuntu-vulkan-x64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/linux-vulkan-x64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-ubuntu-vulkan-arm64.tar.gz",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/linux-vulkan-arm64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-win-cpu-x64.zip",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/windows-cpu-x64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-win-cpu-arm64.zip",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/windows-cpu-arm64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-win-vulkan-x64.zip",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/windows-vulkan-x64"
+  },
+  {
+   "archive": "ai/llama-b12379-bin-win-vulkan-arm64.zip",
+   "dest": "AI/Runner-and-Instructions/llama.cpp/windows-vulkan-arm64"
+  }
+ ],
+ "dirs": [
+  {
+   "src": "mapviewer/sprites/v4",
+   "dest": "Core/05-Maps/Desktop-Map/sprites/v4"
+  },
+  {
+   "src": "mapviewer/maplibre-gl.js",
+   "dest": "Core/05-Maps/Desktop-Map/lib/maplibre-gl.js"
+  },
+  {
+   "src": "mapviewer/maplibre-gl.css",
+   "dest": "Core/05-Maps/Desktop-Map/lib/maplibre-gl.css"
+  },
+  {
+   "src": "mapviewer/pmtiles.js",
+   "dest": "Core/05-Maps/Desktop-Map/lib/pmtiles.js"
+  },
+  {
+   "src": "mapviewer/basemaps.js",
+   "dest": "Core/05-Maps/Desktop-Map/lib/basemaps.js"
+  }
+ ],
+ "map_fonts": "mapviewer/fonts",
+ "places": {
+  "src": "geonames/IN.txt",
+  "admin1": "geonames/admin1CodesASCII.txt"
+ },
+ "generated": {
+  "Core/05-Maps/Desktop-Map/maps.json": [
+   {
+    "file": "india.pmtiles",
+    "name": "India",
+    "center": [
+     78.96,
+     22.59
+    ],
+    "zoom": 4.5
+   }
+  ]
+ },
+ "catalogue": [
+  {
+   "module": "general",
+   "title": "Simple English Wikipedia",
+   "description": "Over 250,000 encyclopedia articles in plain English, with pictures. Search for almost anything.",
+   "topics": [
+    "encyclopedia",
+    "wikipedia",
+    "history",
+    "science",
+    "geography",
+    "people"
+   ],
+   "paths": [
+    "Core/01-General-Knowledge/wikipedia_en-simple_all_maxi_2026-09.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "wikipedia_en-simple_all_maxi"
+    }
+   ]
+  },
+  {
+   "module": "general",
+   "title": "CIA World Factbook",
+   "description": "Facts about every country: people, government, economy, maps and flags.",
+   "topics": [
+    "countries",
+    "geography",
+    "flags",
+    "population"
+   ],
+   "paths": [
+    "Core/01-General-Knowledge/theworldfactbook_en_all_2026-02.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "theworldfactbook_en_all"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Wikipedia Medicine",
+   "description": "About 70,000 medical articles: diseases, symptoms, medicines, anatomy and first aid. Text only.",
+   "topics": [
+    "medicine",
+    "disease",
+    "symptoms",
+    "drugs",
+    "first aid",
+    "health"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/wikipedia_en_medicine_nopic_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "wikipedia_en_medicine_nopic"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Medicine library",
+   "description": "Practical medical guides and manuals for low-resource settings.",
+   "topics": [
+    "medicine",
+    "first aid",
+    "health",
+    "nursing"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/zimgit-medicine_en_2024-08.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "zimgit-medicine_en"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Water Treatment Library",
+   "description": "Guides to making water safe to drink: filtering, boiling, disinfecting, storing.",
+   "topics": [
+    "water",
+    "sanitation",
+    "purification",
+    "hygiene"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/zimgit-water_en_2024-08.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "zimgit-water_en"
+    }
+   ]
+  },
+  {
+   "module": "food",
+   "title": "Food preparation library",
+   "description": "Cooking, preserving and storing food safely.",
+   "topics": [
+    "food",
+    "cooking",
+    "preserving",
+    "storage",
+    "nutrition"
+   ],
+   "paths": [
+    "Core/03-Food-and-Growing/zimgit-food-preparation_en_2025-04.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "zimgit-food-preparation_en"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Post-disaster library",
+   "description": "Shelter, sanitation, health and recovery after floods, earthquakes and other disasters.",
+   "topics": [
+    "disaster",
+    "emergency",
+    "shelter",
+    "flood",
+    "earthquake",
+    "survival"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/zimgit-post-disaster_en_2024-05.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "zimgit-post-disaster_en"
+    }
+   ]
+  },
+  {
+   "module": "repair",
+   "title": "Knots",
+   "description": "How to tie useful knots, step by step.",
+   "topics": [
+    "knots",
+    "rope",
+    "practical"
+   ],
+   "paths": [
+    "Core/04-Repair-and-Practical-Skills/zimgit-knots_en_2024-08.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "zimgit-knots_en"
+    }
+   ]
+  },
+  {
+   "module": "food",
+   "title": "Gardenology",
+   "description": "Plant encyclopedia: growing vegetables, fruit, herbs and flowers.",
+   "topics": [
+    "gardening",
+    "plants",
+    "farming",
+    "vegetables",
+    "growing"
+   ],
+   "paths": [
+    "Core/03-Food-and-Growing/gardenology.org_en_all_2026-09.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "gardenology.org_en_all"
+    }
+   ]
+  },
+  {
+   "module": "repair",
+   "title": "Restarters repair wiki",
+   "description": "Fixing everyday electrical and electronic things.",
+   "topics": [
+    "repair",
+    "electronics",
+    "fixing"
+   ],
+   "paths": [
+    "Core/04-Repair-and-Practical-Skills/restarters_en_all_maxi_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "restarters_en_all_maxi"
+    }
+   ]
+  },
+  {
+   "module": "repair",
+   "title": "Appropedia",
+   "description": "Appropriate technology: solar, water, building, cooking, farming and more, for low-cost living.",
+   "topics": [
+    "technology",
+    "solar",
+    "building",
+    "energy",
+    "diy",
+    "sustainability"
+   ],
+   "paths": [
+    "Core/04-Repair-and-Practical-Skills/appropedia_en_all_maxi_2026-02.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "appropedia_en_all_maxi"
+    }
+   ]
+  },
+  {
+   "module": "extras",
+   "title": "Energypedia",
+   "description": "Renewable energy in practice: solar, biogas, cooking stoves, small hydro.",
+   "topics": [
+    "energy",
+    "solar",
+    "biogas",
+    "electricity"
+   ],
+   "paths": [
+    "Extras/Energypedia/energypedia_en_all_maxi_2026-06.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "energypedia_en_all_maxi"
+    }
+   ]
+  },
+  {
+   "module": "extras",
+   "title": "iFixit repair guides",
+   "description": "Illustrated step-by-step repair guides for phones, laptops, appliances, cars and more.",
+   "topics": [
+    "repair",
+    "phone",
+    "laptop",
+    "appliance",
+    "car",
+    "fixing"
+   ],
+   "paths": [
+    "Extras/iFixit/ifixit_en_all_2025-12.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "ifixit_en_all"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Python documentation",
+   "description": "Reference manual for Python.",
+   "topics": [
+    "programming",
+    "coding",
+    "python"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_python_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_python"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "HTML documentation",
+   "description": "Reference manual for HTML.",
+   "topics": [
+    "programming",
+    "coding",
+    "html"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_html_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_html"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "CSS documentation",
+   "description": "Reference manual for CSS.",
+   "topics": [
+    "programming",
+    "coding",
+    "css"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_css_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_css"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "JavaScript documentation",
+   "description": "Reference manual for JavaScript.",
+   "topics": [
+    "programming",
+    "coding",
+    "javascript"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_javascript_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_javascript"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Web DOM APIs documentation",
+   "description": "Reference manual for Web DOM APIs.",
+   "topics": [
+    "programming",
+    "coding",
+    "dom"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_dom_2026-05.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_dom"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Git documentation",
+   "description": "Reference manual for Git.",
+   "topics": [
+    "programming",
+    "coding",
+    "git"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_git_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_git"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "SQLite documentation",
+   "description": "Reference manual for SQLite.",
+   "topics": [
+    "programming",
+    "coding",
+    "sqlite"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_sqlite_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_sqlite"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Bash documentation",
+   "description": "Reference manual for Bash.",
+   "topics": [
+    "programming",
+    "coding",
+    "bash"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_bash_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_bash"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Linux man pages documentation",
+   "description": "Reference manual for Linux man pages.",
+   "topics": [
+    "programming",
+    "coding",
+    "man"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_man_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_man"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "HTTP documentation",
+   "description": "Reference manual for HTTP.",
+   "topics": [
+    "programming",
+    "coding",
+    "http"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_http_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_http"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "Markdown documentation",
+   "description": "Reference manual for Markdown.",
+   "topics": [
+    "programming",
+    "coding",
+    "markdown"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_markdown_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_markdown"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "C language documentation",
+   "description": "Reference manual for C language.",
+   "topics": [
+    "programming",
+    "coding",
+    "c"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/devdocs_en_c_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "devdocs_en_c"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "freeCodeCamp",
+   "description": "Learn to program: web development, JavaScript, Python and more, with exercises.",
+   "topics": [
+    "programming",
+    "coding",
+    "learn",
+    "web"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/freecodecamp_en_all_2026-08.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "freecodecamp_en_all"
+    }
+   ]
+  },
+  {
+   "module": "computing",
+   "title": "ArchWiki",
+   "description": "Detailed Linux documentation, useful for any Linux system.",
+   "topics": [
+    "linux",
+    "computer",
+    "system"
+   ],
+   "paths": [
+    "Core/07-Computing-and-Documentation/archlinux_en_all_maxi_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "archlinux_en_all_maxi"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "PhET science simulations",
+   "description": "Interactive maths and science simulations from the University of Colorado.",
+   "topics": [
+    "science",
+    "physics",
+    "chemistry",
+    "maths",
+    "school"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/phet_en_all_2026-08.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "phet_en_all"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Wikipedia Mathematics",
+   "description": "Introductions to mathematics topics.",
+   "topics": [
+    "maths",
+    "mathematics",
+    "school"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/wikipedia_en_mathematics_mini_2026-06.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "wikipedia_en_mathematics_mini"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Wikipedia Physics",
+   "description": "Introductions to physics topics.",
+   "topics": [
+    "physics",
+    "science",
+    "school"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/wikipedia_en_physics_mini_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "wikipedia_en_physics_mini"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Wikipedia Chemistry",
+   "description": "Introductions to chemistry topics.",
+   "topics": [
+    "chemistry",
+    "science",
+    "school"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/wikipedia_en_chemistry_mini_2026-10.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "wikipedia_en_chemistry_mini"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "LibreTexts school textbooks (K-12)",
+   "description": "Free school textbooks: maths, science, English and social studies, up to class 12 level.",
+   "topics": [
+    "school",
+    "textbook",
+    "maths",
+    "science",
+    "class",
+    "study"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/libretexts.org_en_k12_2026-01.zim"
+   ],
+   "open": [
+    {
+     "label": "Open",
+     "via": "library",
+     "target": "libretexts.org_en_k12"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Prealgebra 2e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "maths",
+    "arithmetic",
+    "fractions",
+    "school",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Prealgebra-2e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Prealgebra-2e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Elementary Algebra 2e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "maths",
+    "algebra",
+    "school",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Elementary-Algebra-2e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Elementary-Algebra-2e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Introductory Statistics 2e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "maths",
+    "statistics",
+    "data",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Introductory-Statistics-2e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Introductory-Statistics-2e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Physics (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "physics",
+    "science",
+    "school",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Physics.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Physics.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Chemistry 2e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "chemistry",
+    "science",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Chemistry-2e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Chemistry-2e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Concepts of Biology (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "biology",
+    "science",
+    "life",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Concepts-of-Biology.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Concepts-of-Biology.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Fundamentals of Nursing (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "nursing",
+    "patient care",
+    "health",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Fundamentals-of-Nursing.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Fundamentals-of-Nursing.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Clinical Nursing Skills (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "nursing",
+    "procedures",
+    "health",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Clinical-Nursing-Skills.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Clinical-Nursing-Skills.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Pharmacology for Nurses (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "medicines",
+    "drugs",
+    "dose",
+    "nursing",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Pharmacology-for-Nurses.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Pharmacology-for-Nurses.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Maternal-Newborn Nursing (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "pregnancy",
+    "birth",
+    "baby",
+    "nursing",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Maternal-Newborn-Nursing.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Maternal-Newborn-Nursing.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Nutrition for Nurses (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Nutrition-for-Nurses.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Nutrition-for-Nurses.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Population Health for Nurses (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Population-Health-for-Nurses.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Population-Health-for-Nurses.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Psychiatric-Mental Health Nursing (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "mental health",
+    "nursing",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Psychiatric-Mental-Health-Nursing.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Psychiatric-Mental-Health-Nursing.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Medical-Surgical Nursing (OpenStax)",
+   "description": "Free nursing textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "nursing",
+    "illness",
+    "surgery",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/OpenStax/Medical-Surgical-Nursing.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/OpenStax/Medical-Surgical-Nursing.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Psychology 2e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "psychology",
+    "mind",
+    "behaviour",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Psychology-2e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Psychology-2e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Principles of Economics 3e (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "economics",
+    "money",
+    "business",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Principles-of-Economics-3e.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Principles-of-Economics-3e.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Introduction to Python Programming (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "python",
+    "programming",
+    "coding",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Introduction-to-Python-Programming.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Introduction-to-Python-Programming.pdf"
+    }
+   ]
+  },
+  {
+   "module": "edu",
+   "title": "Writing Guide with Handbook (OpenStax)",
+   "description": "Free textbook (PDF). From OpenStax, Rice University.",
+   "topics": [
+    "writing",
+    "english",
+    "essay",
+    "textbook",
+    "book"
+   ],
+   "paths": [
+    "Core/06-Education-and-Books/OpenStax/Writing-Guide-with-Handbook.pdf"
+   ],
+   "open": [
+    {
+     "label": "Open book (PDF)",
+     "via": "files",
+     "target": "Core/06-Education-and-Books/OpenStax/Writing-Guide-with-Handbook.pdf"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Where There Is No Doctor (2025)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "doctor",
+    "first aid",
+    "medicine",
+    "illness",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Where Women Have No Doctor (2024)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "women",
+    "pregnancy",
+    "health",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Where-Women-Have-No-Doctor-2024/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "A Book for Midwives (2026)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "birth",
+    "pregnancy",
+    "midwife",
+    "baby",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/A-Book-for-Midwives-2026/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Where There Is No Dentist (2024)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "teeth",
+    "dentist",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Dentist-2024/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "A Community Guide to Environmental Health (2012)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "water",
+    "sanitation",
+    "toilets",
+    "environment",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/A-Community-Guide-to-Environmental-Health-2012/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "New Where There Is No Doctor (2011)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "doctor",
+    "first aid",
+    "medicine",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/New-Where-There-Is-No-Doctor-2011/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "A Health Handbook for Women with Disabilities (2008)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "disability",
+    "women",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/A-Health-Handbook-for-Women-with-Disabilities-2008/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Disabled Village Children (2025)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "disability",
+    "children",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Disabled-Village-Children-2025/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Epilepsy and Seizures (2026)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "epilepsy",
+    "seizures",
+    "fits",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Epilepsy-and-Seizures-2026/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Health Actions for Women (2015)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "women",
+    "community",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Health-Actions-for-Women-2015/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Helping Children Live with HIV (2019)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "hiv",
+    "children",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Live-with-HIV-2019/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Helping Children Who Are Blind (2000)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "blind",
+    "children",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Blind-2000/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Helping Children Who Are Deaf (2026)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "deaf",
+    "children",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Helping-Children-Who-Are-Deaf-2026/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Helping Health Workers Learn (2026)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "teaching",
+    "health worker",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Helping-Health-Workers-Learn-2026/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Promoting Community Mental Health (2025)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "mental health",
+    "trauma",
+    "depression",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Promoting-Community-Mental-Health-2025/"
+    }
+   ]
+  },
+  {
+   "module": "health",
+   "title": "Workers' Guide to Health and Safety (2015)",
+   "description": "Hesperian health guide, one PDF per chapter.",
+   "topics": [
+    "work",
+    "safety",
+    "factory",
+    "health",
+    "hesperian",
+    "book"
+   ],
+   "paths": [
+    "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015"
+   ],
+   "open": [
+    {
+     "label": "Chapters (PDF)",
+     "via": "files",
+     "target": "Core/02-Health-and-Sanitation/Hesperian/Workers-Guide-to-Health-and-Safety-2015/"
+    }
+   ]
+  },
+  {
+   "module": "maps",
+   "title": "Map of India (computer)",
+   "description": "Street map of all of India that works in your web browser. Zoom in to any town.",
+   "topics": [
+    "map",
+    "india",
+    "streets",
+    "roads",
+    "town",
+    "city"
+   ],
+   "paths": [
+    "Core/05-Maps/Desktop-Map/india.pmtiles"
+   ],
+   "open": [
+    {
+     "label": "Open map",
+     "via": "needs-files-server",
+     "target": "Core/05-Maps/Desktop-Map/index.html"
+    }
+   ]
+  },
+  {
+   "module": "maps",
+   "title": "Map of India for Android (Organic Maps)",
+   "description": "Install Organic Maps from Shared-Readers/android, then copy these map files to the phone (see README.txt). Search and directions work offline.",
+   "topics": [
+    "map",
+    "android",
+    "phone",
+    "directions",
+    "routing",
+    "navigation"
+   ],
+   "paths": [
+    "Core/05-Maps/Android-Organic-Maps"
+   ],
+   "open": [
+    {
+     "label": "Map files",
+     "via": "files",
+     "target": "Core/05-Maps/Android-Organic-Maps/"
+    }
+   ]
+  },
+  {
+   "module": "readers",
+   "title": "Reader apps (Kiwix, Organic Maps)",
+   "description": "Install these to read the library without the browser: Kiwix for Windows, Mac, Linux and Android; Organic Maps for Android.",
+   "topics": [
+    "app",
+    "install",
+    "android",
+    "kiwix",
+    "reader"
+   ],
+   "paths": [
+    "Shared-Readers"
+   ],
+   "open": [
+    {
+     "label": "Programs folder",
+     "via": "files",
+     "target": "Shared-Readers/"
+    }
+   ]
+  },
+  {
+   "module": "ai",
+   "title": "AI assistant: Gemma 4 E4B (smaller)",
+   "description": "A small AI that runs on this computer. Start it with Start-AI, then open it here. It can be wrong: check health and safety answers in the books.",
+   "topics": [
+    "ai",
+    "assistant",
+    "chat",
+    "questions"
+   ],
+   "paths": [
+    "AI/Gemma-4-E4B/gemma-4-E4B_q4_0-it.gguf"
+   ],
+   "open": [
+    {
+     "label": "Open AI chat (after Start-AI)",
+     "via": "ai",
+     "target": ""
+    }
+   ]
+  },
+  {
+   "module": "ai",
+   "title": "AI assistant: Gemma 4 12B (larger)",
+   "description": "A larger, slower AI for computers with plenty of memory. Start it with Start-AI 12b. It can be wrong.",
+   "topics": [
+    "ai",
+    "assistant",
+    "chat",
+    "questions"
+   ],
+   "paths": [
+    "AI/Gemma-4-12B/gemma-4-12b-it-qat-q4_0.gguf"
+   ],
+   "open": [
+    {
+     "label": "Open AI chat (after Start-AI 12b)",
+     "via": "ai",
+     "target": ""
+    }
+   ]
+  }
+ ]
+}

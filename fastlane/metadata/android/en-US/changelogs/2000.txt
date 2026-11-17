@@ -1,0 +1,1 @@
+First release: choose parts of the library, download them over BitTorrent (Wi-Fi only unless you allow mobile data), check them against the signed file list, and read them offline: books with full-text search, PDFs and a map of India with place search. Optional sharing on Wi-Fi while charging.

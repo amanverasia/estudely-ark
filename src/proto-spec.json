@@ -1,0 +1,54 @@
+{
+  "release": "prototype-0 (not for distribution)",
+  "modules": [
+    {"id": "health", "dir": "Core/02-Health-and-Sanitation", "title": "Health and sanitation"},
+    {"id": "maps", "dir": "Core/05-Maps", "title": "Maps"},
+    {"id": "edu", "dir": "Core/06-Education-and-Books", "title": "Education"},
+    {"id": "computing", "dir": "Core/07-Computing-and-Documentation", "title": "Computing"},
+    {"id": "ai", "dir": "AI", "title": "AI assistant (optional)"}
+  ],
+  "files": [
+    {"src": "zim/zimgit-water_en_2024-08.zim", "dest": "Core/02-Health-and-Sanitation/zimgit-water_en_2024-08.zim"},
+    {"src": "hesperian/en_wtnd_2025_fm.pdf", "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/00-front-matter.pdf"},
+    {"src": "hesperian/en_wtnd_2025_01.pdf", "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/01.pdf"},
+    {"src": "hesperian/en_wtnd_2025_02.pdf", "dest": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/02.pdf"},
+    {"src": "zim/phet_en_all_2026-08.zim", "dest": "Core/06-Education-and-Books/phet_en_all_2026-08.zim"},
+    {"src": "zim/devdocs_en_python_2026-10.zim", "dest": "Core/07-Computing-and-Documentation/devdocs_en_python_2026-10.zim"},
+    {"src": "maps/delhi.pmtiles", "dest": "Core/05-Maps/Desktop-Map/delhi.pmtiles"},
+    {"src": "maps/260714/India_Delhi.mwm", "dest": "Core/05-Maps/Android-Organic-Maps/260714/India_Delhi.mwm"},
+    {"src": "maps/260714/World.mwm", "dest": "Core/05-Maps/Android-Organic-Maps/260714/World.mwm"},
+    {"src": "maps/260714/WorldCoasts.mwm", "dest": "Core/05-Maps/Android-Organic-Maps/260714/WorldCoasts.mwm"},
+    {"src": "maps/OrganicMaps-26111139-web-release.apk", "dest": "Shared-Readers/android/OrganicMaps-26111139-web-release.apk"},
+    {"src": "readers/kiwix-macos_3.9.0.dmg", "dest": "Shared-Readers/kiwix-app/kiwix-macos_3.9.0.dmg"},
+    {"src": "readers/miniserve-0.35.0-aarch64-apple-darwin", "dest": "Shared-Readers/miniserve/macos-arm64/miniserve", "mode": "755"},
+    {"src": "readers/miniserve-0.35.0-aarch64-unknown-linux-gnu", "dest": "Shared-Readers/miniserve/linux-arm64/miniserve", "mode": "755", "optional": true},
+    {"src": "ai/gemma-4-E4B_q4_0-it.gguf", "dest": "AI/Gemma-4-E4B/gemma-4-E4B_q4_0-it.gguf"},
+    {"src": "ai/gemma-4-E4B-it-mmproj.gguf", "dest": "AI/Gemma-4-E4B/gemma-4-E4B-it-mmproj.gguf"}
+  ],
+  "unpack": [
+    {"archive": "readers/kiwix-tools_macos-arm64-3.8.1.tar.gz", "dest": "Shared-Readers/kiwix-serve/macos-arm64", "only": ["kiwix-serve"]},
+    {"archive": "readers/kiwix-tools_linux-aarch64-3.8.1.tar.gz", "dest": "Shared-Readers/kiwix-serve/linux-arm64", "only": ["kiwix-serve"], "optional": true},
+    {"archive": "ai/llama-b12379-bin-macos-arm64.tar.gz", "dest": "AI/Runner-and-Instructions/llama.cpp/macos-arm64"},
+    {"archive": "ai/llama-b12379-bin-ubuntu-arm64.tar.gz", "dest": "AI/Runner-and-Instructions/llama.cpp/linux-arm64", "optional": true}
+  ],
+  "dirs": [
+    {"src": "mapviewer/fonts", "dest": "Core/05-Maps/Desktop-Map/fonts"},
+    {"src": "mapviewer/sprites/v4", "dest": "Core/05-Maps/Desktop-Map/sprites/v4"},
+    {"src": "mapviewer/maplibre-gl.js", "dest": "Core/05-Maps/Desktop-Map/lib/maplibre-gl.js"},
+    {"src": "mapviewer/maplibre-gl.css", "dest": "Core/05-Maps/Desktop-Map/lib/maplibre-gl.css"},
+    {"src": "mapviewer/pmtiles.js", "dest": "Core/05-Maps/Desktop-Map/lib/pmtiles.js"},
+    {"src": "mapviewer/basemaps.js", "dest": "Core/05-Maps/Desktop-Map/lib/basemaps.js"}
+  ],
+  "generated": {
+    "Core/05-Maps/Desktop-Map/maps.json": [{"file": "delhi.pmtiles", "name": "Delhi (prototype sample)", "center": [77.209, 28.6139], "zoom": 11}]
+  },
+  "catalogue": [
+    {"module": "health", "title": "Where There Is No Doctor (2025), sample chapters", "description": "Hesperian's village health care handbook. Prototype includes front matter and chapters 1-2.", "topics": ["health", "first aid", "medicine", "doctor"], "paths": ["Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025"], "open": [{"label": "Chapter 1 (PDF)", "via": "files", "target": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/01.pdf"}, {"label": "All chapters", "via": "files", "target": "Core/02-Health-and-Sanitation/Hesperian/Where-There-Is-No-Doctor-2025/"}]},
+    {"module": "health", "title": "Water Treatment Library", "description": "Guides to making water safe to drink: filtering, boiling, disinfecting, storing.", "topics": ["water", "sanitation", "purification", "hygiene"], "paths": ["Core/02-Health-and-Sanitation/zimgit-water_en_2024-08.zim"], "open": [{"label": "Open", "via": "library", "target": "zimgit-water_en"}]},
+    {"module": "maps", "title": "Map of Delhi (desktop)", "description": "Street map that works in your web browser. Prototype covers Delhi only.", "topics": ["map", "india", "delhi", "streets"], "paths": ["Core/05-Maps/Desktop-Map"], "open": [{"label": "Open map", "via": "needs-files-server", "target": "Core/05-Maps/Desktop-Map/index.html"}]},
+    {"module": "maps", "title": "Map of Delhi for Android (Organic Maps)", "description": "Install the Organic Maps app from Shared-Readers/android, then copy these map files to the phone. Search and directions work offline.", "topics": ["map", "android", "phone", "directions", "routing"], "paths": ["Core/05-Maps/Android-Organic-Maps"], "open": [{"label": "Map files", "via": "files", "target": "Core/05-Maps/Android-Organic-Maps/"}]},
+    {"module": "edu", "title": "PhET science simulations", "description": "Interactive maths and science simulations from the University of Colorado.", "topics": ["science", "physics", "chemistry", "maths", "school"], "paths": ["Core/06-Education-and-Books/phet_en_all_2026-08.zim"], "open": [{"label": "Open", "via": "library", "target": "phet_en_all"}]},
+    {"module": "computing", "title": "Python documentation", "description": "The Python language and standard library reference.", "topics": ["python", "programming", "coding"], "paths": ["Core/07-Computing-and-Documentation/devdocs_en_python_2026-10.zim"], "open": [{"label": "Open", "via": "library", "target": "devdocs_en_python"}]},
+    {"module": "ai", "title": "AI assistant: Gemma 4 E4B", "description": "A small AI that runs on this computer. Start it with Start-AI, then open it here. It can be wrong.", "topics": ["ai", "assistant", "chat", "questions"], "paths": ["AI/Gemma-4-E4B"], "open": [{"label": "Open AI chat (after Start-AI)", "via": "ai", "target": ""}]}
+  ]
+}

@@ -1,0 +1,66 @@
+name: Pack test (Windows and Linux)
+
+# Builds a small partial pack from upstream downloads, signs it with a throwaway key,
+# then runs the launchers and checks on real Windows (x64 and ARM64) and Linux x64 machines.
+on:
+  workflow_dispatch:
+    inputs:
+      ai:
+        description: "Also test the AI (downloads the 5.2 GB E4B model)"
+        type: boolean
+        default: true
+      arm:
+        description: "Also test Windows ARM64 (runner may not be available to private repos)"
+        type: boolean
+        default: false
+  push:
+    paths: ["src/**", "scripts/**", ".github/workflows/pack-test.yml"]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(inputs.arm && '[{"os":"windows-latest","name":"windows-x64"},{"os":"windows-11-arm","name":"windows-arm64"},{"os":"ubuntu-latest","name":"linux-x64"}]' || '[{"os":"windows-latest","name":"windows-x64"},{"os":"ubuntu-latest","name":"linux-x64"}]') }}
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
+    timeout-minutes: 90
+    env:
+      AI_FLAG: ${{ (github.event_name == 'push' || inputs.ai == false) && '--no-ai' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: dl
+          key: ci-subset-v1-${{ hashFiles('scripts/ci/fetch_ci_subset.sh', 'scripts/fetch_mapviewer.sh') }}-${{ env.AI_FLAG }}
+
+      - name: Fetch test subset
+        shell: bash
+        run: scripts/ci/fetch_ci_subset.sh dl $AI_FLAG
+
+      - name: Build and sign partial pack (throwaway key)
+        shell: bash
+        run: |
+          python scripts/make_release_spec.py dl spec.json "CI test build"
+          python scripts/build_pack.py spec.json dl pack
+          mkdir -p .ci-key && ssh-keygen -q -t ed25519 -N '' -C ci-throwaway -f .ci-key/key
+          sh scripts/sign_manifest.sh .ci-key/key pack
+
+      - name: Test (Windows)
+        if: runner.os == 'Windows'
+        # Windows PowerShell 5.1: what ordinary Windows 10/11 users have.
+        shell: powershell
+        run: |
+          $PSVersionTable.PSVersion
+          if ($env:AI_FLAG) { .\scripts\ci\windows_test.ps1 -Pack pack -NoAI } else { .\scripts\ci\windows_test.ps1 -Pack pack }
+          exit $LASTEXITCODE
+
+      - name: Test (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: sh scripts/ci/linux_test.sh pack $AI_FLAG

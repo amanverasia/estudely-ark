@@ -1,0 +1,24 @@
+Estudely Ark puts a library on your phone that keeps working with no internet: health books, an encyclopedia, a map of all of India, repair guides, school science and programming manuals.
+
+Pick the parts you want and the app downloads them once. After that, everything works offline.
+
+<b>What's in the library</b>
+* General knowledge: Simple English Wikipedia with pictures, CIA World Factbook
+* Health and sanitation: all 16 Hesperian health books, Wikipedia Medicine, water and sanitation, nursing textbooks
+* Food and growing: food preparation and storage, gardening
+* Repair and practical skills: Appropedia, repair wiki, knots
+* Map of India: every street, with offline search for towns, villages, hospitals and stations
+* Education: science simulations, school textbooks, maths, physics and chemistry
+* Computing: programming manuals, freeCodeCamp, Arch Wiki
+* Optional: iFixit repair guides, Energypedia
+
+<b>How it works</b>
+* Downloads use BitTorrent from other people who have the library, plus an always-on server. Downloads wait for Wi-Fi unless you allow mobile data.
+* Every part is checked against a signed list of files before it opens, so you know nothing was changed or damaged on the way.
+* Search inside each book and the map, with no internet.
+* Optional sharing: on Wi-Fi while charging, your phone can pass the library on to others. It is off until you switch it on.
+
+<b>Free, no ads, no accounts</b>
+The app and the library are free and stay free. There are no ads, no tracking and no sign-in. The library is the same as the Estudely Ark desktop pack (ark.esdy.cc).
+
+The content comes from Wikipedia, Hesperian, Kiwix, OpenStreetMap, Appropedia, iFixit, PhET and others, under their own licences. Some of it (Hesperian, PhET, iFixit) may only be shared for free.
