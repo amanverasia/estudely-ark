@@ -1,9 +1,7 @@
-# Draft metadata for F-Droid's fdroiddata repository (metadata/cc.esdy.ark.yml).
-# Check the commit/tag of the release before submitting.
 Categories:
+  - Navigation
   - Reading
   - Science & Education
-  - Navigation
 License: GPL-3.0-or-later
 AuthorName: Aman Verasia
 WebSite: https://ark.esdy.cc/
@@ -18,36 +16,43 @@ Repo: https://github.com/amanverasia/estudely-ark.git
 Builds:
   - versionName: '2.0'
     versionCode: 2001
-    commit: v2.0
+    commit: cfdb4b66a22d7d50090c62288771babfbb459430
     subdir: android/app
     gradle:
       - yes
     output: build/outputs/apk/release/app-armeabi-v7a-release-unsigned.apk
-    binary: https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-armeabi-v7a.apk
+    binary: 
+      https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-armeabi-v7a.apk
 
   - versionName: '2.0'
     versionCode: 2002
-    commit: v2.0
+    commit: cfdb4b66a22d7d50090c62288771babfbb459430
     subdir: android/app
     gradle:
       - yes
     output: build/outputs/apk/release/app-arm64-v8a-release-unsigned.apk
-    binary: https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-arm64-v8a.apk
+    binary: 
+      https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-arm64-v8a.apk
 
   - versionName: '2.0'
     versionCode: 2003
-    commit: v2.0
+    commit: cfdb4b66a22d7d50090c62288771babfbb459430
     subdir: android/app
     gradle:
       - yes
     output: build/outputs/apk/release/app-x86_64-release-unsigned.apk
-    binary: https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-x86_64.apk
+    binary: 
+      https://github.com/amanverasia/estudely-ark/releases/download/v%v/EstudelyArk-%v-x86_64.apk
 
-# Reproducible: F-Droid's build of tag v2.0 is byte-identical to ours (tested 17 Nov 2026), so F-Droid can
-# publish the developer-signed APKs from the GitHub release.
 AllowedAPKSigningKeys: 9cf9432f4270f8c3a54c677b349b319ea2981d93fb227e1f483fa47de680447d
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
+VercodeOperation:
+  - 10 * %c + 1
+  - 10 * %c + 2
+  - 10 * %c + 3
+UpdateCheckData: android/app/build.gradle.kts|val baseVersionCode = (\d+)|.|versionName
+  = "([^"]+)"
 CurrentVersion: '2.0'
 CurrentVersionCode: 2003

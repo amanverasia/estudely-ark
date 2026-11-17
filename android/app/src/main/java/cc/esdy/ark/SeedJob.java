@@ -38,7 +38,7 @@ public class SeedJob extends JobService {
 
     @Override public boolean onStartJob(JobParameters p) {
         LibraryEngine e = LibraryEngine.get(this);
-        String skip = !e.sharingOn() ? "switched off" : DownloadService.isRunning() || e.isRunning() ? "busy"
+        String skip = !e.sharingOn() ? "switched off" : e.pausedByUser() ? "downloads paused by you" : DownloadService.isRunning() || e.isRunning() ? "busy"
                 : e.verified().isEmpty() ? "nothing downloaded" : !conditionsHold(this) ? "not charging on Wi-Fi" : null;
         if (skip != null) { android.util.Log.i("EstudelyArk", "Sharing skipped: " + skip); return false; }
         active = true;

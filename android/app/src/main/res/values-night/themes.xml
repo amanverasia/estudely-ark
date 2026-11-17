@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Ark" parent="@android:style/Theme.DeviceDefault.NoActionBar" />
+    <style name="Ark" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#9AB1FF</item>
+        <item name="android:colorBackground">#151A27</item>
+        <item name="android:windowBackground">#151A27</item>
+        <item name="android:textColorPrimary">#E6EBF7</item>
+        <item name="android:textColorSecondary">#A0ABC1</item>
+        <item name="android:statusBarColor">#151A27</item>
+        <item name="android:navigationBarColor">#151A27</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
 </resources>

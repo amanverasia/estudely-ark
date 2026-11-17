@@ -23,3 +23,6 @@ ark-release.properties
 
 # Machine-specific helper settings
 scripts/local.env
+
+# Design mockup archives (the unpacked folders are kept)
+design/*.zip

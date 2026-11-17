@@ -66,11 +66,16 @@ public final class LibraryEngine {
     private final List<String> trackers = new ArrayList<>(), webSeeds = new ArrayList<>();
     private SessionManager session;
     private TorrentHandle handle;
+    private volatile String latestMessage = "", checkingModule;
     /** Debug test switches (ignored in release builds). */
     public boolean testWebSeedOnly;
     /** Set to stop a running web-seed fetch quickly (Android's background time limit). */
     public volatile boolean cancel;
+    private volatile HttpURLConnection webConnection;
     private volatile java.util.concurrent.CountDownLatch resumeWritten;
+    private java.util.concurrent.CountDownLatch stopFinished;
+    private boolean stopping;
+    private volatile String resumeSelection = "";
     public final List<TcpEndpoint> testPeers = new ArrayList<>();
 
     private LibraryEngine(Context c) {
@@ -109,7 +114,11 @@ public final class LibraryEngine {
     public void addListener(Consumer<String> l) { listeners.add(l); }
     public void removeListener(Consumer<String> l) { listeners.remove(l); }
 
+    public String latestMessage() { return latestMessage; }
+    public String checkingModule() { return checkingModule; }
+
     void log(String s) {
+        latestMessage = s;
         Log.i("EstudelyArk", s);
         for (Consumer<String> l : listeners) l.accept(s);
     }
@@ -125,6 +134,25 @@ public final class LibraryEngine {
         prefs.edit().putStringSet("selected", new HashSet<>(ids)).putStringSet("verified", v).apply();
         if (handle != null) handle.prioritizeFiles(priorities(ids));
     }
+
+    /** Adds new downloads without dropping subjects already saved or queued. */
+    public synchronized void addSelected(Set<String> additions) {
+        Set<String> valid = new HashSet<>();
+        for (String id : additions) if (catalog.find(id) != null) valid.add(id);
+        setSelected(LibrarySelection.add(selected(), verified(), valid));
+        SharedPreferences.Editor edit = prefs.edit();
+        for (String id : valid) edit.putBoolean("failed:" + id, false);
+        edit.apply();
+    }
+
+    void cancelTransfers() {
+        cancel = true;
+        HttpURLConnection connection = webConnection;
+        if (connection != null) connection.disconnect();
+    }
+
+    public boolean pausedByUser() { return prefs.getBoolean("pausedByUser", false); }
+    public void setPausedByUser(boolean on) { prefs.edit().putBoolean("pausedByUser", on).apply(); }
 
     public boolean mobileDataAllowed() { return prefs.getBoolean("mobileData", false); }
     public void setMobileDataAllowed(boolean on) { prefs.edit().putBoolean("mobileData", on).apply(); }
@@ -181,10 +209,10 @@ public final class LibraryEngine {
 
     // ---- session ----
 
-    public synchronized boolean isRunning() { return session != null; }
+    public synchronized boolean isRunning() { return session != null || stopping; }
 
     public synchronized void start() {
-        if (session != null) return;
+        if (session != null || stopping) return;
         boolean webOnly = BuildConfig.DEBUG && testWebSeedOnly;
         SettingsPack s = new SettingsPack();
         s.setEnableDht(!webOnly);
@@ -202,7 +230,8 @@ public final class LibraryEngine {
         SessionParams sp = new SessionParams(s);
         sp.setPosixDiskIO();
         session.start(sp);
-        Set<String> ids = selected();
+        // A sharing job must not restart an explicitly paused, incomplete download.
+        Set<String> ids = pausedByUser() && !DownloadService.isRunning() ? verified() : selected();
         // Resume data carries the file priorities it was saved with, and libtorrent applies them after our
         // prioritizeFiles call (seen on a Pixel: four new modules ignored, the old Food-only selection "100%").
         // So resume data saved for a different selection is dropped; the check from disk takes seconds.
@@ -228,31 +257,76 @@ public final class LibraryEngine {
         log("Connecting to other copies of the library (" + ids.size() + " part(s) selected)" + (webOnly ? " (TEST: web seed only)" : ""));
     }
 
-    public synchronized void stop() {
-        if (session == null) return;
-        recordUpload();
-        resumeWritten = new java.util.concurrent.CountDownLatch(1);
-        saveResume();
-        try { resumeWritten.await(5, java.util.concurrent.TimeUnit.SECONDS); } catch (InterruptedException ignored) {}
-        session.stop();
-        session = null;
-        handle = null;
+    public void stop() {
+        SessionManager toStop;
+        java.util.concurrent.CountDownLatch written, finished;
+        synchronized (this) {
+            if (stopping) {
+                toStop = null;
+                written = null;
+                finished = stopFinished;
+            } else {
+                if (session == null) return;
+                stopping = true;
+                stopFinished = finished = new java.util.concurrent.CountDownLatch(1);
+                recordUpload();
+                rememberProgress();
+                resumeWritten = written = new java.util.concurrent.CountDownLatch(1);
+                saveResume();
+                toStop = session;
+            }
+        }
+        if (toStop == null) {
+            try { finished.await(10, java.util.concurrent.TimeUnit.SECONDS); } catch (InterruptedException ignored) {}
+            return;
+        }
+        // Do not hold the engine monitor during this wait: the UI still needs status and progress.
+        try { written.await(5, java.util.concurrent.TimeUnit.SECONDS); } catch (InterruptedException ignored) {}
+        synchronized (this) {
+            handle = null;
+            session = null;
+        }
+        try {
+            toStop.stop();
+        } catch (RuntimeException e) {
+            log("Could not close the download session: " + e.getMessage());
+        } finally {
+            synchronized (this) { stopping = false; }
+            finished.countDown();
+        }
         log("Stopped");
     }
 
     public synchronized TorrentStatus status() { return handle == null ? null : handle.status(); }
 
-    /** Bytes of wanted files that are complete, per module id. */
+    /** Last checked torrent bytes, live when running and retained across pause/restart. */
     public synchronized long[] moduleDone(List<ModuleCatalog.Module> mods) {
         long[] out = new long[mods.size()];
-        if (handle == null) return out;
+        if (handle == null) {
+            Set<String> ready = verified();
+            for (int k = 0; k < mods.size(); k++) {
+                ModuleCatalog.Module m = mods.get(k);
+                out[k] = ready.contains(m.id) ? m.bytes : Math.max(0, Math.min(m.bytes, prefs.getLong("progress:" + m.id, 0)));
+            }
+            return out;
+        }
         long[] prog = handle.fileProgress();
+        FileStorage fs = ti.files();
         for (int i = 0; i < prog.length; i++) {
             String r = rel(i);
             if (r == null) continue;
-            for (int k = 0; k < mods.size(); k++) if (mods.get(k).contains(r)) out[k] += prog[i];
+            long bytes = Math.max(0, Math.min(fs.fileSize(i), prog[i]));
+            for (int k = 0; k < mods.size(); k++) if (mods.get(k).contains(r)) out[k] += bytes;
         }
         return out;
+    }
+
+    private synchronized void rememberProgress() {
+        if (handle == null) return;
+        long[] done = moduleDone(catalog.modules);
+        SharedPreferences.Editor edit = prefs.edit();
+        for (int k = 0; k < done.length; k++) edit.putLong("progress:" + catalog.modules.get(k).id, done[k]);
+        edit.apply();
     }
 
     /** Drops the "verified" mark of selected modules that libtorrent finds incomplete on disk (files deleted or damaged). */
@@ -268,8 +342,12 @@ public final class LibraryEngine {
     public State state(ModuleCatalog.Module m) {
         if (!selected().contains(m.id)) return State.NOT_SELECTED;
         if (verified().contains(m.id)) return State.READY;
+        if (m.id.equals(checkingModule)) return State.CHECKING;
+        TorrentStatus torrent = status();
+        if (torrent != null && (torrent.state() == TorrentStatus.State.CHECKING_FILES
+                || torrent.state() == TorrentStatus.State.CHECKING_RESUME_DATA)) return State.CHECKING;
         if (prefs.getBoolean("failed:" + m.id, false)) return State.FAILED;
-        return isRunning() ? State.DOWNLOADING : State.QUEUED;
+        return isRunning() && DownloadService.isRunning() ? State.DOWNLOADING : State.QUEUED;
     }
 
     /**
@@ -302,14 +380,19 @@ public final class LibraryEngine {
         return any;
     }
 
-    void saveResume() { if (handle != null && handle.isValid()) handle.saveResumeData(); }
+    void saveResume() {
+        if (handle != null && handle.isValid()) {
+            resumeSelection = selectionKey(selected());
+            handle.saveResumeData();
+        }
+    }
 
     private void writeResume(AddTorrentParams p) {
         try {
             File tmp = new File(stateDir, "resume.tmp");
             Files.write(tmp.toPath(), AddTorrentParams.writeResumeDataBuf(p));
             if (!tmp.renameTo(resumeFile)) throw new IOException("rename failed");
-            prefs.edit().putString("resumeFor", selectionKey(selected())).apply();
+            prefs.edit().putString("resumeFor", resumeSelection).apply();
         } catch (Exception e) { log("Could not save resume data: " + e); }
         java.util.concurrent.CountDownLatch l = resumeWritten;
         if (l != null) l.countDown();
@@ -352,26 +435,38 @@ public final class LibraryEngine {
         probe.setConnectTimeout(20000);
         probe.setReadTimeout(20000);
         probe.setRequestProperty("Range", "bytes=0-0");
-        int pc = probe.getResponseCode();
-        probe.disconnect();
+        int pc;
+        webConnection = probe;
+        try {
+            if (cancel) throw new InterruptedException("cancelled");
+            pc = probe.getResponseCode();
+        } finally {
+            probe.disconnect();
+            if (webConnection == probe) webConnection = null;
+        }
         if (pc != 200 && pc != 206) throw new IOException("web seed answered HTTP " + pc);
-        cancel = false;
+        if (cancel) throw new InterruptedException("cancelled");
         stop();
         if (resumeFile.exists() && !resumeFile.delete()) log("Could not delete resume data");
         int fetched = 0;
         try {
             for (int i : todo) {
+                if (cancel) throw new InterruptedException("cancelled");
                 String path = fs.filePath(i);
                 long size = fs.fileSize(i);
                 File out = new File(saveDir, path), part = new File(saveDir, path + ".part");
                 out.getParentFile().mkdirs();
                 String url = seedUrl(base, path);
                 for (int attempt = 1; ; attempt++) {
+                    if (cancel) throw new InterruptedException("cancelled");
                     long have = part.isFile() ? part.length() : 0;
                     if (have > size) { part.delete(); have = 0; }
                     if (have == size) break;
+                    HttpURLConnection c = null;
                     try {
-                        HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+                        c = (HttpURLConnection) new URL(url).openConnection();
+                        webConnection = c;
+                        if (cancel) throw new InterruptedException("cancelled");
                         c.setInstanceFollowRedirects(true);
                         c.setConnectTimeout(30000);
                         c.setReadTimeout(60000);
@@ -389,18 +484,23 @@ public final class LibraryEngine {
                             }
                         }
                     } catch (IOException e) {
+                        if (cancel) throw new InterruptedException("cancelled");
                         if (attempt >= 5) throw new IOException(rel(i) + ": " + e.getMessage(), e);
                         log("Connection dropped (" + e.getMessage() + "); resuming " + new File(rel(i)).getName());
                         Thread.sleep(3000L * attempt);
+                    } finally {
+                        if (c != null) c.disconnect();
+                        if (webConnection == c) webConnection = null;
                     }
                 }
+                if (cancel) throw new InterruptedException("cancelled");
                 if (out.exists() && !out.delete()) throw new IOException("cannot replace " + out);
                 if (!part.renameTo(out)) throw new IOException("cannot move " + part);
                 log(String.format("Web seed: fetched %s (%.1f MB)", rel(i), size / 1e6));
                 fetched++;
             }
         } finally {
-            start(); // no resume data, so libtorrent checks the files on disk
+            if (!cancel) start(); // no resume data; cancellation must not restart a paused download
         }
         return fetched;
     }
@@ -409,18 +509,21 @@ public final class LibraryEngine {
 
     /** Checks one module: manifest signature (built-in key), then size and SHA-256 of each of its files. */
     public boolean verify(ModuleCatalog.Module m) {
+        checkingModule = m.id;
         try {
+            if (cancel) throw new InterruptedException("cancelled");
             File dir = packDir();
             byte[] manifest = Files.readAllBytes(new File(dir, "MANIFEST.tsv").toPath());
             String sig = new String(Files.readAllBytes(new File(dir, "MANIFEST.tsv.sig").toPath()), StandardCharsets.US_ASCII);
             SshSig.verify(manifest, sig, SshSig.releaseKey(), SshSig.NAMESPACE);
             int ok = 0, bad = 0;
             for (String line : new String(manifest, StandardCharsets.UTF_8).split("\n")) {
+                if (cancel) throw new InterruptedException("cancelled");
                 if (line.isEmpty() || line.startsWith("#")) continue;
                 String[] c = line.split("\t");
                 if (!m.contains(c[0])) continue;
                 File f = new File(dir, c[0]);
-                if (!f.isFile() || f.length() != Long.parseLong(c[1]) || !sha256(f).equals(c[2])) { bad++; log("Verify: bad or missing " + c[0]); }
+                if (!f.isFile() || f.length() != Long.parseLong(c[1]) || !sha256(f, () -> cancel).equals(c[2])) { bad++; log("Verify: bad or missing " + c[0]); }
                 else ok++;
             }
             boolean good = bad == 0 && ok > 0;
@@ -428,18 +531,31 @@ public final class LibraryEngine {
             prefs.edit().putBoolean("failed:" + m.id, !good).apply();
             log(m.title + ": signature GOOD, " + ok + " file(s) checked" + (bad == 0 ? ", all good" : ", " + bad + " damaged or missing. Download again to repair"));
             return good;
+        } catch (InterruptedException e) {
+            log("Checking paused; it will continue when you resume");
+            return false;
         } catch (Exception e) {
             markVerified(m.id, false);
             prefs.edit().putBoolean("failed:" + m.id, true).apply();
             log(m.title + " could not be checked: " + e.getMessage());
             return false;
+        } finally {
+            checkingModule = null;
         }
     }
 
-    static String sha256(File f) throws Exception {
+    static String sha256(File f) throws Exception { return sha256(f, () -> false); }
+
+    private static String sha256(File f, java.util.function.BooleanSupplier cancelled) throws Exception {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] buf = new byte[1 << 20];
-        try (InputStream in = new FileInputStream(f)) { for (int n; (n = in.read(buf)) > 0; ) md.update(buf, 0, n); }
+        try (InputStream in = new FileInputStream(f)) {
+            for (int n; (n = in.read(buf)) > 0; ) {
+                if (cancelled.getAsBoolean()) throw new InterruptedException("cancelled");
+                md.update(buf, 0, n);
+            }
+        }
+        if (cancelled.getAsBoolean()) throw new InterruptedException("cancelled");
         StringBuilder sb = new StringBuilder();
         for (byte x : md.digest()) sb.append(String.format("%02x", x));
         return sb.toString();
@@ -466,6 +582,30 @@ public final class LibraryEngine {
             need += fs.fileSize(i) - have;
         }
         return need;
+    }
+
+    /** Removes exactly one subject. The caller must run this off the UI thread. */
+    public synchronized void removeModule(ModuleCatalog.Module module) throws IOException {
+        ModuleCatalog.Module m = catalog.find(module.id);
+        if (m == null) throw new IllegalArgumentException("Unknown subject");
+        if (session != null || stopping || DownloadService.isRunning() || SeedJob.isActive())
+            throw new IllegalStateException("Pause downloads and sharing before removing a subject");
+        Set<String> ids = selected();
+        ids.remove(m.id);
+        setSelected(ids);
+        prefs.edit().remove("progress:" + m.id).remove("failed:" + m.id).apply();
+        FileStorage fs = ti.files();
+        IOException failure = null;
+        for (int i = 0; i < fs.numFiles(); i++) {
+            String r = rel(i);
+            if (r == null || !m.contains(r)) continue;
+            for (String suffix : new String[]{"", ".part"}) {
+                File file = new File(saveDir, fs.filePath(i) + suffix);
+                if (file.exists() && !file.delete()) failure = new IOException("Could not remove " + file.getName());
+            }
+        }
+        if (failure != null) throw failure;
+        log("Removed " + m.title + " from this phone");
     }
 
     /** Deletes the files of modules that are no longer selected. */

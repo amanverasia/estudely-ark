@@ -3,9 +3,12 @@ package cc.esdy.ark;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -32,22 +35,58 @@ public class ZimActivity extends Activity {
     private LinearLayout results;
     private ScrollView resultsScroll;
     private ZimWebClient client;
+    private ArkUi ui;
+    private EditText query;
 
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
         new JNIKiwix(this);
         File f = new File(getIntent().getStringExtra("path"));
-        LinearLayout root = new LinearLayout(this);
-        root.setOrientation(LinearLayout.VERTICAL);
+        ui = new ArkUi(this);
+        ui.applyWindow(this);
+        String title = ModuleActivity.label(f);
+        setTitle(title);
+        LinearLayout root = ui.column();
+        root.setBackgroundColor(ui.paper);
+        root.setFocusableInTouchMode(true);
         MainActivity.edgeToEdge(this, root);
-        EditText q = new EditText(this);
-        q.setHint("Search " + ModuleActivity.label(f));
-        q.setSingleLine(true);
-        q.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-        root.addView(q);
-        results = new LinearLayout(this);
-        results.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout toolbar = ui.row();
+        toolbar.setPadding(ui.dp(8), ui.dp(3), ui.dp(22), ui.dp(3));
+        toolbar.addView(ui.iconButton("back", "Back", v -> onBackPressed()));
+        TextView heading = ui.text(title, 15, ui.ink, true);
+        heading.setMaxLines(2);
+        heading.setEllipsize(TextUtils.TruncateAt.END);
+        heading.setPadding(ui.dp(4), 0, 0, 0);
+        toolbar.addView(heading, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        root.addView(toolbar);
+
+        LinearLayout searchBar = ui.row();
+        searchBar.setGravity(Gravity.CENTER_VERTICAL);
+        searchBar.setPadding(ui.dp(13), 0, ui.dp(1), 0);
+        searchBar.setBackground(ui.bg(ui.card, 13, ui.line));
+        searchBar.addView(ui.icon("search", ui.muted, 19));
+        query = new EditText(this);
+        query.setHint("Search this archive");
+        query.setContentDescription("Search " + title);
+        query.setSingleLine(true);
+        query.setTextSize(14);
+        query.setTextColor(ui.ink);
+        query.setHintTextColor(ui.muted);
+        query.setBackground(null);
+        query.setMinHeight(ui.dp(48));
+        query.setPadding(ui.dp(10), ui.dp(10), ui.dp(4), ui.dp(10));
+        query.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        searchBar.addView(query, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        searchBar.addView(ui.iconButton("next", "Search archive", v -> search(query.getText().toString())));
+        LinearLayout.LayoutParams searchParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        searchParams.setMargins(ui.dp(20), ui.dp(5), ui.dp(20), ui.dp(14));
+        root.addView(searchBar, searchParams);
+
+        results = ui.column();
+        results.setPadding(ui.dp(20), ui.dp(6), ui.dp(20), ui.dp(12));
+        results.setBackgroundColor(ui.card);
         resultsScroll = new ScrollView(this);
+        resultsScroll.setBackgroundColor(ui.card);
         resultsScroll.addView(results);
         resultsScroll.setVisibility(View.GONE);
         root.addView(resultsScroll, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
@@ -65,17 +104,22 @@ public class ZimActivity extends Activity {
             web.setWebViewClient(client);
             web.loadUrl(client.mainUrl());
         } catch (Exception e) {
-            TextView t = new TextView(this);
-            t.setText("Could not open " + f.getName() + ": " + e.getMessage());
-            root.addView(t);
+            TextView error = ui.text("Could not open " + f.getName() + ": " + e.getMessage(), 14, ui.ink, false);
+            error.setPadding(ui.dp(22), ui.dp(15), ui.dp(22), ui.dp(18));
+            root.addView(error);
         }
-        q.setOnEditorActionListener((v, id, ev) -> { search(q.getText().toString()); return true; });
+        query.setOnEditorActionListener((v, id, ev) -> { search(query.getText().toString()); return true; });
+        root.requestFocus();
     }
 
     private void search(String text) {
         results.removeAllViews();
         if (text.trim().isEmpty() || archive == null) { resultsScroll.setVisibility(View.GONE); return; }
+        query.clearFocus();
+        InputMethodManager keyboard = getSystemService(InputMethodManager.class);
+        if (keyboard != null) keyboard.hideSoftInputFromWindow(query.getWindowToken(), 0);
         int n = 0;
+        boolean failed = false;
         try {
             if (archive.hasFulltextIndex()) {
                 Search s = new Searcher(archive).search(new Query(text));
@@ -87,25 +131,24 @@ public class ZimActivity extends Activity {
                 while (it.hasNext()) { SuggestionItem s = it.next(); addResult(s.getTitle(), s.getPath()); n++; }
             }
         } catch (Exception e) {
+            failed = true;
             addResult("Search failed: " + e.getMessage(), null);
         }
-        if (n == 0) addResult("Nothing found.", null);
+        if (n == 0 && !failed) addResult("Nothing found. Try another word.", null);
         resultsScroll.setVisibility(View.VISIBLE);
     }
 
     private void addResult(String title, String path) {
-        TextView t = new TextView(this);
-        t.setText(title);
-        t.setTextSize(16);
-        t.setPadding(24, 14, 24, 14);
-        if (path != null) {
-            t.setTextColor(0xff2b4c7e);
-            t.setOnClickListener(v -> {
-                resultsScroll.setVisibility(View.GONE);
-                web.loadUrl("https://" + ZimWebClient.HOST + "/" + Uri.encode(path, "/"));
-            });
-        }
-        results.addView(t);
+        if (results.getChildCount() > 0) results.addView(ui.divider());
+        TextView result = ui.text(title, 16, path != null ? ui.blue : ui.muted, false);
+        result.setMinHeight(ui.dp(52));
+        result.setGravity(Gravity.CENTER_VERTICAL);
+        result.setPadding(ui.dp(4), ui.dp(14), ui.dp(4), ui.dp(14));
+        if (path != null) ui.clickable(result, ui.card, 8, v -> {
+            resultsScroll.setVisibility(View.GONE);
+            web.loadUrl("https://" + ZimWebClient.HOST + "/" + Uri.encode(path, "/"));
+        });
+        results.addView(result);
     }
 
     /** Copies a PDF out of the archive to the cache and opens it in the PDF viewer. */

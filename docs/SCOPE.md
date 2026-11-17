@@ -79,6 +79,10 @@ Out of scope for v1:
 **v2.0 status (17 Nov 2026), emulator and Pixel 9a (Android 17):** done and tested: module picker with sizes and free-space check, foreground download service, Wi-Fi-only downloads, web-seed fallback, signature + SHA-256 verification with the built-in key, ZIM reader with full-text search, PDF viewer, offline India map with place search, sharing on Wi-Fi while charging (JobScheduler). Details and the bugs fixed on the way: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md).
 Done since: release build (`cc.esdy.ark` 2.0, per-ABI + universal APKs, debug hooks inert), signing flow, `onTimeout` handling, a real upload test, UI polish. Still to do for a v2.0 release: app name/icon and publishing channel (Aman, section 9); a full multi-GB download on a real phone; PDFs inside ZIM archives.
 
+### Android design update (approved 17 Nov 2026)
+
+Aman selected **Option B / Bookshelf** from the interactive design shortlist (`design/ark-alternative/`). Implement it as native Android views: blue actions, serif subject covers, a reading-first Library, a filterable subject catalogue, and a separate live Downloads screen. Settings and storage use native sheets. Keep saved subjects and ongoing downloads when new subjects are selected; make manual pause persist across reopening. No AI or account features are part of this update. Version 2.0.1 is being prepared and tested separately from the published 2.0 release.
+
 ### v3: Mesh and radio
 
 LoRa (Meshtastic) carries about 1 kbps raw. Sending Simple Wikipedia over it would take roughly 9 months of continuous airtime, so radio will never carry the files. It is for:

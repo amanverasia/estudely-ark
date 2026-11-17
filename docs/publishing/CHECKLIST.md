@@ -14,7 +14,7 @@ Public copy and uploads need Aman's approval of the text and the destination fir
 ## F-Droid
 - Merge request to fdroiddata with `docs/publishing/fdroid-cc.esdy.ark.yml` (fill in the repository URL).
 - Listing text and screenshots: `fastlane/metadata/android/en-US/` (in the repository; F-Droid reads it from there).
-- F-Droid signs with its own key: its build and the GitHub/Play builds can't update each other unless reproducible builds are set up later.
+- Reproducible builds are enabled: F-Droid verifies our published APKs against its own build and retains the developer signature. Use the same app-signing key for Play so installs can update across channels.
 
 ## Google Play (personal account)
 - Play App Signing: upload Aman's own key as the app signing key (Play Console offers "use existing key", via its PEPK tool) so Play, GitHub and signed APKs update each other. The same key signs uploads.

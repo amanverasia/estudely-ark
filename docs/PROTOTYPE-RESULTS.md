@@ -222,3 +222,15 @@ To avoid a 5.6 GB download, the readers were tested with small files copied over
 - **Sharing uploads for real (emulator, 17 Nov):** the debug app shared Repair (verified) in a sharing session; a libtorrent client on the Mac with no trackers, no web seeds and no DHT connected only to the emulator (adb forward + SSH tunnel) and downloaded all of Repair, 626.6 MB, in 45 s (up to 17.6 MB/s), every piece hash-checked. The app recorded 626,655,232 bytes uploaded ("shared" on the library screen).
 - Bug found and fixed: a force-stop cancels scheduled jobs, so sharing stayed "on" with no job. The app now re-schedules the sharing job whenever it opens with sharing switched on.
 - UI polish (17 Nov): progress bar and "Downloading: X of Y" per module; first-run hint when nothing is ticked; messages in plain English ("Checking the files already on this phone", "Internet Archive copy not available; carrying on with other copies", "Computing: signature GOOD, 14 file(s) checked, all good"); release builds show only the latest message instead of the developer log. Tested on the emulator (Computing download, no crash). App name and icon unchanged, pending Aman.
+
+
+## Android 2.0.1 Bookshelf redesign (17 Nov 2026)
+
+Aman chose Option B from the interactive shortlist. Implemented as native Java views: cover-based library; available/saved subject catalogue; draft choices separate from saved/download selection; live progress dial and per-subject download rows; persistent manual pause/resume; native settings and storage sheets; matching subject and reader controls; system dark mode and larger-text bookshelf layout.
+
+Workstation `ark-test` emulator, Android 16 x86_64: existing Repair and Computing subjects remained ready (738 MB total). Passed subject filtering/selection, selected-byte total, Wi-Fi-only waiting with no new subject downloaded, pause/resume controls, and pause preserved after force-stop/reopen. Settings switches work; no subject deletion was performed. At font scale 1.4 the bookshelf uses one column and the catalogue/footer stay reachable; system dark mode works. Real local Computing archive opens and Bash full-text search returns results and opens an article.
+
+Automated checks: 13 JVM tests passed (4 catalogue, 6 signature, 3 selection-retention tests). Debug APKs, all four unsigned release APKs, and the Play app bundle built. Preview package is separate (`cc.esdy.ark.debug`); release signing and publication have not been performed. Additional reader fixture checks are recorded with the preview artifacts.
+
+Map check completed afterwards (emulator, debug 2.0.1): the map opens under the new "Map of India" toolbar, tiles draw, the toolbar back button returns to the bookshelf, no crash. Leftover: the map page's own "← Back" link now duplicates the toolbar's back button. PDF reader: 12-page fixture renders, next/previous page controls work.
+

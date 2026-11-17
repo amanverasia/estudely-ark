@@ -1,0 +1,1 @@
+New bookshelf design: downloaded subjects appear as book covers; a clearer subject list with sizes; per-subject download progress with pause and resume; settings and storage in one place; dark mode and larger-text layouts. Updating keeps everything you have downloaded.

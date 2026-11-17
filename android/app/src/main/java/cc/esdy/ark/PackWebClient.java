@@ -32,7 +32,12 @@ public final class PackWebClient extends WebViewClient {
     static final String RANGE_SHIM = "<script>(function(){var f=window.fetch;window.fetch=function(u,o){try{"
         + "var h=new Headers(o&&o.headers),r=h.get('Range');"
         + "if(r&&typeof u==='string'){h.delete('Range');var x=new URL(u,location.href);x.searchParams.set('ark-range',r);"
-        + "u=x.href;o=Object.assign({},o,{headers:h});}}catch(e){}return f.call(this,u,o);};})();</script>";
+        + "u=x.href;o=Object.assign({},o,{headers:h});}}catch(e){}return f.call(this,u,o);};})();</script>"
+        // The app has its own toolbar with a back button, so drop the page's link back to the desktop START-HERE
+        // page (and the " · " after it). The shared page keeps that link for the desktop pack.
+        + "<script>document.addEventListener('DOMContentLoaded',function(){"
+        + "document.querySelectorAll('a[href$=\"START-HERE.html\"]').forEach(function(a){"
+        + "var n=a.nextSibling;if(n&&n.nodeType===3&&n.textContent.trim().charAt(0)==='\u00b7')n.remove();a.remove();});});</script>";
 
     static String mime(String name) {
         String n = name.toLowerCase();
