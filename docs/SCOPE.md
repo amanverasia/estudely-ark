@@ -1,6 +1,6 @@
 # Estudely Ark: Scope
 
-Status: v0.5, 17 November 2026. **v1 released 16 Nov 2026; v2 (Android) in progress, v2.0 features working in debug builds.** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
+Status: v0.6, 17 November 2026. **v1 released 16 Nov 2026. v2 (Android): 2.0 and 2.0.1 released on GitHub 17 Nov 2026; F-Droid under review; Google Play later.** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
 
 This document says what we are building, in what order, and what "done" means. It replaces the earlier brief's "proposals" where Aman has since decided. Exact byte figures live in [`manifest/candidates.tsv`](../manifest/candidates.tsv). This file only summarises them.
 
@@ -77,7 +77,7 @@ Out of scope for v1:
 **v2.0 released on GitHub 17 Nov 2026** (https://github.com/amanverasia/estudely-ark/releases/tag/v2.0; signing certificate SHA-256 `9cf9432f4270f8c3a54c677b349b319ea2981d93fb227e1f483fa47de680447d`). F-Droid and Google Play to follow. **v2.0.1 released 17 Nov 2026** (Bookshelf redesign, https://github.com/amanverasia/estudely-ark/releases/tag/v2.0.1). F-Droid submission: merge request 57820, pipeline green, awaiting review.
 
 **v2.0 status (17 Nov 2026), emulator and Pixel 9a (Android 17):** done and tested: module picker with sizes and free-space check, foreground download service, Wi-Fi-only downloads, web-seed fallback, signature + SHA-256 verification with the built-in key, ZIM reader with full-text search, PDF viewer, offline India map with place search, sharing on Wi-Fi while charging (JobScheduler). Details and the bugs fixed on the way: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md).
-Done since: release build (`cc.esdy.ark` 2.0, per-ABI + universal APKs, debug hooks inert), signing flow, `onTimeout` handling, a real upload test, UI polish. Still to do for a v2.0 release: app name/icon and publishing channel (Aman, section 9); a full multi-GB download on a real phone; PDFs inside ZIM archives.
+Done since: release build (`cc.esdy.ark`, per-ABI + universal APKs and a Play bundle, debug hooks inert), reproducible builds (F-Droid's build of each tag matches the signed APKs), signing on a Mac, `onTimeout` handling, a real upload test, app icon and store listing, the 2.0.1 bookshelf redesign. Still open for v2: Google Play (Aman's account, last); F-Droid review (merge request 57820); 2.0.1 on a real phone (tested on the emulator only); a full multi-GB download on a real phone; PDFs inside ZIM archives.
 
 ### Android design update (approved 17 Nov 2026)
 
@@ -178,7 +178,8 @@ Tested on a clean profile, offline, for every platform marked supported:
 ## 9. Open decisions (Aman)
 
 - **Internet Archive item dark (17 Nov):** check IA's notice; restore it, or choose another web-seed host. A new host does **not** need a new torrent: the web-seed list (`url-list`) is outside the info dictionary, so a re-published .torrent with a new URL keeps the same info-hash, swarm and signed manifest; magnet links can add it with `ws=`. Older .torrent copies keep working through peers.
-- **v2.0 release:** app name and icon, and where to publish (GitHub releases, F-Droid, ark.esdy.cc, inside the next pack). APK signing key: created by Aman 17 Nov 2026 (kept on his Mac, signing with `scripts/sign_apk.sh`).
+- **Google Play:** Aman opens a personal developer account (last channel). Then: Play App Signing with Aman's own key, a closed test with 12+ testers for 14 days, store listing and declarations (`docs/publishing/CHECKLIST.md`).
+- Decided 17 Nov 2026: name Estudely Ark, icon (serif A over an ark hull), channels GitHub releases + F-Droid + Google Play, public repository `amanverasia/estudely-ark` (GPL-3.0-or-later), APK signing key kept by Aman.
 - Later: the OpenStax and Gutenberg picks once sized.
 
 ## 10. Known risks and unverified items
