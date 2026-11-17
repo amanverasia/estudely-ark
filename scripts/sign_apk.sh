@@ -10,7 +10,8 @@
 set -eu
 KS="${1:-$HOME/.estudely/ark-release.jks}"
 ALIAS="${2:-ark}"
-. "$(dirname "$0")/local.env" 2>/dev/null || { echo "missing scripts/local.env (see local.env.example)" >&2; exit 1; }
+cd "$(dirname "$0")/.."   # repo root, whatever folder this is run from
+. scripts/local.env 2>/dev/null || { echo "missing scripts/local.env (see local.env.example)" >&2; exit 1; }
 W="$ARK_BUILD_HOST"; K="$ARK_SSH_KEY"
 SRC="estudely-ark-android/app/build/outputs/apk/release"
 SIGNER="tools/android/apksigner.jar"
