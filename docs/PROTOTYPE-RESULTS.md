@@ -265,3 +265,18 @@ Aman's 17 Nov phone screenshot (DevDocs C, `bsearch`, before the first fix) show
 Tested in **desktop Chromium**, not Android WebView: the release DevDocs archives were served by `kiwix-serve` (offline sandbox) through a loopback proxy that inserts the app's `PHONE_LAYOUT` string from the Java source right after `<head>`, as the app does. At 412 px: 48 pages (index, first, middle and last linked article of each of the 12 DevDocs archives); 47 had no page-wide overflow and the phone layout applied; SQLite's `keyword_index` is a dead link inside the archive (404). At 360 and 412 px, C/Python/HTTP/SQLite samples: no overflow, all code blocks within the screen. Arch Wiki and freeCodeCamp unaffected. Every archive's HTML has a literal `<head>`, so the injection lands inside it. `:has()` needs WebView 105+; older WebViews fall back to the first fix's scrolling table.
 
 **Real phone (18 Nov):** debug 2.1 built on a second machine (own JDK 21 and SDK 36 in `~/estudely-android`; unit tests 27/27) and installed on Aman's moto g52 test phone (LineageOS, Android 16, arm64, wireless adb), DevDocs C opened through the debug `openZim` hook, dark theme. Full-width article; Contents full screen with 44 px rows and centred folder arrows, Algorithms expands, `bsearch` opens; declarations keep their layout, each code block swipes sideways on its own (the page doesn't move), "(1)" / "(since C11)" under each; the empty header cells that showed as grey boxes are hidden. Not tried on the phone yet: the Larger text sizes, light theme, other DevDocs archives.
+
+## Android 2.1.1 document viewers (moto g52, 18 Nov 2026)
+
+Debug 2.1.1 built on a second machine and installed beside the signed release on the moto g52 (LineageOS, Android 16, arm64, wireless adb). The phone was on the launcher; the test app was removed afterwards and the release app left installed.
+
+PDF viewer, real Hesperian chapter (`en_hcwb_2000_07.pdf`, 12 pages), opened through the debug `openPdf` hook:
+
+- Renders two pages at once, sharp at 1x; the −/+ buttons step 1x → 1.5x → 2x → 3x and back, double-tap toggles 1x/2x, and a zoomed page pans sideways while the list still scrolls vertically.
+- Page arrows move the counter (checked 1 → 3 → 5). Pages render on a background thread; no jank or crash while paging or zooming.
+- **Bug found and fixed:** the remembered page was saved (`pdf-positions.xml` held `2` for page 3) but never restored — `applyWidth()` calls `notifyDataSetChanged()`, which discards the `setSelection()` made in `onCreate`. The jump now runs in `pages.post()` after the width is applied. Retested: page 5, Home, force-stop, reopen → "Page 5 of 12".
+- Pinch zoom, later with rooted debugging: injected real multitouch through the goodix touchscreen (`sendevent`, adb root). Two fingers 200 px apart spreading to 600 px magnified page 2 to about 3x (page wider than the screen, right edge cut); pinching back from 600 px to 200 px returned it to 1x with both pages visible again. Single-pointer injection was checked first (tapped Next page, 1 → 2).
+
+Archive titles: with the real signed `MANIFEST.tsv`, `MANIFEST.tsv.sig` and `devdocs_en_c_2026-10.zim` placed as a downloaded Computing subject, the list shows **C Docs** from the ZIM's `Title` metadata (with `2026-10` in the detail line) instead of the file-name label. Opening it shows the same title in the reader toolbar, the full-width DevDocs layout and the Contents button.
+
+Automated: 27/27 JVM tests, debug lint 0 errors (33 warnings). The signed 2.1.1 APKs in `release/android/v2.1.1/` were built before this fix and must be rebuilt and re-signed before publishing.

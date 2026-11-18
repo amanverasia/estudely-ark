@@ -15,7 +15,7 @@ val building = gradle.startParameter.taskNames.joinToString(" ")
 val releaseBuild = building.contains("Release", ignoreCase = true)
 
 // Version codes: base * 10 + ABI (1 armeabi-v7a, 2 arm64-v8a, 3 x86_64; 0 universal and debug).
-val baseVersionCode = 210
+val baseVersionCode = 211
 val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86_64" to 3)
 
 android {
@@ -26,7 +26,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = baseVersionCode * 10
-        versionName = "2.1"
+        versionName = "2.1.1"
     }
     signingConfigs {
         if (signingProps.getProperty("storeFile") != null) create("release") {

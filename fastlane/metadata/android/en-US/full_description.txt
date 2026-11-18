@@ -16,6 +16,7 @@ Pick the parts you want and the app downloads them once. After that, everything 
 * Downloads use BitTorrent from other people who have the library, plus an always-on server. Downloads wait for Wi-Fi unless you allow mobile data.
 * Every part is checked against a signed list of files before it opens, so you know nothing was changed or damaged on the way.
 * Search inside each book and the map, with no internet.
+* Keep the library on phone storage or an SD card, and read in light or dark mode with your own text size.
 * Optional sharing: on Wi-Fi while charging, your phone can pass the library on to others. It is off until you switch it on.
 
 <b>Free, no ads, no accounts</b>

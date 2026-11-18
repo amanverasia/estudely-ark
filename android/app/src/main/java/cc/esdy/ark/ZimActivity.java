@@ -46,7 +46,7 @@ public class ZimActivity extends ArkActivity {
         File f = new File(getIntent().getStringExtra("path"));
         ui = new ArkUi(this);
         ui.applyWindow(this);
-        String title = ModuleActivity.label(f);
+        String title = ModuleActivity.displayName(f);
         setTitle(title);
         LinearLayout root = ui.column();
         root.setBackgroundColor(ui.paper);

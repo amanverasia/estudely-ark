@@ -1,0 +1,1 @@
+PDF books can now be zoomed: pinch, double-tap, or the - and + buttons; pages load in the background and the app remembers where you stopped in each book. Books in a subject now show their real titles (for example "WikiMed Medical Encyclopedia" or "Python Docs") instead of file names.

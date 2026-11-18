@@ -103,6 +103,12 @@ public class ModuleActivity extends ArkActivity {
         new Thread(() -> {
             Map<String, List<File>> groups = new TreeMap<>();
             collect(directory, directory, groups);
+            // Archives carry their own title ("C Docs", "WikiMed Medical Encyclopedia"); read it once, then sort by it.
+            try { new org.kiwix.libkiwix.JNIKiwix(getApplicationContext()); } catch (Throwable ignored) {}
+            for (List<File> files : groups.values()) {
+                for (File file : files) loadTitle(file);
+                files.sort((a, b) -> displayName(a).compareToIgnoreCase(displayName(b)));
+            }
             runOnUiThread(() -> { if (!isFinishing() && !isDestroyed()) showFiles(groups); });
         }, "subject-books").start();
     }
@@ -157,8 +163,10 @@ public class ModuleActivity extends ArkActivity {
         row.addView(symbol, new LinearLayout.LayoutParams(ui.dp(36), ui.dp(40)));
 
         LinearLayout copy = ui.column();
-        copy.addView(ui.text(label(file), 14, ui.ink, true));
-        TextView detail = ui.text((pdf ? "PDF" : "Searchable archive") + " · " + MainActivity.gb(file.length()), 11, ui.muted, false);
+        copy.addView(ui.text(displayName(file), 14, ui.ink, true));
+        String edition = edition(file);
+        TextView detail = ui.text((pdf ? "PDF" : "Searchable archive") + " · " + MainActivity.gb(file.length())
+                + (edition.isEmpty() ? "" : " · " + edition), 11, ui.muted, false);
         detail.setPadding(0, ui.dp(5), 0, 0);
         copy.addView(detail);
         LinearLayout.LayoutParams copyParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
@@ -166,7 +174,7 @@ public class ModuleActivity extends ArkActivity {
         row.addView(copy, copyParams);
         row.addView(ui.icon("next", ui.muted, 18));
         ui.clickable(row, ui.card, 12, v -> open(file));
-        row.setContentDescription(label(file) + ", " + (pdf ? "PDF" : "searchable archive") + ", " + MainActivity.gb(file.length()) + ", open");
+        row.setContentDescription(displayName(file) + ", " + (pdf ? "PDF" : "searchable archive") + ", " + MainActivity.gb(file.length()) + ", open");
         row.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         copy.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         return row;
@@ -183,6 +191,33 @@ public class ModuleActivity extends ArkActivity {
                 groups.computeIfAbsent(key, k -> new ArrayList<>()).add(file);
             }
         }
+    }
+
+    /** Titles read from archives, keyed by path and size (a replaced file gets read again). */
+    private static final java.util.concurrent.ConcurrentHashMap<String, String> TITLES = new java.util.concurrent.ConcurrentHashMap<>();
+    private static String titleKey(File f) { return f.getAbsolutePath() + ":" + f.length(); }
+
+    /** Reads an archive's own title (its "Title" metadata). Slow-ish: call off the main thread. */
+    static void loadTitle(File file) {
+        if (!file.getName().endsWith(".zim") || TITLES.containsKey(titleKey(file))) return;
+        String title = "";
+        try {
+            org.kiwix.libzim.Archive archive = new org.kiwix.libzim.Archive(file.getAbsolutePath());
+            try { title = archive.getMetadata("Title").trim(); } finally { archive.dispose(); }
+        } catch (Throwable ignored) {}
+        TITLES.put(titleKey(file), title);
+    }
+
+    /** The archive's own title if known, otherwise a name made from the file name. */
+    static String displayName(File file) {
+        String title = TITLES.get(titleKey(file));
+        return title != null && !title.isEmpty() ? title : label(file);
+    }
+
+    /** "devdocs_en_c_2026-10.zim" -> "2026-10"; "" if the name has no date. */
+    static String edition(File file) {
+        java.util.regex.Matcher match = java.util.regex.Pattern.compile("_(\\d{4}-\\d{2})\\.zim$").matcher(file.getName());
+        return match.find() ? match.group(1) : "";
     }
 
     /** "wikipedia_en_medicine_nopic_2026-10.zim" -> "Wikipedia en medicine nopic (2026-10)"; PDFs keep their name. */
