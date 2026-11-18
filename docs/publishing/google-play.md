@@ -40,7 +40,7 @@ Upload `ark-play-signing-key.zip` on that page. Delete the zip afterwards (it ho
 - App name, short description, full description: `fastlane/metadata/android/en-US/` (`title.txt`, `short_description.txt`, `full_description.txt`). Lengths checked: 12/30, 79/80, 1785/4000.
 - App icon 512 × 512: `fastlane/metadata/android/en-US/images/icon.png`
 - Feature graphic 1024 × 500: `fastlane/metadata/android/en-US/images/featureGraphic.png`
-- Phone screenshots: `release/play/screenshots/` (5 files, 1140 × 2280, taken from 2.1 on the moto g52 on 18 Nov: bookshelf, subjects, Computing subject, DevDocs reader, settings). Status bar trimmed and 30 px of the app background added on each side, because Play rejects a long side more than twice the short side (the phone's 1080 × 2400 is 2.22). The F-Droid set in `fastlane/.../phoneScreenshots/` still shows 2.0 and should be replaced with these too.
+- Phone screenshots: `release/play/screenshots/` (5 files, 1140 × 2280, taken from 2.1 on the moto g52 on 18 Nov: bookshelf, subjects, Computing subject, DevDocs reader, settings). Status bar trimmed and 30 px of the app background added on each side, because Play rejects a long side more than twice the short side (the phone's 1080 × 2400 is 2.22). The same five files are now also the F-Droid set in `fastlane/.../phoneScreenshots/` (byte-identical, checked 18 Nov).
 - Category: Education (alternative: Books & Reference). Tags: education, reference, offline.
 - Contact email: required by Play (shown publicly). Website: https://ark.esdy.cc
 
@@ -79,6 +79,15 @@ Upload `ark-play-signing-key.zip` on that page. Delete the zip afterwards (it ho
 
 - **18 Nov 2026: first closed-test release sent for review.** Track "Closed testing - Alpha", release 2100 (2.1) from `release/android/v2.1/EstudelyArk-2.1.aab`, full rollout to the track, 177 countries plus rest of world, testers from the email list "Cyber". Store listing (en-US), content rating (12+), target audience 13+, data safety (none collected or shared), health (medical reference and education), financial features (none), advertising ID (no; checked: the APK has no AD_ID permission and no Play Services/Firebase/ads libraries), foreground service declaration (dataSync: network "Other" for downloads, with the unlisted YouTube video) submitted with it. **Local processing (SD-card moves via `LibraryMoveService`) was left unticked** for lack of an SD-card video; if review asks about it, record a move on a phone with a microSD card or an emulator with a virtual SD card and add "Local processing → Other".
 - Next: testers must accept the opt-in link and keep the app installed; the 14 days start once 12 have opted in. Then Dashboard → Apply for production.
+
+## 5b. Publishing 2.1.1 to the closed test (when the first review is done, or in parallel)
+
+- Test and release → Testing → Closed testing → the existing track → Create release.
+- Upload `release/android/v2.1.1/EstudelyArk-2.1.1.aab` (already signed with Aman's key; SHA-256 of the AAB is in its `SHA256SUMS`, and GitHub's v2.1.1 release carries the same-named APKs from the same build).
+- Release name `2.1.1`; release notes (en-US) from `fastlane/metadata/android/en-US/changelogs/2112.txt` (338/500 characters): PDF zoom, remembered page, archive titles.
+- Full rollout to the same track and testers. 2.1.1 installs over 2.1 with the same signing key, keeping downloaded subjects.
+- The 14-day clock is not reset by a new release; production access still depends on 12+ testers opted in.
+- Note for the next version (not in 2.1.1): the ZIM-search fix for archives without a title index (`ZimActivity`, moto g52, 18 Nov) ships after this; upload then as usual.
 
 ## 6. Takedown risks to keep in mind
 

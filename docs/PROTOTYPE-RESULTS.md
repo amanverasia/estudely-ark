@@ -280,3 +280,14 @@ PDF viewer, real Hesperian chapter (`en_hcwb_2000_07.pdf`, 12 pages), opened thr
 Archive titles: with the real signed `MANIFEST.tsv`, `MANIFEST.tsv.sig` and `devdocs_en_c_2026-10.zim` placed as a downloaded Computing subject, the list shows **C Docs** from the ZIM's `Title` metadata (with `2026-10` in the detail line) instead of the file-name label. Opening it shows the same title in the reader toolbar, the full-width DevDocs layout and the Contents button.
 
 Automated: 27/27 JVM tests, debug lint 0 errors (33 warnings). The signed 2.1.1 APKs in `release/android/v2.1.1/` were built before this fix and must be rebuilt and re-signed before publishing.
+
+## ZIM reader: PDFs and the zimgit search crash (moto g52, debug 2.1.1, 18 Nov)
+
+Tested with the real `zimgit-food-preparation_en_2025-04.zim` (93 MB, 17 PDFs inside, no title index):
+
+- **A PDF tapped inside an archive opens in the PDF viewer** ("Food Preparation (1).pdf", 44 pages), so the existing link hand-off (`shouldOverrideUrlLoading` → `openPdf`) works on a real phone, not just the emulator.
+- **Bug found and fixed: searching such an archive failed with libzim's raw error "Cannot get entry for end iterator".** Libzim's Java iterators report `hasNext()` on an empty result set and then throw while fetching the entry; zimgit archives have full-text results that behave this way and no title index at all. `ZimActivity` now treats that exception as end-of-results, logs it, and shows "Nothing found. Try another word."; search results that are PDFs also open in the PDF viewer instead of a blank WebView.
+- Regression: DevDocs C search still lists and opens results ("bsearch" → Algorithms, qsort_s, stdlib.h) — the handling fix only changes the broken-archive path. The food-prep archive's full-text index itself returns zero matches for common words ("bread", "jam") in libzim too; that is the upstream archive's index, not the reader.
+- Not testable with pack archives: a *search result* that is a PDF (the zimgit full-text index returns nothing to list). The route is one new branch in the result click: check the entry's mimetype is `application/pdf` and hand it to the PDF viewer, same as the link path tested above.
+
+Fix is in `ZimActivity`, committed after v2.1.1 was published, so it ships in the next version.

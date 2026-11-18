@@ -134,22 +134,45 @@ public class ZimActivity extends ArkActivity {
         InputMethodManager keyboard = getSystemService(InputMethodManager.class);
         if (keyboard != null) keyboard.hideSoftInputFromWindow(query.getWindowToken(), 0);
         int n = 0;
-        boolean failed = false;
+        // libzim's Java binding can report hasNext() on an empty result set and then throw while reading the
+        // entry ("Cannot get entry for end iterator"); zimgit archives, which have no title index, do this.
+        // Treat that as the end of the list, log it, and keep the search usable.
         try {
             if (archive.hasFulltextIndex()) {
                 Search s = new Searcher(archive).search(new Query(text));
                 SearchIterator it = s.getResults(0, 25);
-                while (it.hasNext()) { it.next(); addResult(it.getTitle(), it.getPath()); n++; }
-            }
-            if (n == 0) { // fall back to title suggestions
-                SuggestionIterator it = new SuggestionSearcher(archive).suggest(text).getResults(0, 25);
-                while (it.hasNext()) { SuggestionItem s = it.next(); addResult(s.getTitle(), s.getPath()); n++; }
+                while (it.hasNext()) {
+                    try {
+                        it.next();
+                        addResult(it.getTitle(), it.getPath());
+                        n++;
+                    } catch (RuntimeException end) {
+                        android.util.Log.w("EstudelyArk", "full-text results ended early", end);
+                        break;
+                    }
+                }
             }
         } catch (Exception e) {
-            failed = true;
-            addResult("Search failed: " + e.getMessage(), null);
+            android.util.Log.w("EstudelyArk", "full-text search failed", e);
         }
-        if (n == 0 && !failed) addResult("Nothing found. Try another word.", null);
+        if (n == 0) { // fall back to title suggestions
+            try {
+                SuggestionIterator it = new SuggestionSearcher(archive).suggest(text).getResults(0, 25);
+                while (it.hasNext()) {
+                    try {
+                        SuggestionItem s = it.next();
+                        addResult(s.getTitle(), s.getPath());
+                        n++;
+                    } catch (RuntimeException end) {
+                        android.util.Log.w("EstudelyArk", "suggestions ended early", end);
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                android.util.Log.w("EstudelyArk", "suggestion search failed", e);
+            }
+        }
+        if (n == 0) addResult("Nothing found. Try another word.", null);
         resultsScroll.setVisibility(View.VISIBLE);
     }
 
@@ -161,9 +184,19 @@ public class ZimActivity extends ArkActivity {
         result.setPadding(ui.dp(4), ui.dp(14), ui.dp(4), ui.dp(14));
         if (path != null) ui.clickable(result, ui.card, 8, v -> {
             resultsScroll.setVisibility(View.GONE);
-            web.loadUrl("https://" + ZimWebClient.HOST + "/" + Uri.encode(path, "/"));
+            // A result can itself be a PDF (some archives index their attachments). The WebView can't show one,
+            // so hand it to the PDF viewer as a tapped link inside a page would be.
+            if (isPdf(path)) openPdf(path);
+            else web.loadUrl("https://" + ZimWebClient.HOST + "/" + Uri.encode(path, "/"));
         });
         results.addView(result);
+    }
+
+    private boolean isPdf(String path) {
+        try {
+            return archive != null && archive.hasEntryByPath(path)
+                    && archive.getEntryByPath(path).getItem(true).getMimetype().startsWith("application/pdf");
+        } catch (Exception e) { return false; }
     }
 
     /** Copies a PDF out of the archive to the cache and opens it in the PDF viewer. */
