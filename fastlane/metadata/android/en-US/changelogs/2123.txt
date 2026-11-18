@@ -1,0 +1,1 @@
+Search in offline archives is more reliable: books without a title index now say "Nothing found" instead of showing an error, and PDF search results open in the PDF viewer. DevDocs function names no longer run together. Updating keeps everything you have downloaded.

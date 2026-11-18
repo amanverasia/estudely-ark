@@ -291,3 +291,12 @@ Tested with the real `zimgit-food-preparation_en_2025-04.zim` (93 MB, 17 PDFs in
 - Not testable with pack archives: a *search result* that is a PDF (the zimgit full-text index returns nothing to list). The route is one new branch in the result click: check the entry's mimetype is `application/pdf` and hand it to the PDF viewer, same as the link path tested above.
 
 Fix is in `ZimActivity`, committed after v2.1.1 was published, so it ships in the next version.
+
+## Android 2.1.2 search and DevDocs fix (moto g52, 18 Nov 2026)
+
+Debug 2.1.2 built on a second machine (JDK 21, SDK 36) and installed beside the signed 2.1.1 release on the moto g52 (LineageOS, Android 16, arm64, wireless adb). Unit tests 27/27, release lint 0 errors (33 warnings); version codes 2120-2123.
+
+- Opened `zimgit-food-preparation_en_2025-04.zim` (93 MB, no title index) through the debug `openZim` hook. Searching "bread" shows "Nothing found. Try another word." instead of libzim's "Cannot get entry for end iterator"; no crash in logcat.
+- Tapped the "Philmont Trail Cookbook" PDF (44 pages): it opens in the PDF viewer; the + button zooms the page.
+- DevDocs C search "bsearch" still lists Algorithms, qsort_s and Standard library header <stdlib.h>; opening Algorithms renders. Its overview table now shows `qsort`, `qsort_s` and `(C11)` on separate lines instead of `qsortqsort_s`; the same rule covers See also rows.
+- Signed release check (Aman signed with `scripts/sign_apk.sh`, 18 Nov): all five SHA-256 sums pass; APK and AAB certificates are Aman's `9cf9432f…447d`; `jarsigner -verify` passes on the AAB. The signed arm64 APK installed over 2.1.1 on the moto g52 (2112 → 2122, 2.1.1 → 2.1.2) and launched without a crash; logcat clean. Reproducibility (arm64 APK only; the other ABIs were not re-checked): `apksigcopier` 1.1.1 on Python 3.12 copies the signature onto the unsigned build from a second machine and the result is byte-identical to the signed APK (`compare` passes). Run under Python 3.15.2 the same tool reports a false `CHUNKED_SHA512 digest mismatch`: it writes the three v1 signature entries without the UTF-8 name flag (0x0800), the only bytes that differ. Use an older Python (3.12 here) for this check.

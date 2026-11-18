@@ -63,6 +63,9 @@ public final class ZimWebClient extends WebViewClient {
         // DevDocs pins the folder arrow to the row's top; centre it (its 32 px box) in the taller row.
         + "html.ark-devdocs.ark-nav ._sidebar ._list-arrow{top:calc(50% - 16px)!important}"
         + "html.ark-devdocs ._page table:has(pre) .ark-empty{display:none!important}"
+        // cppreference marks overload names as .t-lines and relies on a ._cppref parent the offline pages lack;
+        // without this, names run together ("qsortqsort_s") in tables and See also rows.
+        + "html.ark-devdocs .t-lines>span{display:block!important}"
         + "}</style><script>(function(){function f(){if(!document.querySelector('._app,devdocs-navbar'))return;"
         + "document.documentElement.classList.add('ark-devdocs');"
         // Stacked declaration tables show their empty filler cells as grey boxes; mark them so the CSS hides them.

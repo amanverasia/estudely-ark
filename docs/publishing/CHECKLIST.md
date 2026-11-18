@@ -1,6 +1,6 @@
 # Android release checklist
 
-For each release (released so far: 2.0 and 2.0.1, 17 Nov 2026). Public copy and uploads need Aman's approval of the text and the destination first.
+For each release (released so far: 2.0, 2.0.1, 2.1 and 2.1.1, 17-18 Nov 2026; 2.1.2 prepared 18 Nov 2026). Public copy and uploads need Aman's approval of the text and the destination first.
 
 ## 1. Version
 - `android/app/build.gradle.kts`: raise `baseVersionCode` (2.0 = 200, 2.0.1 = 201, 2.1 = 210) and `versionName`. Version codes come out as base x 10 + ABI: 0 universal, 1 armeabi-v7a, 2 arm64-v8a, 3 x86_64.

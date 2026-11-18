@@ -79,6 +79,7 @@ Upload `ark-play-signing-key.zip` on that page. Delete the zip afterwards (it ho
 
 - **18 Nov 2026: first closed-test release sent for review.** Track "Closed testing - Alpha", release 2100 (2.1) from `release/android/v2.1/EstudelyArk-2.1.aab`, full rollout to the track, 177 countries plus rest of world, testers from the email list "Cyber". Store listing (en-US), content rating (12+), target audience 13+, data safety (none collected or shared), health (medical reference and education), financial features (none), advertising ID (no; checked: the APK has no AD_ID permission and no Play Services/Firebase/ads libraries), foreground service declaration (dataSync: network "Other" for downloads, with the unlisted YouTube video) submitted with it. **Local processing (SD-card moves via `LibraryMoveService`) was left unticked** for lack of an SD-card video; if review asks about it, record a move on a phone with a microSD card or an emulator with a virtual SD card and add "Local processing → Other".
 - Next: testers must accept the opt-in link and keep the app installed; the 14 days start once 12 have opted in. Then Dashboard → Apply for production.
+- **18 Nov 2026: 2.1.2 built and tested** (ZIM search fix for archives without a title index, PDF search results open in the viewer, DevDocs overload names stack properly). Version code 2120; 27/27 JVM tests, release lint clean; debug build checked on the moto g52. Sign with `scripts/sign_apk.sh`, then upload `release/android/v2.1.2/EstudelyArk-2.1.2.aab` to the same closed track.
 
 ## 5b. Publishing 2.1.1 to the closed test (when the first review is done, or in parallel)
 
@@ -88,6 +89,16 @@ Upload `ark-play-signing-key.zip` on that page. Delete the zip afterwards (it ho
 - Full rollout to the same track and testers. 2.1.1 installs over 2.1 with the same signing key, keeping downloaded subjects.
 - The 14-day clock is not reset by a new release; production access still depends on 12+ testers opted in.
 - Note for the next version (not in 2.1.1): the ZIM-search fix for archives without a title index (`ZimActivity`, moto g52, 18 Nov) ships after this; upload then as usual.
+
+## 5c. Publishing 2.1.2 to the closed test
+
+- Test and release → Testing → Closed testing → the existing track → Create release.
+- Upload `release/android/v2.1.2/EstudelyArk-2.1.2.aab` (version code 2120; signed with Aman's key; SHA-256 in its `SHA256SUMS`).
+- Release name `2.1.2`; release notes (en-US) from `fastlane/metadata/android/en-US/changelogs/2120.txt` (267/500 characters): archive search without the libzim error, PDF search results, DevDocs names.
+- Full rollout to the same track. 2.1.2 installs over 2.1 or 2.1.1 with the same signing key, keeping downloaded subjects and settings.
+- If Play still shows 2.1 or 2.1.1 as "In review", wait for that review to finish if Console locks the track; the 14-day tester clock is not reset by any of these releases.
+- After 12+ testers have been opted in for 14 consecutive days: Dashboard → Apply for production. Use 2.1.2 (or a newer bundle) for the production release.
+- Build evidence (18 Nov 2026): 27/27 JVM tests, release lint 0 errors (33 warnings); debug 2.1.2 on the moto g52 checked the zimgit search fix, a PDF inside the archive, PDF zoom, and the DevDocs C search regression.
 
 ## 6. Takedown risks to keep in mind
 
