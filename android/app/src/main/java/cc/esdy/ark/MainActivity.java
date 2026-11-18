@@ -45,7 +45,7 @@ import java.util.function.Consumer;
 import org.kiwix.libkiwix.JNIKiwix;
 
 /** Bookshelf, subject catalogue and live downloads. LibraryEngine remains the source of truth. */
-public class MainActivity extends Activity {
+public class MainActivity extends ArkActivity {
     private enum Screen { LIBRARY, SUBJECTS, DOWNLOADS }
     private LibraryEngine engine;
     private ArkUi style;
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     private final Map<Screen, Integer> scrollPositions = new HashMap<>();
     private LinearLayout root, body, footer, navigation;
     private ScrollView scroll;
-    private Dialog sheetDialog;
+    private Dialog sheetDialog, moveDialog;
     private Snapshot snapshot;
     private String renderedKey = "";
     private final List<Consumer<Snapshot>> bindings = new ArrayList<>();
@@ -71,8 +71,8 @@ public class MainActivity extends Activity {
         final Map<String, LibraryEngine.State> states = new LinkedHashMap<>();
         final Map<String, Long> done = new HashMap<>();
         long free, uploaded;
-        boolean running, paused, limited, wifi, mobile, sharing;
-        String checking, message;
+        boolean running, paused, limited, wifi, mobile, sharing, storageAvailable, moving, recovering, moveRecoveryPending;
+        String checking, message, storageName, recoveryMessage;
         long bytes(ModuleCatalog.Module m) {
             return states.get(m.id) == LibraryEngine.State.READY ? m.bytes : Math.min(m.bytes, Math.max(0, done.getOrDefault(m.id, 0L)));
         }
@@ -80,9 +80,15 @@ public class MainActivity extends Activity {
 
     static void edgeToEdge(Activity a, View root) {
         root.setOnApplyWindowInsetsListener((v, insets) -> {
-            android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
-            v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-            return WindowInsets.CONSUMED;
+            if (Build.VERSION.SDK_INT >= 30) {
+                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
+                v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+                return WindowInsets.CONSUMED;
+            }
+            // Android 8-10: the same system-bar insets through the older API.
+            v.setPadding(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(),
+                    insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
+            return insets.consumeSystemWindowInsets();
         });
     }
 
@@ -108,6 +114,7 @@ public class MainActivity extends Activity {
         snapshot = readSnapshot();
         buildShell();
         render(true);
+        BackCompat.register(this, this::handleBack);
         if (engine.sharingOn()) SeedJob.schedule(this, true);
         if (BuildConfig.DEBUG) handleTestIntent(getIntent());
     }
@@ -164,7 +171,11 @@ public class MainActivity extends Activity {
         s.running = DownloadService.isRunning(); s.paused = engine.pausedByUser(); s.limited = engine.pausedByLimit();
         s.wifi = LibraryEngine.unmetered(this); s.mobile = engine.mobileDataAllowed();
         s.sharing = engine.sharingOn(); s.uploaded = engine.uploaded();
-        s.free = LibraryEngine.allocatableBytes(this); s.checking = engine.checkingModule(); s.message = engine.latestMessage();
+        s.storageAvailable = engine.storageAvailable(); s.moving = engine.isMoving() || LibraryMoveService.isRunning();
+        s.recovering = engine.isRecovering(); s.moveRecoveryPending = engine.moveNeedsRecovery();
+        s.storageName = engine.storageName(); s.recoveryMessage = engine.recoveryMessage();
+        s.free = s.storageAvailable ? engine.allocatableBytes() : 0;
+        s.checking = engine.checkingModule(); s.message = engine.latestMessage();
         if (s.checking == null && s.states.containsValue(LibraryEngine.State.CHECKING)) s.checking = "torrent";
         return s;
     }
@@ -187,7 +198,9 @@ public class MainActivity extends Activity {
 
     private String layoutKey() {
         return screen + ":" + savedOnly + ":" + snapshot.states + ":" + snapshot.running + ":" + snapshot.paused
-                + ":" + snapshot.wifi + ":" + snapshot.mobile + ":" + snapshot.checking + ":" + pending + ":" + storageBusy;
+                + ":" + snapshot.wifi + ":" + snapshot.mobile + ":" + snapshot.checking + ":" + pending + ":" + storageBusy
+                + ":" + snapshot.storageName + ":" + snapshot.storageAvailable + ":" + snapshot.moving
+                + ":" + snapshot.moveRecoveryPending + ":" + snapshot.recoveryMessage;
     }
 
     private void render(boolean force) {
@@ -231,9 +244,25 @@ public class MainActivity extends Activity {
 
     private void buildLibrary() {
         heading("Your bookshelf.", null);
+        if (!snapshot.storageAvailable || snapshot.moving) {
+            LinearLayout notice = style.column();
+            notice.setPadding(dp(15), dp(14), dp(15), dp(14));
+            notice.setBackground(style.bg(style.soft, 14));
+            String title = snapshot.recovering ? "Finishing interrupted move…"
+                    : snapshot.moving ? "Moving your library…"
+                    : snapshot.moveRecoveryPending ? "Library move needs attention" : snapshot.storageName + " unavailable";
+            notice.addView(style.text(title, 15, style.ink, true));
+            String explanation = snapshot.moving
+                    ? "Keep your storage connected. Reading, downloads and sharing resume when the move finishes."
+                    : snapshot.moveRecoveryPending ? snapshot.recoveryMessage
+                    : "Reinsert the card to read or download. Your saved subjects have not been deleted or replaced.";
+            TextView detail = style.text(explanation, 12, style.muted, false);
+            add(notice, detail, 6);
+            add(body, notice, 18);
+        }
         long stored = 0; for (ModuleCatalog.Module m : snapshot.ready) stored += m.bytes;
         TextView meta = style.text(snapshot.ready.size() + " " + plural(snapshot.ready.size(), "subject") + " ready"
-                + (snapshot.ready.isEmpty() ? "" : " · " + gb(stored) + " on this phone"), 12, style.muted, false);
+                + (snapshot.ready.isEmpty() ? "" : " · " + gb(stored) + " saved"), 12, style.muted, false);
         add(body, meta, 10);
         if (snapshot.ready.isEmpty()) {
             LinearLayout empty = style.column();
@@ -317,7 +346,8 @@ public class MainActivity extends Activity {
             long bytes = 0; for (String id : pending) { ModuleCatalog.Module m = engine.catalog.find(id); if (m != null) bytes += m.bytes; }
             total.addView(style.text(gb(bytes), 12, style.muted, false)); footer.addView(total);
             TextView download = style.button("Add to downloads", true, v -> addDownloads());
-            download.setEnabled(!pending.isEmpty() && !storageBusy); download.setAlpha(download.isEnabled() ? 1f : .45f);
+            download.setEnabled(!pending.isEmpty() && !storageBusy && snapshot.storageAvailable && !snapshot.moving);
+            download.setAlpha(download.isEnabled() ? 1f : .45f);
             add(footer, download, 10);
             TextView note = style.text((snapshot.mobile ? "Mobile data allowed. " : "Wi-Fi only. ") + gb(snapshot.free) + " available.", 11, style.muted, false);
             note.setGravity(Gravity.CENTER); add(footer, note, 8);
@@ -433,7 +463,7 @@ public class MainActivity extends Activity {
         add(body, trust, 20);
         TextView status = style.text("", 12, style.muted, false); add(body, status, 12);
         bindings.add(s -> { String copy = friendlyMessage(); status.setText(copy); status.setVisibility(copy.isEmpty() ? View.GONE : View.VISIBLE); });
-        add(body, style.button("Manage phone storage", false, v -> showStorage()), 17);
+        add(body, style.button("Manage library storage", false, v -> showStorage()), 17);
     }
 
     private View downloadRow(ModuleCatalog.Module m) {
@@ -487,10 +517,85 @@ public class MainActivity extends Activity {
         Switch share = switchRow(content, "Share your downloaded library", "Only on Wi-Fi while this phone is charging. Sharing waits while downloads are manually paused.", engine.sharingOn());
         share.setOnCheckedChangeListener((b, checked) -> { engine.setSharing(checked); SeedJob.schedule(this, checked); requestSnapshot(); });
         TextView shared = style.text("Shared so far: " + gb(engine.uploaded()), 12, style.muted, false); add(content, shared, 12);
-        add(content, style.button("Manage phone storage", false, v -> showStorage()), 18);
+        add(content, style.button("Manage library storage", false, v -> showStorage()), 18);
+
+        add(content, style.text("Appearance", 15, style.ink, true), 26);
+        add(content, style.text("Theme", 13, style.ink, true), 12);
+        String theme = AppSettings.theme(this);
+        LinearLayout themes = segmented(new String[]{"System", "Light", "Dark"},
+                new boolean[]{AppSettings.SYSTEM.equals(theme), AppSettings.LIGHT.equals(theme), AppSettings.DARK.equals(theme)}, i -> {
+                    String chosen = i == 0 ? AppSettings.SYSTEM : i == 1 ? AppSettings.LIGHT : AppSettings.DARK;
+                    if (chosen.equals(AppSettings.theme(this))) return;
+                    AppSettings.setTheme(this, chosen);
+                    if (sheetDialog != null) sheetDialog.dismiss();
+                    recreate(); // applies the new theme right away
+                });
+        add(content, themes, 8);
+        add(content, style.text("Reading text size", 13, style.ink, true), 16);
+        int zoom = AppSettings.textZoom(this);
+        boolean[] zoomOn = new boolean[AppSettings.TEXT_ZOOMS.length];
+        for (int i = 0; i < zoomOn.length; i++) zoomOn[i] = AppSettings.TEXT_ZOOMS[i] == zoom;
+        add(content, segmented(AppSettings.TEXT_ZOOM_NAMES, zoomOn, i -> { AppSettings.setTextZoom(this, AppSettings.TEXT_ZOOMS[i]); showSettings(); }), 8);
+        add(content, style.text("For books and articles. Opens at this size next time you read.", 11, style.muted, false), 6);
+
+        add(content, style.text("Library", 15, style.ink, true), 26);
+        add(content, style.text("Storage location", 13, style.ink, true), 8);
+        TextView location = style.text(snapshot.storageName + (snapshot.storageAvailable ? " · " + gb(snapshot.free) + " available" : " · unavailable"), 12, style.muted, false);
+        add(content, location, 5);
+        add(content, style.button(snapshot.moving ? "View library move" : "Choose storage or move the library", false, v -> showStorageLocation()), 10);
+        add(content, style.text("Check every saved subject again against the library's signed file list, for example after copying the phone or if something looks wrong.", 12, style.muted, false), 18);
+        TextView recheck = style.button("Check my library again", false, v -> recheckLibrary());
+        boolean idle = !snapshot.running && !SeedJob.isActive() && !storageBusy && snapshot.storageAvailable && !snapshot.moving && !snapshot.ready.isEmpty();
+        recheck.setEnabled(idle); recheck.setAlpha(idle ? 1f : .45f);
+        add(content, recheck, 10);
+        if (!idle && !snapshot.ready.isEmpty()) add(content, style.text(
+                snapshot.moving ? "Wait for the library move to finish."
+                        : !snapshot.storageAvailable ? "Make " + snapshot.storageName.toLowerCase(Locale.ROOT) + " available first."
+                        : "Pause downloads and sharing first.", 11, style.muted, false), 6);
+
+        add(content, style.button("About Estudely Ark", false, v -> startActivity(new Intent(this, AboutActivity.class))), 26);
         TextView privacy = style.text("No account, ads or analytics. Your library stays on this phone. BitTorrent peers can see your IP address while downloading or sharing.", 12, style.muted, false); add(content, privacy, 18);
         if (BuildConfig.DEBUG) add(content, style.button("Diagnostics", false, v -> new AlertDialog.Builder(this).setTitle("Latest download message").setMessage(engine.latestMessage()).setPositiveButton("Close", null).show()), 14);
         showSheet("Library settings", content);
+    }
+
+    /** A row of equal-width choices, the chosen one highlighted. */
+    private LinearLayout segmented(String[] labels, boolean[] on, java.util.function.IntConsumer pick) {
+        LinearLayout row = style.row(); row.setPadding(dp(4), dp(4), dp(4), dp(4));
+        row.setBackground(style.bg(style.soft, 12));
+        for (int i = 0; i < labels.length; i++) {
+            final int index = i;
+            TextView option = style.text(labels[i], 12, on[i] ? style.blue : style.muted, on[i]);
+            option.setGravity(Gravity.CENTER); option.setPadding(dp(4), dp(10), dp(4), dp(10)); option.setMinHeight(dp(44));
+            if (on[i]) option.setBackground(style.bg(style.card, 9));
+            option.setFocusable(true); option.setSelected(on[i]);
+            option.setContentDescription(labels[i] + (on[i] ? ", selected" : ""));
+            option.setOnClickListener(v -> pick.accept(index));
+            row.addView(option, new LinearLayout.LayoutParams(0, -2, 1));
+        }
+        return row;
+    }
+
+    private void recheckLibrary() {
+        if (engine.isMoving() || LibraryMoveService.isRunning()) { toast("Wait for the library move to finish."); return; }
+        if (!engine.storageAvailable()) { toast("Make " + engine.storageName().toLowerCase(Locale.ROOT) + " available first."); return; }
+        if (DownloadService.isRunning() || SeedJob.isActive() || engine.isRunning()) { toast("Pause downloads and sharing first."); return; }
+        if (sheetDialog != null) sheetDialog.dismiss();
+        storageBusy = true; render(true);
+        toast("Checking your library. This can take a few minutes.");
+        background.execute(() -> {
+            int[] result = engine.recheckLibrary();
+            ui.post(() -> {
+                storageBusy = false; requestSnapshot();
+                if (isDestroyed()) return;
+                new AlertDialog.Builder(this).setTitle(result[1] == 0 ? "Everything checks out" : "Some subjects need repair")
+                        .setMessage(result[1] == 0
+                                ? result[0] + " " + plural(result[0], "subject") + " checked against the signed file list. All good."
+                                : result[1] + " " + plural(result[1], "subject") + " had damaged or missing files. Open Downloads and tap Resume to repair "
+                                    + (result[1] == 1 ? "it" : "them") + "; only the damaged parts are downloaded again.")
+                        .setPositiveButton("OK", null).show();
+            });
+        });
     }
 
     private int subjectTint(ModuleCatalog.Module module) {
@@ -559,7 +664,8 @@ public class MainActivity extends Activity {
 
     private void showStorage() {
         LinearLayout content = style.column(); content.setPadding(dp(20), dp(8), dp(20), dp(18));
-        content.addView(style.text(gb(snapshot.free) + " available on this phone", 14, style.muted, false));
+        content.addView(style.text(gb(snapshot.free) + " available · " + snapshot.storageName, 14, style.muted, false));
+        add(content, style.button(snapshot.moving ? "View library move" : "Choose storage or move the library", false, v -> showStorageLocation()), 12);
         boolean any = false;
         for (ModuleCatalog.Module m : engine.catalog.modules) {
             long bytes = snapshot.bytes(m);
@@ -568,19 +674,122 @@ public class MainActivity extends Activity {
             LinearLayout row = simpleRow(style.iconName(m), style.shortTitle(m), gb(bytes) + (snapshot.states.get(m.id) == LibraryEngine.State.READY ? " · checked" : " · partial download"));
             row.setPadding(0, dp(14), 0, dp(14));
             TextView remove = style.text("Remove", 12, style.blue, true); remove.setPadding(dp(8), dp(14), 0, dp(14)); remove.setMinHeight(dp(48));
-            remove.setEnabled(!snapshot.running && !SeedJob.isActive() && !storageBusy); remove.setAlpha(remove.isEnabled() ? 1f : .4f);
+            remove.setEnabled(canChangeStorage()); remove.setAlpha(remove.isEnabled() ? 1f : .4f);
             remove.setContentDescription("Remove " + m.title + " from this phone"); remove.setOnClickListener(v -> confirmRemove(m)); row.addView(remove); content.addView(row); content.addView(style.divider());
         }
         if (!any) add(content, style.text("No downloaded subjects to remove yet.", 14, style.muted, false), 22);
         add(content, style.text("Pause downloads and sharing before removing a subject. Removed subjects can be downloaded again later.", 12, style.muted, false), 18);
-        showSheet("Phone storage", content);
+        showSheet("Library storage", content);
+    }
+
+    private boolean canChangeStorage() {
+        return !snapshot.running && !SeedJob.isActive() && !engine.isRunning() && !storageBusy
+                && !engine.isMoving() && !LibraryMoveService.isRunning()
+                && engine.storageAvailable() && snapshot.storageAvailable && !snapshot.moving;
+    }
+
+    private void showStorageLocation() {
+        if (engine.moveNeedsRecovery() || engine.isRecovering()) {
+            engine.recoverInBackground();
+            toast("Finishing the interrupted move. Keep the current storage connected.");
+            requestSnapshot();
+            return;
+        }
+        if (engine.isMoving() || LibraryMoveService.isRunning()) { showMoveProgress(); return; }
+        LinearLayout content = style.column(); content.setPadding(dp(20), dp(8), dp(20), dp(18));
+        add(content, style.text("Your library stays together in one place. Moving copies and checks every file before removing the original.", 13, style.muted, false), 5);
+        List<LibraryStorage.Location> locations = LibraryStorage.locations(this);
+        String active = engine.storageRoot().getAbsolutePath();
+        boolean listed = false, sdFound = false;
+        for (LibraryStorage.Location location : locations) {
+            if (location.removable) sdFound = true;
+            if (location.root.getAbsolutePath().equals(active)) listed = true;
+            addLocationRow(content, location, canChangeStorage());
+        }
+        if (!listed) addLocationRow(content, LibraryStorage.current(this, engine.storageRoot()), false);
+        if (!sdFound) add(content, style.text("No SD card was found. Insert and mount a card, then open this screen again. No storage permission is needed.", 12, style.muted, false), 18);
+        add(content, style.text("On an SD card, Ark uses its own app folder. Android removes that folder if you uninstall Ark, so keep another copy of anything you cannot download again.", 11, style.muted, false), 18);
+        showSheet("Storage location", content);
+    }
+
+    private void addLocationRow(LinearLayout content, LibraryStorage.Location location, boolean idle) {
+        boolean active = location.root.getAbsolutePath().equals(engine.storageRoot().getAbsolutePath());
+        String detail = !location.available ? "Unavailable · reinsert the card"
+                : gb(location.root.getUsableSpace()) + " available" + (active ? " · in use" : "");
+        LinearLayout row = simpleRow("download", location.name, detail);
+        row.setPadding(0, dp(15), 0, dp(15));
+        if (!active) {
+            TextView move = style.text("Move here", 12, style.blue, true);
+            move.setPadding(dp(8), dp(14), 0, dp(14)); move.setMinHeight(dp(48));
+            move.setEnabled(idle && location.available); move.setAlpha(move.isEnabled() ? 1f : .4f);
+            move.setOnClickListener(v -> confirmMove(location));
+            row.addView(move);
+        }
+        content.addView(row); content.addView(style.divider());
+    }
+
+    private void confirmMove(LibraryStorage.Location target) {
+        if (!canChangeStorage()) { toast("Pause downloads and sharing, and make the current storage available first."); return; }
+        new AlertDialog.Builder(this).setTitle("Move library to " + target.name.toLowerCase(Locale.ROOT) + "?")
+                .setMessage("Ark will copy the whole library, read back and check every copied file, then switch location and remove the old copy. Keep the storage connected until this finishes. You can cancel during the copy.")
+                .setNegativeButton("Not now", null).setPositiveButton("Move library", (dialog, which) -> {
+                    try {
+                        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED)
+                            requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+                        LibraryMoveService.start(this, target.root);
+                        showMoveProgress();
+                    } catch (RuntimeException e) {
+                        toast("Could not start the move: " + e.getMessage());
+                    }
+                }).show();
+    }
+
+    private void showMoveProgress() {
+        if (sheetDialog != null) sheetDialog.dismiss();
+        if (moveDialog != null) moveDialog.dismiss();
+        LinearLayout content = style.column(); content.setPadding(dp(24), dp(12), dp(24), dp(8));
+        TextView status = style.text("Starting the move…", 14, style.ink, true); content.addView(status);
+        TextView amount = style.text("Keep your storage connected.", 12, style.muted, false); add(content, amount, 8);
+        ProgressBar progress = progressBar(); add(content, progress, 18);
+        long started = System.currentTimeMillis();
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Moving your library")
+                .setView(content).setNegativeButton("Cancel", null).create();
+        dialog.setCancelable(false);
+        moveDialog = dialog;
+        dialog.setOnDismissListener(d -> { if (moveDialog == dialog) moveDialog = null; });
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(v -> {
+            LibraryMoveService.requestCancel();
+            status.setText("Cancelling safely…");
+            v.setEnabled(false);
+        });
+        Runnable update = new Runnable() {
+            @Override public void run() {
+                if (isDestroyed() || moveDialog != dialog) return;
+                String phase = LibraryMoveService.phase();
+                long done = LibraryMoveService.done(), total = LibraryMoveService.total();
+                int percent = total > 0 ? (int) Math.min(100, done * 100 / total) : 0;
+                status.setText(phase == null || phase.isEmpty() ? "Preparing" : phase);
+                amount.setText(total > 0 ? gb(done) + " of " + gb(total) + " · " + percent + "%" : "Keep your storage connected.");
+                progress.setProgress(percent);
+                if (!LibraryMoveService.isRunning() && !engine.isMoving() && System.currentTimeMillis() - started > 3000) {
+                    dialog.dismiss();
+                    String result = LibraryMoveService.result();
+                    toast(result == null || result.isEmpty() ? "The move did not start. Please try again." : result);
+                    requestSnapshot();
+                    return;
+                }
+                ui.postDelayed(this, 500);
+            }
+        };
+        ui.postDelayed(update, 300);
     }
 
     private void confirmRemove(ModuleCatalog.Module m) {
         new AlertDialog.Builder(this).setTitle("Remove " + style.shortTitle(m) + "?")
                 .setMessage("This deletes only this subject's downloaded files from this phone. You can download it again later.")
                 .setNegativeButton("Keep", null).setPositiveButton("Remove", (dialog, which) -> {
-                    if (DownloadService.isRunning() || SeedJob.isActive() || engine.isRunning()) { toast("Pause downloads and sharing first."); return; }
+                    if (!canChangeStorage()) { toast("Pause downloads and sharing, and make the current storage available first."); return; }
                     storageBusy = true; render(true);
                     background.execute(() -> {
                         try { engine.removeModule(m); ui.post(() -> { pending.remove(m.id); saveDraft(); toast("Subject removed."); }); }
@@ -592,10 +801,12 @@ public class MainActivity extends Activity {
 
     private void addDownloads() {
         if (pending.isEmpty()) return;
+        if (engine.isMoving() || LibraryMoveService.isRunning()) { toast("Wait for the library move to finish."); return; }
+        if (!engine.storageAvailable()) { toast("Make " + engine.storageName().toLowerCase(Locale.ROOT) + " available first."); return; }
         final Set<String> additions = new HashSet<>(pending);
         storageBusy = true; render(true);
         background.execute(() -> {
-            long need = engine.bytesStillNeeded(additions), free = LibraryEngine.allocatableBytes(this);
+            long need = engine.bytesStillNeeded(additions), free = engine.allocatableBytes();
             ui.post(() -> {
                 storageBusy = false;
                 if (isDestroyed()) return;
@@ -610,6 +821,8 @@ public class MainActivity extends Activity {
 
     private void resumeDownloads() {
         if (engine.selected().isEmpty()) { openSubjects(); return; }
+        if (engine.isMoving() || LibraryMoveService.isRunning()) { toast("Wait for the library move to finish."); return; }
+        if (!engine.storageAvailable()) { toast(storageBlockMessage()); return; }
         if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
         startForegroundService(new Intent(this, DownloadService.class).setAction(DownloadService.ACTION_RESUME));
@@ -621,6 +834,9 @@ public class MainActivity extends Activity {
     private int percent() { return (int) Math.max(0, Math.min(100, totalWanted() > 0 ? totalDone() * 100 / totalWanted() : 0)); }
     private int modulePercent(ModuleCatalog.Module m) { return (int) Math.min(100, m.bytes > 0 ? snapshot.bytes(m) * 100 / m.bytes : 0); }
     private String downloadStatus() {
+        if (snapshot.moving) return snapshot.recovering ? "Finishing interrupted move" : "Moving the library";
+        if (snapshot.moveRecoveryPending) return "Library move needs attention";
+        if (!snapshot.storageAvailable) return "Reinsert " + snapshot.storageName.toLowerCase(Locale.ROOT);
         if (snapshot.paused) return "Paused by you";
         if (snapshot.checking != null) return "Checking downloaded files";
         if (snapshot.running && !snapshot.mobile && !snapshot.wifi) return "Waiting for Wi-Fi";
@@ -629,6 +845,9 @@ public class MainActivity extends Activity {
         return totalDone() > 0 ? "Ready to resume" : "Ready to download";
     }
     private String moduleStatus(ModuleCatalog.Module m) {
+        if (snapshot.moving) return snapshot.recovering ? "Finishing move" : "Moving library";
+        if (snapshot.moveRecoveryPending) return "Move needs attention";
+        if (!snapshot.storageAvailable) return snapshot.storageName + " unavailable";
         LibraryEngine.State s = snapshot.states.get(m.id);
         if (s == LibraryEngine.State.CHECKING) return "Checking files";
         if (s == LibraryEngine.State.FAILED) return "Check failed · try again";
@@ -645,8 +864,16 @@ public class MainActivity extends Activity {
         return "";
     }
 
+    private String storageBlockMessage() {
+        if (engine.moveNeedsRecovery() && engine.recoveryMessage() != null && !engine.recoveryMessage().isEmpty())
+            return engine.recoveryMessage();
+        return engine.storageName() + " is unavailable. Reinsert it to continue; no files were deleted.";
+    }
+
     private void openSubjects() { savedOnly = false; show(Screen.SUBJECTS); }
     private void openModule(ModuleCatalog.Module m) {
+        if (engine.isMoving() || LibraryMoveService.isRunning()) { toast("Wait for the library move to finish."); return; }
+        if (!engine.storageAvailable()) { toast(storageBlockMessage()); return; }
         if (engine.state(m) != LibraryEngine.State.READY) { toast("This subject is still downloading or being checked."); return; }
         startActivity(new Intent(this, ModuleActivity.class).putExtra("module", m.id));
     }
@@ -665,18 +892,26 @@ public class MainActivity extends Activity {
     private final Runnable ticker = new Runnable() { @Override public void run() { requestSnapshot(); if (alive) ui.postDelayed(this, 2000); } };
     @Override protected void onResume() {
         super.onResume(); alive = true; engine.addListener(listener);
+        engine.recoverInBackground();
         if (engine.pausedByLimit() && !engine.pausedByUser() && !DownloadService.isRunning()) {
             engine.setPausedByLimit(false); getSystemService(android.app.NotificationManager.class).cancel(2); resumeDownloads();
         }
         ui.post(ticker);
     }
     @Override protected void onPause() { alive = false; engine.removeListener(listener); ui.removeCallbacks(ticker); super.onPause(); }
-    @Override protected void onDestroy() { if (sheetDialog != null) sheetDialog.dismiss(); ui.removeCallbacksAndMessages(null); background.shutdownNow(); super.onDestroy(); }
+    @Override protected void onDestroy() {
+        if (sheetDialog != null) sheetDialog.dismiss();
+        if (moveDialog != null) moveDialog.dismiss();
+        ui.removeCallbacksAndMessages(null); background.shutdownNow(); super.onDestroy();
+    }
     @Override protected void onSaveInstanceState(Bundle state) {
         scrollPositions.put(screen, scroll.getScrollY()); state.putString("screen", screen.name()); state.putBoolean("savedOnly", savedOnly);
         for (Screen s : Screen.values()) state.putInt("scroll:" + s.name(), scrollPositions.getOrDefault(s, 0)); super.onSaveInstanceState(state);
     }
-    @Override public void onBackPressed() { if (screen != Screen.LIBRARY) show(Screen.LIBRARY); else super.onBackPressed(); }
+    /** Android 8-12 path; Android 13+ back gestures go through BackCompat (OnBackInvokedCallback). */
+    @android.annotation.SuppressLint("GestureBackNavigation")
+    @Override public void onBackPressed() { handleBack(); }
+    private void handleBack() { if (screen != Screen.LIBRARY) show(Screen.LIBRARY); else finish(); }
     @Override protected void onNewIntent(Intent i) { super.onNewIntent(i); setIntent(i); if (BuildConfig.DEBUG) handleTestIntent(i); }
     private void handleTestIntent(Intent i) {
         String selected = i.getStringExtra("select");

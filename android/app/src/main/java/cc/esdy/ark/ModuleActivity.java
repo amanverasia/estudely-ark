@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /** A downloaded subject's books and documents, presented as a native, offline reading shelf. */
-public class ModuleActivity extends Activity {
+public class ModuleActivity extends ArkActivity {
     private ArkUi ui;
     private LinearLayout list;
     private TextView documentCount;
@@ -27,6 +27,14 @@ public class ModuleActivity extends Activity {
         ui = new ArkUi(this);
         ui.applyWindow(this);
         LibraryEngine engine = LibraryEngine.get(this);
+        if (engine.isMoving() || !engine.storageAvailable()) {
+            String message = engine.moveNeedsRecovery() ? engine.recoveryMessage()
+                    : engine.isMoving() ? "Wait for the library move to finish."
+                    : engine.storageName() + " is unavailable. Reinsert it to read.";
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
         ModuleCatalog.Module module = engine.catalog.find(getIntent().getStringExtra("module"));
         if (module == null) { finish(); return; }
         setTitle(module.title);

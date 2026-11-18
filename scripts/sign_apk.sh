@@ -11,8 +11,9 @@ set -eu
 KS="${1:-$HOME/.estudely/ark-release.jks}"
 ALIAS="${2:-ark}"
 cd "$(dirname "$0")/.."   # repo root, whatever folder this is run from
+_h="${ARK_BUILD_HOST:-}"   # environment wins over local.env (e.g. a different build machine)
 . scripts/local.env 2>/dev/null || { echo "missing scripts/local.env (see local.env.example)" >&2; exit 1; }
-W="$ARK_BUILD_HOST"; K="$ARK_SSH_KEY"
+W="${_h:-$ARK_BUILD_HOST}"; K="$ARK_SSH_KEY"
 SRC="estudely-ark-android/app/build/outputs/apk/release"
 SIGNER="tools/android/apksigner.jar"
 [ -f "$KS" ] || { echo "keystore not found: $KS" >&2; exit 1; }

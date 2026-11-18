@@ -15,7 +15,7 @@ val building = gradle.startParameter.taskNames.joinToString(" ")
 val releaseBuild = building.contains("Release", ignoreCase = true)
 
 // Version codes: base * 10 + ABI (1 armeabi-v7a, 2 arm64-v8a, 3 x86_64; 0 universal and debug).
-val baseVersionCode = 201
+val baseVersionCode = 210
 val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86_64" to 3)
 
 android {
@@ -26,7 +26,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = baseVersionCode * 10
-        versionName = "2.0.1"
+        versionName = "2.1"
     }
     signingConfigs {
         if (signingProps.getProperty("storeFile") != null) create("release") {
@@ -57,6 +57,8 @@ android {
     }
     // libkiwix also ships 32-bit x86; libtorrent4j doesn't, so that ABI could never run. Leave it out.
     packaging { jniLibs { excludes += "lib/x86/**" } }
+    // Calls newer than minSdk crashed 2.0/2.0.1 at launch on Android 8-12. Make that a release-build error.
+    lint { fatal += "NewApi"; checkReleaseBuilds = true }
     buildFeatures { buildConfig = true }
     androidResources { noCompress += listOf("torrent") }
     compileOptions {

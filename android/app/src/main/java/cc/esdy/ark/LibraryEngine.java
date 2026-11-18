@@ -60,8 +60,13 @@ public final class LibraryEngine {
     public final ModuleCatalog catalog;
     public final TorrentInfo ti;
     private final byte[] torrentBytes;
-    private final File saveDir, stateDir, resumeFile;
+    private final Context appContext;
+    private volatile File saveDir;
+    private final File stateDir, resumeFile;
     private final SharedPreferences prefs;
+    private final LibraryMover.Journal moveJournal;
+    private volatile boolean moving, recovering, moveRecoveryPending;
+    private volatile String recoveryMessage = "";
     private final List<Consumer<String>> listeners = new CopyOnWriteArrayList<>();
     private final List<String> trackers = new ArrayList<>(), webSeeds = new ArrayList<>();
     private SessionManager session;
@@ -79,14 +84,18 @@ public final class LibraryEngine {
     public final List<TcpEndpoint> testPeers = new ArrayList<>();
 
     private LibraryEngine(Context c) {
-        try (InputStream in = c.getAssets().open(TORRENT_ASSET)) { torrentBytes = in.readAllBytes(); }
+        appContext = c.getApplicationContext();
+        try (InputStream in = c.getAssets().open(TORRENT_ASSET)) { torrentBytes = readAll(in); }
         catch (IOException e) { throw new IllegalStateException(e); }
         ti = new TorrentInfo(torrentBytes);
-        saveDir = c.getFilesDir();
+        prefs = c.getSharedPreferences("library", Context.MODE_PRIVATE);
+        saveDir = new File(prefs.getString("storagePath", c.getFilesDir().getAbsolutePath()));
         stateDir = new File(c.getFilesDir(), "engine");
         stateDir.mkdirs();
         resumeFile = new File(stateDir, "resume.dat");
-        prefs = c.getSharedPreferences("library", Context.MODE_PRIVATE);
+        moveJournal = new LibraryMover.Journal(new File(stateDir, "move.journal"));
+        moveRecoveryPending = moveJournal.read() != null;
+        if (moveRecoveryPending) recoveryMessage = "Ark needs to check the interrupted move before using the library. No files were deleted.";
         FileStorage fs = ti.files();
         List<String> paths = new ArrayList<>();
         List<Long> sizes = new ArrayList<>();
@@ -107,6 +116,15 @@ public final class LibraryEngine {
             Entry ul = d.get("url-list");
             try { for (Entry u : ul.list()) webSeeds.add(u.string()); } catch (Exception e) { webSeeds.add(ul.string()); }
         }
+        recoverInBackground();
+    }
+
+    /** InputStream.readAllBytes() is Android 13+; the app supports Android 8. */
+    static byte[] readAll(InputStream in) throws IOException {
+        java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
+        byte[] buf = new byte[1 << 16];
+        for (int n; (n = in.read(buf)) > 0; ) out.write(buf, 0, n);
+        return out.toByteArray();
     }
 
     // ---- logging ----
@@ -206,6 +224,104 @@ public final class LibraryEngine {
     }
 
     public File packDir() { return new File(saveDir, ti.name()); }
+    public File storageRoot() { return saveDir; }
+    public String storageName() { return LibraryStorage.current(appContext, saveDir).name; }
+    public boolean storageAvailable() {
+        return !moving && !recovering && !moveRecoveryPending && LibraryStorage.available(appContext, saveDir);
+    }
+    public boolean isMoving() { return moving || recovering; }
+    public boolean isRecovering() { return recovering; }
+    public boolean moveNeedsRecovery() { return moveRecoveryPending; }
+    public String recoveryMessage() { return recoveryMessage; }
+
+    /** Starts interrupted-move recovery away from the UI thread. Safe to call again when the user returns/reinserts a card. */
+    public synchronized void recoverInBackground() {
+        if (recovering || moving) return;
+        if (moveJournal.read() == null) { moveRecoveryPending = false; return; }
+        moveRecoveryPending = true;
+        if (!LibraryStorage.available(appContext, saveDir)) {
+            recoveryMessage = "The interrupted library move is paused until " + storageName().toLowerCase()
+                    + " is available again. No files were deleted.";
+            return;
+        }
+        recovering = true;
+        new Thread(() -> {
+            try {
+                String result = LibraryMover.recover(moveJournal, packDir());
+                if (moveJournal.isClear()) {
+                    moveRecoveryPending = false;
+                    recoveryMessage = "";
+                    if (result != null) log("Library move: " + result);
+                } else {
+                    recoveryMessage = result == null ? "The interrupted library move needs attention. No files were deleted." : result;
+                    log("Library move: " + recoveryMessage);
+                }
+            } catch (IOException e) {
+                recoveryMessage = "The interrupted library move could not be finished: " + e.getMessage();
+                log("Library move needs attention: " + e.getMessage());
+            } finally {
+                recovering = false;
+            }
+        }, "library-move-recovery").start();
+    }
+
+    /**
+     * Copies the complete pack to another app-owned storage root, verifies it, then switches this engine.
+     * The caller supplies progress from a background thread. No torrent or sharing session may be active.
+     */
+    public void moveLibrary(File targetRoot, LibraryMover.Progress progress) throws IOException, InterruptedException {
+        synchronized (this) {
+            if (moving) throw new IllegalStateException("a library move is already running");
+            if (recovering || moveRecoveryPending) throw new IllegalStateException("Finish the interrupted library move first");
+            if (session != null || stopping || DownloadService.isRunning() || SeedJob.isActive())
+                throw new IllegalStateException("Pause downloads and sharing before moving the library");
+            if (!LibraryStorage.available(appContext, saveDir))
+                throw new IOException("The current " + storageName().toLowerCase() + " is unavailable. Reinsert it before moving the library.");
+            LibraryStorage.Location target = LibraryStorage.current(appContext, targetRoot);
+            if (!target.available) throw new IOException(target.name + " is unavailable");
+            if (saveDir.getAbsolutePath().equals(targetRoot.getAbsolutePath()))
+                throw new IOException("The library is already on " + target.name.toLowerCase());
+            moving = true;
+        }
+        final File sourceRoot = saveDir;
+        final boolean[] switched = {false};
+        try {
+            File from = packDir();
+            if (!from.exists() && !from.mkdirs()) throw new IOException("cannot create the library folder");
+            File to = new File(targetRoot, ti.name());
+            LibraryStorage.Location target = LibraryStorage.current(appContext, targetRoot);
+            LibraryMover.move(from, to, moveJournal, targetRoot.getUsableSpace(), target.removable, progress, () -> {
+                // Resume data can contain the old save path. Drop it before the durable switch; a later download
+                // simply checks the files at the new location. Failure here leaves the source active.
+                if (resumeFile.exists() && !resumeFile.delete()) throw new IOException("cannot reset the old download state");
+                if (!prefs.edit().putString("storagePath", targetRoot.getAbsolutePath()).commit())
+                    throw new IOException("could not save the new storage location");
+                saveDir = targetRoot;
+                switched[0] = true;
+                prefs.edit().remove("resumeFor").apply();
+            });
+            log("Library moved to " + storageName());
+        } catch (IOException | InterruptedException | RuntimeException e) {
+            boolean recovered = false;
+            try {
+                if (LibraryStorage.available(appContext, saveDir)) {
+                    String message = LibraryMover.recover(moveJournal, packDir());
+                    recovered = true;
+                    if (message != null) log("Library move: " + message);
+                }
+            } catch (IOException cleanup) { e.addSuppressed(cleanup); }
+            // The durable switch had already happened, and recovery completed its cleanup. This is a success,
+            // not a misleading failure merely because the first DELETE journal write or deletion was interrupted.
+            boolean sourceRemoved = !new File(sourceRoot, ti.name()).exists();
+            if (switched[0] && recovered && moveJournal.isClear() && sourceRemoved && packDir().isDirectory()) {
+                log("Library moved to " + storageName());
+                return;
+            }
+            throw e;
+        } finally {
+            moving = false;
+        }
+    }
 
     // ---- session ----
 
@@ -213,6 +329,12 @@ public final class LibraryEngine {
 
     public synchronized void start() {
         if (session != null || stopping) return;
+        if (isMoving()) { log("Wait for the library move to finish"); return; }
+        if (moveRecoveryPending) { log(recoveryMessage); return; }
+        if (!LibraryStorage.available(appContext, saveDir)) {
+            log(storageName() + " is unavailable. Reinsert it to use your library; no files were deleted");
+            return;
+        }
         boolean webOnly = BuildConfig.DEBUG && testWebSeedOnly;
         SettingsPack s = new SettingsPack();
         s.setEnableDht(!webOnly);
@@ -235,6 +357,11 @@ public final class LibraryEngine {
         // Resume data carries the file priorities it was saved with, and libtorrent applies them after our
         // prioritizeFiles call (seen on a Pixel: four new modules ignored, the old Food-only selection "100%").
         // So resume data saved for a different selection is dropped; the check from disk takes seconds.
+        if (prefs.getBoolean("recheckDisk", false)) {
+            if (resumeFile.isFile()) resumeFile.delete();
+            prefs.edit().putBoolean("recheckDisk", false).apply();
+            log("Checking the files on this phone again");
+        }
         if (resumeFile.isFile() && !selectionKey(ids).equals(prefs.getString("resumeFor", ""))) {
             resumeFile.delete();
             log("Checking the files already on this phone");
@@ -508,6 +635,20 @@ public final class LibraryEngine {
     // ---- verification ----
 
     /** Checks one module: manifest signature (built-in key), then size and SHA-256 of each of its files. */
+    /**
+     * Checks every saved subject again against the signed file list (Settings, "Check my library again").
+     * Returns {good, failed}. Callers must not run it while downloading or sharing.
+     */
+    public int[] recheckLibrary() {
+        int good = 0, failed = 0;
+        cancel = false;
+        for (ModuleCatalog.Module m : catalog.modules) {
+            if (!verified().contains(m.id)) continue;
+            if (verify(m)) good++; else failed++;
+        }
+        return new int[]{good, failed};
+    }
+
     public boolean verify(ModuleCatalog.Module m) {
         checkingModule = m.id;
         try {
@@ -527,6 +668,9 @@ public final class LibraryEngine {
                 else ok++;
             }
             boolean good = bad == 0 && ok > 0;
+            // Damaged files: libtorrent's saved state may still call them complete, so the next start must check
+            // the files on disk from scratch (that is how the damaged pieces get downloaded again).
+            if (!good) prefs.edit().putBoolean("recheckDisk", true).apply();
             markVerified(m.id, good);
             prefs.edit().putBoolean("failed:" + m.id, !good).apply();
             log(m.title + ": signature GOOD, " + ok + " file(s) checked" + (bad == 0 ? ", all good" : ", " + bad + " damaged or missing. Download again to repair"));
@@ -561,13 +705,13 @@ public final class LibraryEngine {
         return sb.toString();
     }
 
-    /** Free bytes the app may still use for downloads. */
-    public static long allocatableBytes(Context c) {
+    /** Free bytes on the storage that currently holds the library. */
+    public long allocatableBytes() {
         try {
-            android.os.storage.StorageManager sm = c.getSystemService(android.os.storage.StorageManager.class);
-            return sm.getAllocatableBytes(sm.getUuidForPath(c.getFilesDir()));
+            android.os.storage.StorageManager sm = appContext.getSystemService(android.os.storage.StorageManager.class);
+            return sm.getAllocatableBytes(sm.getUuidForPath(saveDir));
         } catch (Exception e) {
-            return c.getFilesDir().getUsableSpace();
+            return saveDir.getUsableSpace();
         }
     }
 
@@ -586,6 +730,7 @@ public final class LibraryEngine {
 
     /** Removes exactly one subject. The caller must run this off the UI thread. */
     public synchronized void removeModule(ModuleCatalog.Module module) throws IOException {
+        if (!storageAvailable()) throw new IOException(storageName() + " is unavailable");
         ModuleCatalog.Module m = catalog.find(module.id);
         if (m == null) throw new IllegalArgumentException("Unknown subject");
         if (session != null || stopping || DownloadService.isRunning() || SeedJob.isActive())

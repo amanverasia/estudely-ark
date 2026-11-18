@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.io.File;
 
 /** Shows a PDF with Android's built-in renderer, one page per row, rendered on demand. */
-public class PdfActivity extends Activity {
+public class PdfActivity extends ArkActivity {
     private PdfRenderer renderer;
     private ParcelFileDescriptor fd;
     private ListView pages;

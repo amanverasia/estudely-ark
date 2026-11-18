@@ -3,7 +3,7 @@
 For each release (released so far: 2.0 and 2.0.1, 17 Nov 2026). Public copy and uploads need Aman's approval of the text and the destination first.
 
 ## 1. Version
-- `android/app/build.gradle.kts`: raise `baseVersionCode` (2.0 = 200, 2.0.1 = 201) and `versionName`. Version codes come out as base x 10 + ABI: 0 universal, 1 armeabi-v7a, 2 arm64-v8a, 3 x86_64.
+- `android/app/build.gradle.kts`: raise `baseVersionCode` (2.0 = 200, 2.0.1 = 201, 2.1 = 210) and `versionName`. Version codes come out as base x 10 + ABI: 0 universal, 1 armeabi-v7a, 2 arm64-v8a, 3 x86_64.
 - Store changelog: `fastlane/metadata/android/en-US/changelogs/<code>.txt` for each of the four codes (under 500 characters).
 - Release notes: `docs/publishing/release-notes-v<ver>.md`.
 
@@ -24,14 +24,14 @@ For each release (released so far: 2.0 and 2.0.1, 17 Nov 2026). Public copy and 
 - Before tagging, a local check is cheap: on the build machine, `fdroid build cc.esdy.ark:<code>` in `~/estudely-android/fdroiddata` (point the recipe at the new commit), then `apksigcopier compare` against the signed APKs.
 - Recipe edits must match `fdroid rewritemeta` from fdroidserver master byte for byte (including trailing spaces), so push files rather than paste them in the web editor.
 
-## 5. Google Play (personal account, not opened yet)
+## 5. Google Play (personal account accepted into Play Console 18 Nov 2026)
 - Play App Signing: upload Aman's own key as the app signing key (Play Console offers "use existing key", via its PEPK tool) so Play, GitHub and F-Droid installs update each other. The same key signs uploads.
 - Upload `release/android/v<ver>/EstudelyArk-<ver>.aab`.
 - New personal accounts: closed test with at least 12 testers for 14 days before production access.
 - Store listing: text, screenshots, 512 x 512 icon and 1024 x 500 feature graphic from `fastlane/metadata/android/en-US/`.
 - Privacy policy URL: https://ark.esdy.cc/privacy (`site/public/privacy.html`, live since 17 Nov 2026).
 - Data safety: no data collected or shared; BitTorrent exposes the IP address to peers and trackers (disclosed in the policy).
-- Foreground service declaration: `dataSync`, for user-started downloads of the library; short video of starting a download.
+- Foreground service declaration: `dataSync`, for user-started downloads and storage moves of the library; short video of starting a download and moving the library to an SD card.
 - Health apps declaration: the app contains health reference books (not a medical device, no health data).
 - Content rating questionnaire; target audience 13+ or all ages.
 - Free, no ads, no in-app purchases (required by the non-commercial content licences).

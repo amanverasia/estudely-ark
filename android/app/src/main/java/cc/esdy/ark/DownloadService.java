@@ -66,7 +66,8 @@ public class DownloadService extends Service {
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
         getSystemService(NotificationManager.class).createNotificationChannel(
                 new NotificationChannel(CHANNEL, "Downloads", NotificationManager.IMPORTANCE_LOW));
-        startForeground(1, note("Starting", -1), ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
+        if (android.os.Build.VERSION.SDK_INT >= 29) startForeground(1, note("Starting", -1), ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
+        else startForeground(1, note("Starting", -1));
         LibraryEngine e = LibraryEngine.get(this);
         // Starting or resuming is explicit. Merely opening MainActivity must not clear a manual pause.
         e.setPausedByUser(false);

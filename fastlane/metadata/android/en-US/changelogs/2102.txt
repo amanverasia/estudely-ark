@@ -1,0 +1,1 @@
+Choose System, Light or Dark theme and a reading text size. DevDocs is easier to read on a phone, with collapsible contents and dark pages. Move the library to or from an SD card: every copied file is checked before the original is removed, with safe cancellation and recovery. Re-check saved subjects, and view app licences and credits.

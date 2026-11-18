@@ -1,0 +1,34 @@
+ESTUDELY ARK FOR ANDROID: SOFTWARE NOTICES
+=========================================
+
+Estudely Ark for Android
+  Copyright 2026 Aman Verasia.
+  Licensed under the GNU General Public License, version 3 or (at your option) any later
+  version. You can get the complete source code, and the full licence text, at
+  https://github.com/amanverasia/estudely-ark (see the LICENSE file there).
+  This program comes with ABSOLUTELY NO WARRANTY.
+
+The app includes these libraries:
+
+libkiwix and libzim (Kiwix / openZIM): read ZIM archives and search them.
+  libkiwix: GPL-3.0-or-later. libzim: GPL-2.0-or-later.
+  https://github.com/kiwix/libkiwix  https://github.com/openzim/libzim
+  These are built with other free libraries, including Xapian (GPL-2.0-or-later),
+  ICU (Unicode licence), zstd (BSD), XZ Utils (public domain), pugixml (MIT),
+  Mustache (BSL-1.0) and libcurl (curl licence).
+
+libtorrent4j: Java bindings for libtorrent. MIT licence.
+  https://github.com/aldenml/libtorrent4j
+  libtorrent (Arvid Norberg): BSD 3-Clause. https://libtorrent.org
+  Boost: Boost Software License 1.0. OpenSSL: Apache-2.0.
+
+Bouncy Castle: Ed25519 signature checking. Bouncy Castle licence (MIT-style).
+  https://www.bouncycastle.org
+
+The offline map viewer is part of the library you download, not the app. It uses
+MapLibre GL JS (BSD 3-Clause), PMTiles (BSD 3-Clause) and Protomaps basemaps (BSD 3-Clause),
+with map data from OpenStreetMap contributors (ODbL 1.0) and place names from GeoNames
+(CC BY 4.0).
+
+The credits and licences of the library's content (Wikipedia, Hesperian, PhET, iFixit and
+others) follow under "Library content".

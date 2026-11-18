@@ -40,7 +40,7 @@ Builds are reproducible: F-Droid's build of a release tag is byte-identical to o
 ## Status
 
 - Desktop pack v1.0: released 16 November 2026.
-- Android app: 2.0 released 17 November 2026; 2.0.1 (bookshelf redesign) the same day.
+- Android app: 2.0 released 17 November 2026; 2.0.1 (bookshelf redesign) the same day. In development: 2.1, with verified moves between phone and SD-card storage and the 2.0.2 reader/settings improvements.
 - Bugs and questions: [GitHub issues](https://github.com/amanverasia/estudely-ark/issues).
 
 ## Licence

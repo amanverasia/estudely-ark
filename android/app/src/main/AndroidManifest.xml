@@ -20,7 +20,9 @@
         <activity android:name=".ZimActivity" android:exported="false" />
         <activity android:name=".PdfActivity" android:exported="false" />
         <activity android:name=".MapActivity" android:exported="false" />
+        <activity android:name=".AboutActivity" android:exported="false" />
         <service android:name=".DownloadService" android:exported="false" android:foregroundServiceType="dataSync" />
+        <service android:name=".LibraryMoveService" android:exported="false" android:foregroundServiceType="dataSync" />
         <service android:name=".SeedJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 </manifest>

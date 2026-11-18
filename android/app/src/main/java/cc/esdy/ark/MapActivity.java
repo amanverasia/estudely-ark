@@ -10,7 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 /** The pack's own offline map viewer (MapLibre + PMTiles, place search), served from the phone's storage. */
-public class MapActivity extends Activity {
+public class MapActivity extends ArkActivity {
     private WebView web;
 
     @Override protected void onCreate(Bundle b) {
@@ -24,7 +24,7 @@ public class MapActivity extends Activity {
         MainActivity.edgeToEdge(this, root);
         LinearLayout toolbar = ui.row();
         toolbar.setPadding(ui.dp(8), ui.dp(3), ui.dp(22), ui.dp(3));
-        toolbar.addView(ui.iconButton("back", "Back to library", v -> onBackPressed()));
+        toolbar.addView(ui.iconButton("back", "Back to library", v -> handleBack()));
         ModuleCatalog.Module module = engine.catalog.find(folder);
         String title = module != null ? ui.shortTitle(module) : "Map of India";
         setTitle(title);
@@ -52,12 +52,14 @@ public class MapActivity extends Activity {
         });
         web.loadUrl("https://" + PackWebClient.HOST + "/" + folder + "/index.html");
         setContentView(root);
+        BackCompat.register(this, this::handleBack);
         if (BuildConfig.DEBUG) web.postDelayed(() -> web.evaluateJavascript(
             "JSON.stringify({err: document.getElementById('err').textContent, w: innerWidth, h: innerHeight, gl: !!document.createElement('canvas').getContext('webgl2'), bar: document.getElementById('bar').getBoundingClientRect().top})",
             v -> android.util.Log.i("EstudelyArkWeb", "state " + v)), 10000);
     }
 
-    @Override public void onBackPressed() {
-        if (web.canGoBack()) web.goBack(); else super.onBackPressed();
-    }
+    /** Android 8-12 path; Android 13+ back gestures go through BackCompat (OnBackInvokedCallback). */
+    @android.annotation.SuppressLint("GestureBackNavigation")
+    @Override public void onBackPressed() { handleBack(); }
+    private void handleBack() { if (web.canGoBack()) web.goBack(); else finish(); }
 }

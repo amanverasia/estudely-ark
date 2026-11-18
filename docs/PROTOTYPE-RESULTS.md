@@ -234,3 +234,34 @@ Automated checks: 13 JVM tests passed (4 catalogue, 6 signature, 3 selection-ret
 
 Map check completed afterwards (emulator, debug 2.0.1): the map opens under the new "Map of India" toolbar, tiles draw, the toolbar back button returns to the bookshelf, no crash. Leftover: the map page's own "← Back" link now duplicates the toolbar's back button. PDF reader: 12-page fixture renders, next/previous page controls work.
 
+## Android 2.0.2 reader/settings fixes (17 Nov 2026)
+
+These changes are folded into 2.1 rather than released separately. On the `ark-test` Android 16 emulator: System/Light/Dark selection applies without restarting; reading text size persists; DevDocs uses the full phone width with one article scroll and a separate full-screen Contents panel; dark theme also covers archive pages (including DevDocs' `color-scheme: light only` override); freeCodeCamp works after enabling DOM storage. About, signing-certificate fingerprint, credits and licences open correctly.
+
+The library re-check was tested by changing one byte in the DevDocs Bash archive without changing its length. The check removed Computing from the ready shelf; Resume let libtorrent fetch the damaged piece again, and Computing passed 14/14 files. The repaired archive's SHA-256 exactly matched its original (`ea4afb04…`). Release lint and debug/release builds passed at that checkpoint.
+
+## Android 2.1 SD-card storage (17 Nov 2026)
+
+Implementation: app-specific internal/removable roots (no storage permission); a foreground move service with notification, progress and cancellation; copy-time and read-back SHA-256 checks; durable journal plus hash manifest and directory/fsync barriers; background crash recovery that validates the active tree before deletion; no-follow symlink handling; downloads, sharing, removal and reading blocked while moving, recovering or the configured card is absent. FAT32's 4 GiB file limit is checked conservatively for removable cards. The phone-selectable v1 files fit it (largest 3.57 GB decimal).
+
+Automated checks at the device-test checkpoint: **27 JVM tests, 0 failures/errors**, including 14 move tests (nested move, cancellation, insufficient space, pre/post-commit recovery, unavailable storage, truncated target, inconsistent/malformed journal, commit failure and symlink sentinel). Release lint completed with no errors. A final review subsequently moved startup recovery off the UI thread and tightened post-recovery success checks; the clean rebuild after that refactor is recorded below only when available.
+
+Real UI/device sequence on `ark-test`, Android 16 x86_64, using the existing 738 MB Repair + Computing library and a temporary 2 GB FAT32 card (`0000-0000`):
+
+1. **No card attached:** storage screen says so and offers no fake target. Existing library remains ready.
+2. **Phone → SD:** Android exposes the card with no permission prompt; move completes through the foreground service. `storagePath` points to the SD app folder and the internal pack folder is gone. Log: `Library moved to SD card`.
+3. **Cold start and signed verification on SD:** Repair signature GOOD, 3/3 files; Computing signature GOOD, 14/14 files; UI says "2 subjects checked against the signed file list. All good." DevDocs C opens from the card, full-width article, dark theme, larger text and Contents all work.
+4. **SD → phone:** `storagePath` returns to internal storage and the SD app folder is empty. SHA-256 after returning exactly matches the pre-move values: manifest `b7ad6a2136ffd6c93c5be2844e5e601d81f117476b1ab3fa0cb40b5b10f3a5fb`; DevDocs C `5b5c00cd83c0cbfc7e89220721afbbc15ce82210d62229ac3639a169a3352431`.
+5. **Card removal:** after moving to SD again, rebooting without the card shows "SD card unavailable" and explains that saved subjects were not deleted or replaced. No internal pack directory is created and no fallback download starts.
+6. **Reattach and restore:** rebooting with the same card restores access; moving back to phone storage succeeds and both independent hashes again match the originals.
+
+This is emulator evidence, not a physical SD-card endurance/removal test. Simulated journal/crash states are covered in JVM tests; an actual phone power cut during a move remains untested. The temporary card image is a test artifact, not part of the app or release.
+
+
+## DevDocs phone layout, second pass (18 Nov 2026)
+
+Aman's 17 Nov phone screenshot (DevDocs C, `bsearch`, before the first fix) showed the sidebar taking half the screen and code broken one word per line. The first fix gave the article the full width, but code inside the C declaration tables still had only 238 of 412 px and wrapped word by word. Second pass (`ZimWebClient.PHONE_LAYOUT`): code keeps its lines and indentation and scrolls sideways; tables holding code stack their cells (code full width, "(1)" / "(since C11)" labels under it); article text 1rem instead of DevDocs' 0.875rem (the reader text size still scales it); Contents rows at least 44 px and the panel opens on the current page's entry; attribution URLs no longer stick out.
+
+Tested in **desktop Chromium**, not Android WebView: the release DevDocs archives were served by `kiwix-serve` (offline sandbox) through a loopback proxy that inserts the app's `PHONE_LAYOUT` string from the Java source right after `<head>`, as the app does. At 412 px: 48 pages (index, first, middle and last linked article of each of the 12 DevDocs archives); 47 had no page-wide overflow and the phone layout applied; SQLite's `keyword_index` is a dead link inside the archive (404). At 360 and 412 px, C/Python/HTTP/SQLite samples: no overflow, all code blocks within the screen. Arch Wiki and freeCodeCamp unaffected. Every archive's HTML has a literal `<head>`, so the injection lands inside it. `:has()` needs WebView 105+; older WebViews fall back to the first fix's scrolling table.
+
+**Real phone (18 Nov):** debug 2.1 built on a second machine (own JDK 21 and SDK 36 in `~/estudely-android`; unit tests 27/27) and installed on Aman's moto g52 test phone (LineageOS, Android 16, arm64, wireless adb), DevDocs C opened through the debug `openZim` hook, dark theme. Full-width article; Contents full screen with 44 px rows and centred folder arrows, Algorithms expands, `bsearch` opens; declarations keep their layout, each code block swipes sideways on its own (the page doesn't move), "(1)" / "(since C11)" under each; the empty header cells that showed as grey boxes are hidden. Not tried on the phone yet: the Larger text sizes, light theme, other DevDocs archives.

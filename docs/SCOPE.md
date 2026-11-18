@@ -1,6 +1,6 @@
 # Estudely Ark: Scope
 
-Status: v0.6, 17 November 2026. **v1 released 16 Nov 2026. v2 (Android): 2.0 and 2.0.1 released on GitHub 17 Nov 2026; F-Droid under review; Google Play later.** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
+Status: v0.6, 17 November 2026. **v1 released 16 Nov 2026. v2 (Android): 2.0 and 2.0.1 released on GitHub 17 Nov 2026; 2.1 in development with SD-card storage; F-Droid under review; Google Play later.** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
 
 This document says what we are building, in what order, and what "done" means. It replaces the earlier brief's "proposals" where Aman has since decided. Exact byte figures live in [`manifest/candidates.tsv`](../manifest/candidates.tsv). This file only summarises them.
 
@@ -36,7 +36,7 @@ It is **not** a hotspot appliance, a Raspberry Pi build or a new internet servic
 
 ### v1: Desktop pack (released 16 Nov 2026)
 
-Done: `Estudely-Ark-v1.0-2026-11`, 32.02 GB, signed (`SHA256:PAm9fPRpBLPaPXZVXO3g+ixxl4QW/LSjIhvWDe7uZ4E`), hybrid v1+v2 torrent (info-hash `e2b95e10be196280c33fe85cb7c679f77f906fb5`), page https://ark.esdy.cc, always-on always-on seeder (full pack). Internet Archive copy uploaded and MD5-checked (1,122/1,122 files), then **made dark by IA on 17 Nov** (see risks). Still untested: the v1 Android steps, macOS Gatekeeper, Windows on real hardware (CI only).
+Done: `Estudely-Ark-v1.0-2026-11`, 32.02 GB, signed (`SHA256:PAm9fPRpBLPaPXZVXO3g+ixxl4QW/LSjIhvWDe7uZ4E`), hybrid v1+v2 torrent (info-hash `e2b95e10be196280c33fe85cb7c679f77f906fb5`), page https://ark.esdy.cc, always-on always-on seeder (full pack). Internet Archive copy uploaded and MD5-checked (1,122/1,122 files), made dark by IA on 17 Nov, **live again on 18 Nov** (IA restored it; re-checked: all 1,122 names, sizes and MD5s match the local pack, and a peerless libtorrent run fetched files through the web seed alone). Still untested: the v1 Android steps, macOS Gatekeeper, Windows on real hardware (CI only).
 
 In scope:
 - Content modules in section 4, as files in a torrent.
@@ -70,7 +70,7 @@ Out of scope for v1:
 - The library stays private to the app (app storage). Sharing with file managers or the Kiwix app can come later.
 - Seeding: only on Wi-Fi and while charging, in short sessions inside a foreground service (Android freezes background apps and caps `dataSync` services at about 6 hours a day), with an on/off switch. Downloads also run in a foreground service.
 - Maps: our own India vector map (the desktop `india.pmtiles` with the same viewer and place search), not Organic Maps. No turn-by-turn directions at first. The torrent's `Android-Organic-Maps` folder is simply not selected.
-- Release order: v2.0 = pick modules, download, verify, read (ZIM, PDF), map, seed; v2.1 = phone-to-phone sharing and acting as a library server; v2.2 = AI.
+- Release order: v2.0 = pick modules, download, verify, read (ZIM, PDF), map, seed; **v2.1 = SD-card storage (changed and approved by Aman on 17 Nov)**. Phone-to-phone sharing and acting as a library server remain later work, as does AI.
 - First fixes from the prototype: libtorrent4j drops trackers and web seeds (fixed in the prototype); the Internet Archive web seed fails over HTTPS on Android (fixed: the app fetches it with Android's HTTPS).
 - Downloads wait for Wi-Fi unless the user ticks "Download over mobile data too" (off by default). Sharing is off by default.
 
@@ -82,6 +82,12 @@ Done since: release build (`cc.esdy.ark`, per-ABI + universal APKs and a Play bu
 ### Android design update (approved 17 Nov 2026)
 
 Aman selected **Option B / Bookshelf** from the interactive design shortlist (`design/ark-alternative/`). Implement it as native Android views: blue actions, serif subject covers, a reading-first Library, a filterable subject catalogue, and a separate live Downloads screen. Settings and storage use native sheets. Keep saved subjects and ongoing downloads when new subjects are selected; make manual pause persist across reopening. No AI or account features are part of this update. Version 2.0.1 is being prepared and tested separately from the published 2.0 release.
+
+### v2.1 storage and reader update (approved 17 Nov 2026)
+
+Aman asked for the 2.0.2 settings/reader fixes and the larger SD-card job to be built immediately as v2.1. The 2.0.2 work (System/Light/Dark theme, reading text size, phone-friendly DevDocs with collapsible contents, dark archive pages, library re-check/repair, About/licences) is folded into 2.1 rather than published separately.
+
+The library can stay in internal app storage or in Ark's app-specific folder on a removable SD card; no broad storage permission is used. A foreground-service move copies every file, reads back and SHA-256-checks the copy, fsyncs the journal and copied directory entries, then durably switches location before deleting the source. Cancellation preserves the source. A journal and hash manifest support background crash/power-loss recovery; recovery validates the active copy before deleting the other one and follows no symlinks. A missing card blocks reading/downloads/sharing with an explanation rather than silently creating an internal replacement library. Physical SD-card hardware remains to be tested; emulator evidence is in [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md).
 
 ### v3: Mesh and radio
 
@@ -177,14 +183,13 @@ Tested on a clean profile, offline, for every platform marked supported:
 
 ## 9. Open decisions (Aman)
 
-- **Internet Archive item dark (17 Nov):** check IA's notice; restore it, or choose another web-seed host. A new host does **not** need a new torrent: the web-seed list (`url-list`) is outside the info dictionary, so a re-published .torrent with a new URL keeps the same info-hash, swarm and signed manifest; magnet links can add it with `ws=`. Older .torrent copies keep working through peers.
-- **Google Play:** Aman opens a personal developer account (last channel). Then: Play App Signing with Aman's own key, a closed test with 12+ testers for 14 days, store listing and declarations (`docs/publishing/CHECKLIST.md`).
+- **Google Play:** Aman's personal developer account was accepted into Play Console (18 Nov 2026); Play is still the last channel. Next: Play App Signing with Aman's own key, a closed test with 12+ testers for 14 days, store listing and declarations (`docs/publishing/CHECKLIST.md`).
 - Decided 17 Nov 2026: name Estudely Ark, icon (serif A over an ark hull), channels GitHub releases + F-Droid + Google Play, public repository `amanverasia/estudely-ark` (GPL-3.0-or-later), APK signing key kept by Aman.
 - Later: the OpenStax and Gutenberg picks once sized.
 
 ## 10. Known risks and unverified items
 
-- **Internet Archive web seed down (17 Nov):** the item `estudely-ark-v1.0-2026-11` reports `is_dark: true` (details page 404, files 403), hours after a full MD5 check passed. The torrent still works through peers (always-on seeder, the Mac). The Android app skips the dead web seed.
+- **Internet Archive web seed (dark 17 Nov, restored 18 Nov):** IA made the item `estudely-ark-v1.0-2026-11` dark on 17 Nov and restored it on 18 Nov. Re-checked 18 Nov: not dark, details page 200, 1,122/1,122 files with matching names, sizes and MD5s; byte-identical downloads (incl. a name with spaces, and a 1 MB range from the middle of the largest ZIM); libtorrent with no peers fetched files through the web seed alone. It can go dark again: if so, another host needs no new torrent (`url-list` is outside the info dictionary, so the info-hash stays; magnets can add `ws=`).
 - **Torrent leakage (found in prototype, fixed 16 Nov):** release torrents are hybrid v1+v2 with pad files (`scripts/make_torrent.py`); tested leak-free in libtorrent and Transmission 4.1.4. Transmission stores the padding on disk as a `.pad` folder; small files are bundled to keep that small. qBittorrent, Deluge, aria2 and mobile clients still to test.
 - **macOS Gatekeeper (found in prototype):** our macOS binaries are unsigned; behaviour on a fresh Mac is untested.
 - **AI on 8 GB machines (measured):** E4B works on an 8 GB M1 but slows to 2-4 tokens/s once memory is tight. Image input is impractical on modest CPUs.

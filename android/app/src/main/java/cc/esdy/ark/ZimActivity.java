@@ -29,9 +29,11 @@ import org.kiwix.libzim.SuggestionIterator;
 import org.kiwix.libzim.SuggestionSearcher;
 
 /** Reads one ZIM archive offline, with title suggestions and full-text search. */
-public class ZimActivity extends Activity {
+public class ZimActivity extends ArkActivity {
     private Archive archive; // kept alive while the WebView reads from it
     private WebView web;
+    private View contents;
+    private boolean contentsOpen;
     private LinearLayout results;
     private ScrollView resultsScroll;
     private ZimWebClient client;
@@ -52,12 +54,15 @@ public class ZimActivity extends Activity {
         MainActivity.edgeToEdge(this, root);
         LinearLayout toolbar = ui.row();
         toolbar.setPadding(ui.dp(8), ui.dp(3), ui.dp(22), ui.dp(3));
-        toolbar.addView(ui.iconButton("back", "Back", v -> onBackPressed()));
+        toolbar.addView(ui.iconButton("back", "Back", v -> handleBack()));
         TextView heading = ui.text(title, 15, ui.ink, true);
         heading.setMaxLines(2);
         heading.setEllipsize(TextUtils.TruncateAt.END);
         heading.setPadding(ui.dp(4), 0, 0, 0);
         toolbar.addView(heading, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        contents = ui.iconButton("grid", "Contents", v -> setContentsOpen(!contentsOpen));
+        contents.setVisibility(View.GONE);
+        toolbar.addView(contents);
         root.addView(toolbar);
 
         LinearLayout searchBar = ui.row();
@@ -95,12 +100,22 @@ public class ZimActivity extends Activity {
         ws.setJavaScriptEnabled(true);
         ws.setAllowFileAccess(false);
         ws.setAllowContentAccess(false);
+        ws.setTextZoom(AppSettings.textZoom(this)); // reading text size from settings
+        if (ui.dark) darken(ws); // dark theme: let WebView darken the archive's own (light) pages
+        ws.setDomStorageEnabled(true); // some archives are web apps that need localStorage (freeCodeCamp was blank without it)
         root.addView(web, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 3));
         setContentView(root);
+        BackCompat.register(this, this::handleBack);
         try {
             archive = new Archive(f.getAbsolutePath());
             client = new ZimWebClient(archive);
             client.onPdf = this::openPdf;
+            client.darkPages = ui.dark;
+            client.onPageFinished = () -> {
+                contentsOpen = false;
+                web.evaluateJavascript("window.arkHasContents&&window.arkHasContents()",
+                        v -> contents.setVisibility("true".equals(v) ? View.VISIBLE : View.GONE));
+            };
             web.setWebViewClient(client);
             web.loadUrl(client.mainUrl());
         } catch (Exception e) {
@@ -165,9 +180,25 @@ public class ZimActivity extends Activity {
         }
     }
 
-    @Override public void onBackPressed() {
+    /** Android 8-12 path; Android 13+ back gestures go through BackCompat (OnBackInvokedCallback). */
+    @android.annotation.SuppressLint("GestureBackNavigation")
+    @Override public void onBackPressed() { handleBack(); }
+    @SuppressWarnings("deprecation")
+    private static void darken(WebSettings ws) {
+        if (android.os.Build.VERSION.SDK_INT >= 33) ws.setAlgorithmicDarkeningAllowed(true);
+        else if (android.os.Build.VERSION.SDK_INT >= 29) ws.setForceDark(WebSettings.FORCE_DARK_ON);
+    }
+
+    private void setContentsOpen(boolean open) {
+        contentsOpen = open;
+        web.evaluateJavascript("window.arkToggleContents&&window.arkToggleContents(" + open + ")", null);
+        contents.setContentDescription(open ? "Close contents" : "Contents");
+    }
+
+    private void handleBack() {
+        if (contentsOpen) { setContentsOpen(false); return; }
         if (resultsScroll.getVisibility() == View.VISIBLE) resultsScroll.setVisibility(View.GONE);
         else if (web.canGoBack()) web.goBack();
-        else super.onBackPressed();
+        else finish();
     }
 }
