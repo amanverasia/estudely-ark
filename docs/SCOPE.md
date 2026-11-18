@@ -1,6 +1,6 @@
 # Estudely Ark: Scope
 
-Status: v0.7, 18 November 2026. **v1 released 16 Nov 2026. v2 (Android): 2.0 and 2.0.1 released on GitHub 17 Nov 2026; 2.1 (SD-card storage, phone-friendly DevDocs) released on GitHub 18 Nov 2026; F-Droid under review; Google Play next (account accepted 18 Nov).** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
+Status: v0.7, 18 November 2026. **v1 released 16 Nov 2026. v2 (Android): 2.0 and 2.0.1 released on GitHub 17 Nov 2026; 2.1 (SD-card storage, phone-friendly DevDocs) and 2.1.1 (PDF zoom, remembered page, archive titles) released on GitHub 18 Nov 2026; F-Droid under review; Google Play next (account accepted 18 Nov).** Prototype results: [PROTOTYPE-RESULTS.md](PROTOTYPE-RESULTS.md). Owner: Aman. Name: Estudely Ark (chosen 16 Nov 2026).
 
 This document says what we are building, in what order, and what "done" means. It replaces the earlier brief's "proposals" where Aman has since decided. Exact byte figures live in [`manifest/candidates.tsv`](../manifest/candidates.tsv). This file only summarises them.
 

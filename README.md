@@ -22,7 +22,7 @@ tools/lt-venv/bin/python scripts/make_torrent.py release/Estudely-Ark-v1.0-2026-
 
 ## Android app
 
-Download: [GitHub releases](https://github.com/amanverasia/estudely-ark/releases/latest) (current: 2.0.1). An F-Droid listing is under review; Google Play later. Android 8.0 or newer. Signing certificate SHA-256 `9cf9432f4270f8c3a54c677b349b319ea2981d93fb227e1f483fa47de680447d`.
+Download: [GitHub releases](https://github.com/amanverasia/estudely-ark/releases/latest) (current: 2.1.1). An F-Droid listing is under review; Google Play later. Android 8.0 or newer. Signing certificate SHA-256 `9cf9432f4270f8c3a54c677b349b319ea2981d93fb227e1f483fa47de680447d`.
 
 The app (`cc.esdy.ark`, source in `android/`, Java with libkiwix, libtorrent4j and BouncyCastle) downloads the chosen subjects of the v1 torrent, checks every file against the signed manifest with the release key built into the app, and reads them offline: ZIM archives with full-text search, PDFs, and the India map with place search. Downloads wait for Wi-Fi unless the user allows mobile data; sharing is opt-in (Wi-Fi and charging only).
 
@@ -40,7 +40,7 @@ Builds are reproducible: F-Droid's build of a release tag is byte-identical to o
 ## Status
 
 - Desktop pack v1.0: released 16 November 2026.
-- Android app: 2.0 released 17 November 2026; 2.0.1 (bookshelf redesign) the same day. In development: 2.1, with verified moves between phone and SD-card storage and the 2.0.2 reader/settings improvements.
+- Android app: 2.0 and 2.0.1 (bookshelf redesign) released 17 November 2026; 2.1 (SD-card storage, phone-friendly DevDocs, themes, About) on 18 November 2026; 2.1.1 (PDF zoom and remembered page, archive titles) the same day.
 - Bugs and questions: [GitHub issues](https://github.com/amanverasia/estudely-ark/issues).
 
 ## Licence
